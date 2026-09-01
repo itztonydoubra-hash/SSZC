@@ -1,0 +1,165 @@
+/*
+ * PUBLICATIONS — "The Knowledge Hub" (design.md B3). tasks.md 10.x
+ * Journal-contents composition: masthead + featured band (brackets image on two
+ * sides) + metadata-weighted index (ledger). Filter recomposes the index.
+ * Token-only; ivory reading surface.
+ */
+
+.pub-masthead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-5);
+  border-bottom: 1px solid var(--hairline-on-ivory);
+  padding-bottom: var(--space-5);
+}
+
+.pub-count {
+  color: var(--stone-600);
+  white-space: nowrap;
+}
+
+/* Featured band — image cols 5-12 bleeding right; type brackets left + below. */
+.pub-featured {
+  margin-block: var(--space-8);
+}
+
+.pub-featured__cat {
+  color: var(--crimson);
+}
+
+.pub-featured__meta {
+  color: var(--stone-600);
+}
+
+/* Filter bar — data-driven categories with a sliding active hairline. */
+.pub-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  border-bottom: 1px solid var(--hairline-on-ivory);
+  padding-bottom: var(--space-4);
+  margin-block: var(--space-6);
+  list-style: none;
+  padding-left: 0;
+}
+
+.pub-filter__btn {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0 0 var(--space-2);
+  color: var(--stone-600);
+  cursor: pointer;
+  position: relative;
+}
+
+.pub-filter__btn[aria-pressed="true"] {
+  color: var(--crimson);
+}
+
+.pub-filter__btn[aria-pressed="true"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--crimson);
+}
+
+/* Index — metadata-weighted ledger rows; no default thumbnails. */
+.pub-index {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--hairline-on-ivory);
+}
+
+.pub-row {
+  display: grid;
+  grid-template-columns: auto auto 1fr auto auto;
+  align-items: baseline;
+  gap: var(--space-5);
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--hairline-on-ivory);
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform var(--dur-state) var(--ease-out);
+}
+
+.pub-row__idx {
+  color: var(--stone-600);
+}
+
+.pub-row__cat {
+  color: var(--crimson);
+}
+
+.pub-row__title {
+  display: inline-block;
+  transition: transform var(--dur-state) var(--ease-out);
+}
+
+.pub-row:hover .pub-row__title,
+.pub-row:focus-visible .pub-row__title {
+  transform: translateX(var(--shift-row));
+}
+
+.pub-row__author,
+.pub-row__date {
+  color: var(--stone-600);
+}
+
+.pub-row__date {
+  text-align: right;
+  white-space: nowrap;
+}
+
+@media (width <= 767px) {
+  .pub-row {
+    grid-template-columns: auto 1fr;
+    gap: var(--space-2) var(--space-4);
+  }
+
+  .pub-row__author,
+  .pub-row__date {
+    grid-column: 2;
+  }
+}
+
+/* Article page — long-form reading. */
+.pub-article {
+  padding-block: var(--space-9);
+}
+
+.pub-article__meta {
+  color: var(--stone-600);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-block: var(--space-5);
+}
+
+.pub-article__body {
+  margin-top: var(--space-7);
+}
+
+.pub-article__body p {
+  margin-block: var(--space-5) 0;
+}
+
+.pub-pullquote {
+  border-left: 2px solid var(--crimson);
+  padding-left: var(--space-5);
+  margin-block: var(--space-7);
+  color: var(--ink);
+}
+
+.pub-report {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  color: var(--crimson);
+  margin-top: var(--space-6);
+}

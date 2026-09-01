@@ -1,0 +1,81 @@
+/*
+ * ============================================================================
+ * PAGE TRANSITION — CSS  (design.md A8)  tasks.md 4.3
+ * ============================================================================
+ * ONE mechanism for the whole site. An --ink panel wipes across, a small
+ * NN — TITLE index flashes, then the panel wipes away revealing the new route.
+ * No per-route variants, no FLIP/shared-element morphs.
+ *
+ * The panel is a fixed overlay driven by data-state on the root transition
+ * element:
+ *   idle     -> panel off-screen (below), not covering
+ *   covering -> panel wipes up to fully cover (scroll reset happens here)
+ *   revealing-> panel wipes further up and off, revealing the new page
+ *
+ * Reduced motion: no wipe; the panel becomes a brief opacity cross-fade
+ * (<=180ms) with no movement and no index flash.
+ * ============================================================================
+ */
+
+.pt-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  /* rest: fully below the viewport (not covering) */
+  transform: translateY(100%);
+  transition: transform var(--dur-page-max) var(--ease-in-out);
+}
+
+.pt-panel[data-state="covering"] {
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.pt-panel[data-state="revealing"] {
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+/* The destination index flash (e.g. "04 — LEADERSHIP"), visible only while the
+ * panel covers. ~150ms beat, not a spinner. */
+.pt-index {
+  opacity: 0;
+  transition: opacity var(--dur-state) var(--ease-out);
+  color: var(--ivory);
+}
+
+.pt-index__num {
+  color: var(--crimson);
+}
+
+.pt-panel[data-state="covering"] .pt-index {
+  opacity: 1;
+}
+
+/* Reduced motion: cross-fade only, no movement, no index flash. */
+@media (prefers-reduced-motion: reduce) {
+  .pt-panel {
+    transform: none;
+    opacity: 0;
+    transition: opacity 180ms linear;
+  }
+
+  .pt-panel[data-state="covering"] {
+    transform: none;
+    opacity: 1;
+  }
+
+  .pt-panel[data-state="revealing"] {
+    transform: none;
+    opacity: 0;
+  }
+
+  .pt-index {
+    display: none;
+  }
+}

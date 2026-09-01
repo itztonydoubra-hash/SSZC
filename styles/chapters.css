@@ -1,0 +1,258 @@
+/*
+ * ============================================================================
+ * CHAPTERS — "The Network"  (design.md B2)  tasks.md 9.1 / 9.2
+ * ============================================================================
+ * Information visualisation FIRST: the real Zone → State → Chapter containment.
+ * Two layers over ONE data source:
+ *   - OrgList: the semantic nested list — the source of truth, the mobile
+ *     experience, and the accessibility/reduced-motion fallback.
+ *   - OrgNetwork: a desktop stylised node graph LAYERED over the list. Node
+ *     positions are a DESIGNED (non-geographic) layout. Primary interaction:
+ *     select a State to read its subtree (light one branch, mute the rest).
+ *     Budget (3): network animation + panel reveal + ambient breath.
+ * Token-only. No new pattern. No FLIP. No cursor label on nodes.
+ * ============================================================================
+ */
+
+/* ==========================================================================
+ * ORG LIST (9.1) — semantic nested list. On desktop it can be visually hidden
+ * behind the graph but stays in the DOM for SR/keyboard; on mobile/reduced/no-JS
+ * it IS the experience.
+ * ========================================================================== */
+
+.cn-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--surface-hairline);
+}
+
+.cn-list__state {
+  border-bottom: 1px solid var(--surface-hairline);
+}
+
+.cn-list__toggle {
+  appearance: none;
+  background: none;
+  border: 0;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  color: var(--surface-text);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-5) 0;
+  transition: transform var(--dur-state) var(--ease-out);
+}
+
+.cn-list__toggle:hover {
+  transform: translateX(var(--shift-row));
+}
+
+.cn-list__count {
+  color: var(--surface-text-muted);
+}
+
+.cn-list__chapters {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 var(--space-5);
+}
+
+.cn-list__chapter {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--surface-hairline);
+}
+
+.cn-tbd {
+  color: var(--surface-text-muted);
+  padding-block: var(--space-4);
+}
+
+/* ==========================================================================
+ * NETWORK (9.2) — desktop stylised node graph. Layered over the list; the list
+ * is visually hidden (still in DOM) while the graph is shown.
+ * ========================================================================== */
+
+.cn-network {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* graph | masthead+panel */
+  gap: var(--grid-gutter);
+}
+
+/* On desktop the semantic list is present but visually hidden (screen-reader +
+ * keyboard still reach it); the graph is the visual layer. Under 1024px this is
+ * reversed (see the responsive block). */
+.cn-list-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.cn-canvas {
+  position: relative;
+  overflow: hidden;
+}
+
+.cn-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  /* ambient breath: translate toward pointer, tiny; JS sets --cn-bx/--cn-by */
+  transform: translate3d(var(--cn-bx, 0), var(--cn-by, 0), 0);
+  transition: transform 600ms var(--ease-in-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cn-svg {
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Edges: thin hairlines at rest; a highlighted subtree brightens to ivory. */
+.cn-edge {
+  stroke: var(--hairline-on-ink);
+  stroke-width: 1;
+  transition: stroke var(--dur-state) var(--ease-out), opacity var(--dur-state) var(--ease-out);
+}
+
+.cn-edge[data-active="true"] {
+  stroke: var(--ivory);
+}
+
+.cn-edge[data-muted="true"] {
+  opacity: 0.25;
+}
+
+/* State dot (SVG, presentational). Selected = crimson (NON-TEXT mark, allowed
+ * on ink); muted branches dim. */
+.cn-state-dot {
+  fill: var(--stone);
+  transition: fill var(--dur-state) var(--ease-out), r var(--dur-state) var(--ease-out);
+}
+
+.cn-state-dot[data-selected="true"] {
+  fill: var(--crimson);
+}
+
+.cn-state-dot[data-muted="true"] {
+  opacity: 0.3;
+}
+
+/* Chapter dot (SVG): appears on subtree highlight, ivory. */
+.cn-chapter-dot {
+  fill: var(--ivory);
+}
+
+/* ---- Accessible interaction overlay (HTML over the SVG) ------------------- */
+.cn-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* only the labels/buttons capture events */
+}
+
+/* Zone label — largest, serif; anchored at the zone point, offset below. */
+.cn-overlay__zone {
+  position: absolute;
+  transform: translate(-50%, var(--space-4));
+  color: var(--ivory);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* State labels — real buttons; ordinary pointer (NO custom cursor label). */
+.cn-overlay__state {
+  position: absolute;
+  transform: translate(var(--space-3), -50%);
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: var(--space-2);
+  color: var(--ivory);
+  white-space: nowrap;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: color var(--dur-state) var(--ease-out), opacity var(--dur-state) var(--ease-out);
+}
+
+.cn-overlay__state[data-muted="true"] {
+  color: var(--stone);
+  opacity: 0.5;
+}
+
+.cn-overlay__state[aria-pressed="true"] {
+  color: var(--ivory);
+}
+
+/* Masthead + slide-in chapter panel (right column). */
+.cn-side {
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--space-9) + var(--space-6)) var(--grid-margin) var(--space-9) 0;
+}
+
+.cn-statement {
+  color: var(--ivory);
+  margin-top: var(--space-4);
+}
+
+.cn-side__count {
+  color: var(--stone);
+  margin-top: var(--space-4);
+}
+
+.cn-panel {
+  margin-top: var(--space-7);
+  border-top: 1px solid var(--hairline-on-ink);
+}
+
+/* panel reveal (the one non-graph motion in the budget besides highlight) */
+.cn-panel__row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--hairline-on-ink);
+  color: var(--ivory);
+}
+
+.cn-panel__row-meta {
+  color: var(--stone);
+}
+
+/* ==========================================================================
+ * RESPONSIVE — below the desktop breakpoint the graph is REPLACED by the list.
+ * ========================================================================== */
+@media (width <= 1023px) {
+  .cn-network {
+    display: block;
+    min-height: 0;
+  }
+
+  .cn-canvas,
+  .cn-side {
+    display: none; /* graph + its side masthead are a desktop enhancement only */
+  }
+
+  .cn-list-sr {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+}

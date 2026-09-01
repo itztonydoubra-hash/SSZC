@@ -1,0 +1,93 @@
+/*
+ * ============================================================================
+ * ACCESSIBILITY FOUNDATIONS — CSS  (requirements §23, design.md A9-focus)
+ * tasks.md 5.1
+ * ============================================================================
+ * Structural, reusable, no visual patterns / no design-system components. Just
+ * the focus, skip-link, and screen-reader primitives every page inherits.
+ * ============================================================================
+ */
+
+/* --------------------------------------------------------------------------
+ * FOCUS-VISIBLE — a 2px crimson ring, 2px offset, on every interactive element.
+ * NEVER removed. Focus order follows visual order (handled per component). We
+ * only show the ring for keyboard/programmatic focus (:focus-visible), so mouse
+ * users don't see rings — but the ring is always available to keyboard users.
+ * -------------------------------------------------------------------------- */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--crimson);
+  outline-offset: 2px;
+  /* Ensure the ring is legible on ink surfaces too (crimson passes on both). */
+  border-radius: var(--radius-s);
+}
+
+/* Never leave an element with no focus indicator: if a component suppresses the
+ * default outline, :focus-visible above reinstates it. Guard against removal. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus:not(:focus-visible) {
+  /* mouse/touch focus: no ring, but do not break layout */
+  outline: none;
+}
+
+/* --------------------------------------------------------------------------
+ * SKIP LINK — first focusable element; visually hidden until focused, then
+ * appears top-left. Lets keyboard users jump past chrome to <main>.
+ * -------------------------------------------------------------------------- */
+.skip-link {
+  position: fixed;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: 300; /* above chrome + transition panel content region */
+  transform: translateY(calc(-100% - var(--space-6)));
+  padding: var(--space-3) var(--space-4);
+  background: var(--ink);
+  color: var(--ivory);
+  border-radius: var(--radius-s);
+  transition: transform var(--dur-state) var(--ease-out);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skip-link {
+    transition: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+ * VISUALLY HIDDEN — content available to screen readers but not shown. Used for
+ * off-screen labels/headings that keep the DOM semantic without visual clutter.
+ * -------------------------------------------------------------------------- */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Make it focusable-visible if it also receives focus (rare; e.g. a hidden
+ * heading that is a landmark target should not trap focus invisibly). */
+.visually-hidden:focus,
+.visually-hidden:focus-within {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* --------------------------------------------------------------------------
+ * MAIN focus target — <main> receives focus after skip-link activation without
+ * showing a persistent ring (it's a programmatic focus target, not interactive).
+ * -------------------------------------------------------------------------- */
+main:focus {
+  outline: none;
+}

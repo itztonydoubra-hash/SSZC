@@ -1,0 +1,219 @@
+/*
+ * ============================================================================
+ * TYPOGRAPHY SYSTEM  (design.md A3 / A3.1 / A3.2)  — tasks.md 2.2
+ * ============================================================================
+ * TWO families with DISTINCT ROLES, not a generic heading/body pairing:
+ *
+ *   Instrument Serif = THE INSTITUTION SPEAKING
+ *     names of people, section/page titles, statements of value, key figures,
+ *     publication & project titles, the network's one statement, pull-quotes.
+ *     -> role tokens whose family is var(--font-serif): display-* and numeral.
+ *
+ *   Manrope = THE RECORD AROUND IT
+ *     navigation, dates, roles, locations, categories, body copy, captions,
+ *     data, labels, standfirsts.
+ *     -> role tokens whose family is var(--font-sans): body-*, label, label-s.
+ *
+ * Hierarchy is built from SCALE + SPACE + ALIGNMENT + WHITESPACE (A3.2),
+ * NOT from many font weights or decorative treatments. Serif never sets long
+ * body; Manrope never sets a hero statement. On reading pages Manrope is
+ * dominant and serif appears only at the title and pull-quotes.
+ *
+ * The scale is the EXACT A3.1 table. Sizes are the only place these numbers
+ * appear; components reference the role classes, never raw font sizes.
+ * Fluid sizing uses clamp(min, fluid, max) interpolating between the mobile
+ * viewport (~375px) and the large-desktop viewport (1440px) from A10 breakpoints.
+ * ============================================================================
+ */
+
+:root {
+  /* --- Family role tokens (A3) --- */
+  --family-serif: var(--font-serif), Georgia, "Times New Roman", serif;
+  --family-sans: var(--font-sans), system-ui, -apple-system, "Segoe UI",
+    "Helvetica Neue", Arial, sans-serif;
+
+  /* --- Fluid type scale (A3.1 exact min -> max) ---------------------------
+   * clamp(minPx, calc(interpolate 375px..1440px), maxPx).
+   * The middle term is derived so size == min at 375px and == max at 1440px:
+   *   slope    = (max - min) / (1440 - 375) [px per px of viewport]
+   *   intercept= min - slope * 375
+   *   preferred= intercept(rem-ish as px) + slope*100vw   (expressed in px/vw)
+   * We express intercept in px and slope as (slope*100)vw.
+   * ---------------------------------------------------------------------- */
+
+  /* display-xxl  44 -> 132  (slope .08263, intercept 12.99px, 8.263vw) */
+  --type-display-xxl-size: clamp(44px, 12.99px + 8.263vw, 132px);
+  --type-display-xxl-lh: 0.98;
+  --type-display-xxl-track: -0.01em;
+
+  /* display-xl   36 -> 88   (slope .04883, intercept 17.69px, 4.883vw) */
+  --type-display-xl-size: clamp(36px, 17.69px + 4.883vw, 88px);
+  --type-display-xl-lh: 1.02;
+  --type-display-xl-track: -0.01em;
+
+  /* display-l    28 -> 56   (slope .02629, intercept 18.14px, 2.629vw) */
+  --type-display-l-size: clamp(28px, 18.14px + 2.629vw, 56px);
+  --type-display-l-lh: 1.06;
+  --type-display-l-track: 0em;
+
+  /* display-m    22 -> 34   (slope .01127, intercept 17.77px, 1.127vw) */
+  --type-display-m-size: clamp(22px, 17.77px + 1.127vw, 34px);
+  --type-display-m-lh: 1.15;
+  --type-display-m-track: 0em;
+
+  /* body-l       18 -> 21   (slope .002817, intercept 16.94px, 0.282vw) */
+  --type-body-l-size: clamp(18px, 16.94px + 0.282vw, 21px);
+  --type-body-l-lh: 1.6;
+
+  /* body-m       16 -> 17   (slope .000939, intercept 15.65px, 0.094vw) */
+  --type-body-m-size: clamp(16px, 15.65px + 0.094vw, 17px);
+  --type-body-m-lh: 1.65;
+
+  /* body-s       14 -> 15   (slope .000939, intercept 13.65px, 0.094vw) */
+  --type-body-s-size: clamp(14px, 13.65px + 0.094vw, 15px);
+  --type-body-s-lh: 1.55;
+
+  /* label        12 -> 13   (slope .000939, intercept 11.65px, 0.094vw) */
+  --type-label-size: clamp(12px, 11.65px + 0.094vw, 13px);
+  --type-label-lh: 1.2;
+  --type-label-track: 0.14em;
+
+  /* label-s      11 -> 12   (slope .000939, intercept 10.65px, 0.094vw) */
+  --type-label-s-size: clamp(11px, 10.65px + 0.094vw, 12px);
+  --type-label-s-lh: 1.2;
+  --type-label-s-track: 0.16em;
+
+  /* numeral      96 -> 240  (slope .13521, intercept 45.30px, 13.521vw) */
+  --type-numeral-size: clamp(96px, 45.3px + 13.521vw, 240px);
+  --type-numeral-lh: 0.9;
+  --type-numeral-track: -0.02em;
+
+  /* Reading measure (A3.1): body wraps at 62–72ch. */
+  --measure-body: 66ch;
+  --measure-body-min: 62ch;
+  --measure-body-max: 72ch;
+}
+
+/* ============================================================================
+ * BASE  — Manrope is the document default (the record). Serif is opt-in via the
+ * display roles only, so nothing becomes serif merely for being large (A3.2).
+ * ============================================================================ */
+body {
+  font-family: var(--family-sans);
+  font-size: var(--type-body-m-size);
+  line-height: var(--type-body-m-lh);
+  font-weight: 400;
+  /* Enable ligatures/kerning generally; tabular figures are opt-in via .tnum
+   * (counters & dates) so numerals don't jitter (A3 / A2.2). */
+  font-kerning: normal;
+}
+
+/* Tabular, lining figures for counters and dates (A3.1 numeral / Impact). */
+.tnum {
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+/* ============================================================================
+ * ROLE CLASSES  — the ONLY way to set type. Components use these; they never
+ * set font-size/family directly. Each class fixes family + size + line-height
+ * + tracking from the tokens above.
+ * ============================================================================ */
+
+/* --- Serif: the institution speaking --------------------------------------- */
+.type-display-xxl,
+.type-display-xl,
+.type-display-l,
+.type-display-m,
+.type-numeral {
+  font-family: var(--family-serif);
+  font-weight: 400; /* Instrument Serif ships a single weight */
+  margin: 0;
+}
+
+.type-display-xxl {
+  font-size: var(--type-display-xxl-size);
+  line-height: var(--type-display-xxl-lh);
+  letter-spacing: var(--type-display-xxl-track);
+}
+
+.type-display-xl {
+  font-size: var(--type-display-xl-size);
+  line-height: var(--type-display-xl-lh);
+  letter-spacing: var(--type-display-xl-track);
+}
+
+.type-display-l {
+  font-size: var(--type-display-l-size);
+  line-height: var(--type-display-l-lh);
+  letter-spacing: var(--type-display-l-track);
+}
+
+.type-display-m {
+  font-size: var(--type-display-m-size);
+  line-height: var(--type-display-m-lh);
+  letter-spacing: var(--type-display-m-track);
+}
+
+.type-numeral {
+  font-size: var(--type-numeral-size);
+  line-height: var(--type-numeral-lh);
+  letter-spacing: var(--type-numeral-track);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+/* Editorial italic is available for serif emphasis but used sparingly (A3). */
+.type-italic {
+  font-style: italic;
+}
+
+/* --- Manrope: the record --------------------------------------------------- */
+.type-body-l,
+.type-body-m,
+.type-body-s,
+.type-label,
+.type-label-s {
+  font-family: var(--family-sans);
+  margin: 0;
+}
+
+.type-body-l {
+  font-size: var(--type-body-l-size);
+  line-height: var(--type-body-l-lh);
+  font-weight: 400;
+}
+
+.type-body-m {
+  font-size: var(--type-body-m-size);
+  line-height: var(--type-body-m-lh);
+  font-weight: 400;
+}
+
+.type-body-s {
+  font-size: var(--type-body-s-size);
+  line-height: var(--type-body-s-lh);
+  font-weight: 400;
+}
+
+.type-label {
+  font-size: var(--type-label-size);
+  line-height: var(--type-label-lh);
+  letter-spacing: var(--type-label-track);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.type-label-s {
+  font-size: var(--type-label-s-size);
+  line-height: var(--type-label-s-lh);
+  letter-spacing: var(--type-label-s-track);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Long-form reading measure (A3.1). Apply to prose containers so body copy in
+ * Manrope stays at 62–72ch regardless of section width. */
+.measure {
+  max-width: var(--measure-body-max);
+}

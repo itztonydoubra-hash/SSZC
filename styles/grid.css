@@ -1,0 +1,195 @@
+/*
+ * ============================================================================
+ * LAYOUT / GRID SYSTEM  (design.md A4.2 / A4.3)  — tasks.md 3.1 / 3.2
+ * ============================================================================
+ * This provides STRUCTURE, not a visual recipe. It gives pages a grid, a shared
+ * left "spine", the ability to offset/overlap and break the grid, and a way to
+ * escape to full-bleed. It intentionally does NOT define a "section look" — the
+ * five experiences compose these primitives differently (A4.3 note).
+ *
+ * Responsive columns/margins/gutters redefine the grid tokens per breakpoint,
+ * so the SAME primitive recomposes rather than shrinks:
+ *   Desktop (>=1024): 12 cols, margin fluid 48->96, gutter 24, max 1440
+ *   Tablet  (>=768):   8 cols, margin 32,           gutter 20
+ *   Mobile  (<768):    4 cols, margin 20,           gutter 16
+ * No card grids, no fixed centered SaaS container beyond the max-width read
+ * container; asymmetry and negative space are first-class.
+ * ============================================================================
+ */
+
+:root {
+  /* Grid tokens (defaults = desktop). --grid-margin is fluid 48->96 between the
+   * tablet and desktop breakpoints so outer whitespace grows with the viewport
+   * (A4.2). Mobile/tablet override cols + margin + gutter below. */
+  --grid-cols: 12;
+  --grid-gutter: 24px;
+  --grid-margin: clamp(48px, 5.5vw, 96px);
+  --grid-max-width: 1440px;
+}
+
+@media (width <= 1023px) {
+  :root {
+    --grid-cols: 8;
+    --grid-gutter: 20px;
+    --grid-margin: 32px;
+  }
+}
+
+@media (width <= 767px) {
+  :root {
+    --grid-cols: 4;
+    --grid-gutter: 16px;
+    --grid-margin: 20px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+ * CONTAINER — bounds the readable content width and applies the outer margin.
+ * It is centered ONLY as a max-width guard; content inside is free to be
+ * asymmetric. This is not a "everything centered" SaaS container.
+ * -------------------------------------------------------------------------- */
+.l-container {
+  width: 100%;
+  max-width: calc(var(--grid-max-width) + var(--grid-margin) * 2);
+  margin-inline: auto;
+  padding-inline: var(--grid-margin);
+}
+
+/* --------------------------------------------------------------------------
+ * GRID — the N-column track system. Children place themselves with the
+ * GridItem span/start utilities (data attributes) below. Row gap is opt-in via
+ * the --grid-row-gap custom property so vertical rhythm stays deliberate.
+ * -------------------------------------------------------------------------- */
+.l-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+  gap: var(--grid-row-gap, 0) var(--grid-gutter);
+}
+
+/* --------------------------------------------------------------------------
+ * GRID ITEM — placement by column span + optional start. Values are provided
+ * per breakpoint via custom properties set inline by the GridItem component,
+ * so a component can specify DIFFERENT placement at desktop/tablet/mobile
+ * (recomposition, not shrink). Spans are clamped to the current column count
+ * so an over-wide desktop span collapses sensibly on smaller grids.
+ *
+ * Custom properties consumed (all optional, fall back gracefully):
+ *   --col-span / --col-start                (desktop)
+ *   --col-span-md / --col-start-md          (tablet)
+ *   --col-span-sm / --col-start-sm          (mobile)
+ * -------------------------------------------------------------------------- */
+.l-item {
+  grid-column: var(--col-start, auto) / span
+    min(var(--col-span, var(--grid-cols)), var(--grid-cols));
+}
+
+@media (width <= 1023px) {
+  .l-item {
+    grid-column: var(--col-start-md, var(--col-start, auto)) / span
+      min(
+        var(--col-span-md, var(--col-span, var(--grid-cols))),
+        var(--grid-cols)
+      );
+  }
+}
+
+@media (width <= 767px) {
+  .l-item {
+    grid-column: var(--col-start-sm, auto) / span
+      min(
+        var(--col-span-sm, var(--grid-cols)),
+        var(--grid-cols)
+      );
+  }
+}
+
+/* --------------------------------------------------------------------------
+ * SPINE — the shared left alignment edge (A3.2 / A4.3). Elements aligned to the
+ * spine share one left edge so that offsets read as deliberate. The spine is
+ * simply "start at column 1"; a section keeps its title, eyebrow and body on
+ * the spine while other elements offset AGAINST it. This class is a semantic
+ * marker + guarantees column-start 1.
+ * -------------------------------------------------------------------------- */
+.l-spine {
+  --col-start: 1;
+}
+
+/* --------------------------------------------------------------------------
+ * FULL-BLEED — escape the container to the viewport edges (A4.2, photographic
+ * material). Used for hero/project openers/media. Uses the viewport-width
+ * technique; guarded so it never introduces horizontal scroll.
+ * -------------------------------------------------------------------------- */
+.l-bleed {
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+/* --------------------------------------------------------------------------
+ * OVERLAP — allow an element to cross a grid/image boundary by a MEASURED
+ * amount (A4.3 "overlap": serif type crossing into an image edge; never
+ * centered over it). The amount is a token-based negative margin, set by the
+ * consuming component via --overlap-x / --overlap-y. Defaults to one gutter.
+ * On mobile the overlap is reduced/neutralised by the component's own
+ * responsive placement (recomposition), not by shrinking the whole thing.
+ * -------------------------------------------------------------------------- */
+.l-overlap {
+  position: relative;
+  z-index: 1;
+  margin-left: calc(-1 * var(--overlap-x, 0px));
+  margin-top: calc(-1 * var(--overlap-y, 0px));
+}
+
+/* Overlaps are re-tuned per breakpoint (A10: recomposition, not shrink). At
+ * tablet a desktop overlap is often too large for the 8-col recomposition, and
+ * on mobile it must not push type past the outer margin. Components set the
+ * *Md / *Sm variants; if unset, tablet inherits the desktop value and mobile
+ * neutralises to 0. */
+@media (width <= 1023px) {
+  .l-overlap {
+    margin-left: calc(-1 * var(--overlap-x-md, var(--overlap-x, 0px)));
+    margin-top: calc(-1 * var(--overlap-y-md, var(--overlap-y, 0px)));
+  }
+}
+
+@media (width <= 767px) {
+  .l-overlap {
+    margin-left: calc(-1 * var(--overlap-x-sm, 0px));
+    margin-top: calc(-1 * var(--overlap-y-sm, 0px));
+  }
+}
+
+/* --------------------------------------------------------------------------
+ * STACK — vertical spacing helper using the spacing scale. This is the ONLY
+ * generic spacing helper; it takes a token step via --stack-gap so no arbitrary
+ * gaps appear. Used for intra-block rhythm; section rhythm uses section padding.
+ * -------------------------------------------------------------------------- */
+.l-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap, var(--space-4));
+}
+
+/* --------------------------------------------------------------------------
+ * LEDGER — the record row format (A4.3), the primary alternative to cards.
+ * A ledger is a list; each row is index · title · meta · terminal, divided by
+ * hairlines. Slots are reorderable per context (Publications leads with
+ * category/title, Events-past with date, Chapters with institution) via
+ * source order + flex; this file only provides the row structure + hairline.
+ * NO card styling: no background, no border-box, no shadow, no radius.
+ * -------------------------------------------------------------------------- */
+.l-ledger {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--surface-hairline);
+}
+
+.l-ledger__row {
+  display: grid;
+  align-items: baseline;
+  column-gap: var(--grid-gutter);
+  padding-block: var(--space-5);
+  border-bottom: 1px solid var(--surface-hairline);
+}

@@ -1,0 +1,350 @@
+/*
+ * ============================================================================
+ * LEADERSHIP — CSS  (design.md B1)  tasks.md 8.1 / 8.2 / 8.3
+ * ============================================================================
+ * The Executive Register (Movement one) and the Directory (Movement two).
+ * Token-only. The Register's signature motion is a pinned, scroll-driven
+ * replacement of ONE person by the next within a FIXED frame — implemented with
+ * position:sticky + a scroll-progress observer (no new animation library;
+ * design.md A6.3 "behaviour, not library"). Budget (3): pin + mask + count-tick.
+ * ============================================================================
+ */
+
+/* ==========================================================================
+ * MOVEMENT ONE — EXECUTIVE REGISTER (design.md B1.1)
+ * ========================================================================== */
+
+/* The register is a tall scroll track; the stage pins (sticky) within it, and
+ * scroll progress through the track selects the active executive. Track height
+ * = one viewport per executive, so each executive gets a full scroll "page". */
+.lr-register {
+  position: relative;
+}
+
+.lr-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+}
+
+/* The fixed frame: a 42% spine split. Type column left, portrait right. */
+.lr-frame {
+  position: relative;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 42% 58%;
+}
+
+/* Left type column — bottom-weighted (lower third), on the container margin. */
+.lr-type {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--space-9) var(--space-6) var(--space-9) var(--grid-margin);
+  gap: var(--space-4);
+}
+
+/* INDEX on the INK Register.
+ * design.md B1.1 specifies a crimson index, but crimson on ink is 2.60:1 —
+ * it fails WCAG even for large text (D4 assumed large crimson numerals on ink
+ * pass; they measurably do not). INTERIM accessible treatment (flagged for
+ * approval, decisions.md D5): the index numeral is IVORY on ink; the count-tick
+ * "deepen" beat is expressed by briefly dimming toward stone (a legible,
+ * non-crimson emphasis) rather than a failing crimson. On IVORY surfaces the
+ * index stays crimson per D4 (see the Directory selector below). */
+.lr-index {
+  color: var(--ivory);
+  transition: color var(--dur-state) var(--ease-out);
+}
+
+/* The count-tick beat (JS toggles data-ticking): a brief stone dim, legible. */
+.lr-index[data-ticking="true"] {
+  color: var(--stone);
+}
+
+.lr-rule {
+  width: 100%;
+  max-width: 320px;
+  height: 1px;
+  background: var(--hairline-on-ink);
+  border: 0;
+  margin: 0;
+}
+
+.lr-role {
+  color: var(--stone);
+}
+
+.lr-name {
+  color: var(--ivory);
+}
+
+/* Portrait column — 4:5 crop bleeding to the top and right edges. */
+.lr-portraits {
+  position: relative;
+  height: 100%;
+}
+
+/* Ghost numeral — static, behind, bleeding off bottom-left, crossing the spine. */
+.lr-ghost {
+  position: absolute;
+  left: calc(-1 * var(--space-8));
+  bottom: calc(-1 * var(--space-7));
+  z-index: 0;
+  color: var(--ink-800);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Each portrait layer stacks in the same box; the active one is shown, others
+ * are masked out. The mask cross is driven by data-state set by the component. */
+.lr-portrait {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  /* default hidden (fully clipped from the top) */
+  clip-path: inset(0 0 0 100%);
+}
+
+.lr-portrait__img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform: translateY(0);
+  transition:
+    clip-path var(--dur-settle) var(--ease-in-out),
+    transform var(--dur-settle) var(--ease-in-out);
+  will-change: transform, clip-path;
+}
+
+/* active: fully open */
+.lr-portrait[data-state="active"] {
+  clip-path: inset(0 0 0 0);
+  z-index: 1;
+}
+
+/* incoming: opens from the TOP edge downward */
+.lr-portrait[data-state="incoming"] {
+  clip-path: inset(0 0 100% 0);
+}
+
+/* outgoing: closes from the BOTTOM edge upward + slides up 6% */
+.lr-portrait[data-state="outgoing"] {
+  clip-path: inset(100% 0 0 0);
+}
+
+.lr-portrait[data-state="outgoing"] .lr-portrait__img {
+  transform: translateY(-6%);
+}
+
+/* Portrait placeholder (when [OFFICIAL IMAGE] not yet supplied): a marked ink
+ * block, never a stock image. */
+.lr-portrait__placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--ink-800);
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-5);
+}
+
+/* hover scale on the portrait (VIEW / OPEN target) — 1.02 only.
+ * (Transition already declared on .lr-portrait__img above; here only the hover
+ * transform target.) */
+.lr-portraits[data-hover="true"] .lr-portrait[data-state="active"] .lr-portrait__img {
+  transform: scale(1.02);
+}
+
+/* Register rail — left-edge focusable ticks 01…0N. */
+.lr-rail {
+  position: absolute;
+  top: 50%;
+  left: var(--space-4);
+  transform: translateY(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lr-rail__tick {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: var(--space-2);
+  color: var(--stone);
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* Active tick on ink: ivory (crimson small text on ink fails AA — D4/D5). The
+ * crimson accent role on ink is carried by non-text marks elsewhere. */
+.lr-rail__tick[aria-current="true"] {
+  color: var(--ivory);
+}
+
+/* Reduced motion + no-JS: the register becomes a clean vertical stack of
+ * full-height panels; portraits static, index static, name fades <=180ms. */
+.lr-fallback {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lr-portrait__img {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+ * MOBILE / no-pin (design.md B1.1 mobile) — applied under 768px OR when the
+ * component runs in stacked mode. Each executive is one full-height panel.
+ * ========================================================================== */
+@media (width <= 767px) {
+  .lr-stage {
+    position: static;
+    height: auto;
+    overflow: visible;
+  }
+
+  .lr-track-spacer {
+    display: none; /* no scroll track needed without a pin */
+  }
+}
+
+.lr-panel {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+.lr-panel__portrait {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  max-height: 62svh;
+  overflow: hidden;
+}
+
+.lr-panel__type {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-6) var(--grid-margin) var(--space-8);
+}
+
+/* Mobile top progress bar (replaces the rail). */
+.lr-progress {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  height: 2px;
+  background: var(--hairline-on-ink);
+}
+
+.lr-progress__fill {
+  height: 100%;
+  background: var(--crimson);
+  width: var(--lr-progress, 0%);
+}
+
+/* ==========================================================================
+ * MOVEMENT TWO — DIRECTORY (design.md B1.2)
+ * ========================================================================== */
+
+.ld-directory {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+  column-gap: var(--grid-gutter);
+  padding-block: var(--space-9);
+}
+
+.ld-selector {
+  grid-column: 1 / span 4;
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ld-selector__item {
+  position: relative;
+  display: block;
+}
+
+.ld-selector__btn {
+  appearance: none;
+  background: none;
+  border: 0;
+  border-top: 1px solid var(--hairline-on-ivory);
+  width: 100%;
+  text-align: left;
+  padding: var(--space-4) 0;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  transition: transform var(--dur-state) var(--ease-out);
+}
+
+.ld-selector__btn:hover {
+  transform: translateX(var(--shift-row));
+}
+
+.ld-selector__btn[aria-pressed="true"] {
+  color: var(--crimson);
+}
+
+.ld-selector__num {
+  color: var(--crimson);
+}
+
+.ld-panel {
+  grid-column: 5 / span 8;
+}
+
+.ld-tier {
+  margin-block: var(--space-6);
+}
+
+.ld-tier__label {
+  color: var(--stone-600);
+  margin-bottom: var(--space-3);
+}
+
+.ld-tbd {
+  color: var(--stone-600);
+}
+
+/* Mobile directory: selector becomes a horizontal DRAG rail; tiers accordion. */
+@media (width <= 767px) {
+  .ld-directory {
+    display: block;
+  }
+
+  .ld-selector {
+    display: flex;
+    gap: var(--space-5);
+    overflow-x: auto;
+    border-bottom: 1px solid var(--hairline-on-ivory);
+    padding-bottom: var(--space-3);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ld-selector__btn {
+    border-top: 0;
+    white-space: nowrap;
+    padding: var(--space-2) 0;
+  }
+
+  .ld-panel {
+    margin-top: var(--space-6);
+  }
+}

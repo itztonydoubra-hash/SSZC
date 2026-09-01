@@ -1,0 +1,27 @@
+{
+  "extends": ["stylelint-config-standard"],
+  "rules": {
+    "custom-property-empty-line-before": null,
+    "declaration-empty-line-before": null,
+    "comment-empty-line-before": null,
+    "selector-class-pattern": null,
+    "value-keyword-case": null,
+    "import-notation": "string",
+    "media-feature-range-notation": "context",
+    "color-no-hex": [true, {
+      "message": "Raw hex colours are forbidden. Use a design token via var(--token) (see docs/decisions.md D1 / design.md A2)."
+    }],
+    "color-named": ["never", {
+      "message": "Named colours are forbidden. Use a design token via var(--token)."
+    }]
+  },
+  "overrides": [
+    {
+      "files": ["styles/tokens.css"],
+      "rules": {
+        "color-no-hex": null,
+        "color-named": null
+      }
+    }
+  ]
+}

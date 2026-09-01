@@ -1,0 +1,106 @@
+/*
+ * CONTACT — institutional colophon (design.md B5, D5 approved). tasks.md 12.
+ * Ink plate; contact channels ARE the invitation (body-l, email largest); final
+ * nav index; sub-strip. Least-animated screen. Token-only.
+ */
+
+.col-plate {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: calc(var(--space-9) + var(--space-6));
+  padding-bottom: var(--space-6);
+}
+
+.col-name {
+  color: var(--ivory);
+  max-width: 20ch;
+}
+
+.col-rule {
+  border: 0;
+  border-top: 1px solid var(--hairline-on-ink);
+  margin-block: var(--space-7);
+}
+
+.col-records {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-7);
+}
+
+.col-records__head {
+  color: var(--stone);
+  margin-bottom: var(--space-4);
+}
+
+.col-line {
+  display: block;
+  color: var(--ivory);
+  text-decoration: none;
+  margin-bottom: var(--space-3);
+  transition: transform var(--dur-state) var(--ease-out), color var(--dur-state) var(--ease-out);
+}
+
+a.col-line:hover,
+a.col-line:focus-visible {
+  transform: translateX(var(--shift-link));
+}
+
+.col-line--email {
+  /* the primary route in — the largest, most-weighted line */
+}
+
+.col-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-6);
+  list-style: none;
+  margin: 0;
+  padding: var(--space-7) 0 0;
+}
+
+.col-nav a {
+  color: var(--stone);
+  text-decoration: none;
+  transition: color var(--dur-state) var(--ease-out);
+}
+
+.col-nav a:hover,
+.col-nav a:focus-visible {
+  color: var(--ivory);
+}
+
+.col-substrip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  border-top: 1px solid var(--hairline-on-ink);
+  padding-top: var(--space-5);
+  margin-top: var(--space-8);
+  color: var(--stone);
+}
+
+.col-backtotop {
+  appearance: none;
+  background: none;
+  border: 0;
+  color: var(--stone);
+  cursor: pointer;
+  transition: color var(--dur-state) var(--ease-out);
+}
+
+.col-backtotop:hover,
+.col-backtotop:focus-visible {
+  color: var(--ivory);
+}
+
+@media (width <= 767px) {
+  .col-records {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+}

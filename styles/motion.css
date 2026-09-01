@@ -1,0 +1,117 @@
+/*
+ * ============================================================================
+ * SHARED MOTION PRIMITIVES — CSS  (design.md A6.1 / A6.2 / A6.3)  tasks.md 4.2
+ * ============================================================================
+ * Small, composable, static-first. Each primitive has TWO states: a rest state
+ * (before reveal / static baseline) and an active state. The rest state is the
+ * ANIMATED-OUT position; components toggle a `data-inview` attribute (set by the
+ * useInView hook) to reach the active state.
+ *
+ * Reduced motion: the duration tokens collapse to ~1ms (tokens.css) AND the
+ * rest state is neutralised below, so content renders in its FINAL position
+ * with no transform — a coherent static experience, never a stuck mid-state.
+ *
+ * Only transform / opacity / clip-path animate (A6.2). Layout never animates.
+ * ============================================================================
+ */
+
+/* --------------------------------------------------------------------------
+ * LINE-RISE REVEAL (A6.1) — a title/standfirst rises one line-height from a
+ * clipped box while fading in. Used for TITLES and STANDFIRSTS only; body copy
+ * does not animate. Apply .m-rise to the element; the clip is provided by
+ * wrapping in .m-rise-clip (overflow hidden) where a hard clip is wanted.
+ * -------------------------------------------------------------------------- */
+.m-rise-clip {
+  overflow: hidden;
+}
+
+.m-rise {
+  opacity: 0;
+  transform: translateY(0.9em);
+  transition:
+    opacity var(--dur-reveal) var(--ease-out),
+    transform var(--dur-reveal) var(--ease-out);
+  transition-delay: var(--m-delay, 0ms);
+}
+
+.m-rise[data-inview="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* --------------------------------------------------------------------------
+ * MASK-OPEN IMAGE (A6.1) — an image reveals as a clip edge opens while the
+ * inner picture de-scales 1.06 -> 1.0. Direction set by --m-mask-from
+ * (default: bottom, i.e. opens upward). The image element is .m-mask__img
+ * inside a .m-mask container.
+ * -------------------------------------------------------------------------- */
+.m-mask {
+  position: relative;
+  overflow: hidden;
+  /* rest: fully clipped from the reveal edge */
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path var(--dur-settle) var(--ease-in-out);
+  transition-delay: var(--m-delay, 0ms);
+}
+
+.m-mask[data-inview="true"] {
+  clip-path: inset(0 0 0 0);
+}
+
+.m-mask__img {
+  display: block;
+  position: relative; /* positioning context for next/image fill */
+  width: 100%;
+  height: 100%;
+  transform: scale(1.06);
+  transition: transform var(--dur-settle) var(--ease-in-out);
+  transition-delay: var(--m-delay, 0ms);
+  will-change: transform;
+}
+
+.m-mask[data-inview="true"] .m-mask__img {
+  transform: scale(1);
+}
+
+/* --------------------------------------------------------------------------
+ * HELD PARALLAX (A6.1) — a large photo drifts by a capped amount. The offset
+ * is driven by a JS-set custom property --m-parallax (px), clamped by the
+ * component to <= --parallax-max of the element height. CSS just applies it via
+ * transform so only the compositor is touched. Never on small images.
+ * -------------------------------------------------------------------------- */
+.m-parallax {
+  transform: translate3d(0, var(--m-parallax, 0), 0);
+  will-change: transform;
+}
+
+/* --------------------------------------------------------------------------
+ * REDUCED MOTION — neutralise rest states so content is in its FINAL position
+ * with no transform/clip. Combined with the ~1ms duration tokens this yields a
+ * clean static baseline (A6.2 / A8). No primitive is left mid-animation.
+ * -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .m-rise,
+  .m-rise[data-inview="false"],
+  .m-rise[data-inview="true"] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .m-mask,
+  .m-mask[data-inview="false"],
+  .m-mask[data-inview="true"] {
+    clip-path: none;
+    transition: none;
+  }
+
+  .m-mask__img,
+  .m-mask[data-inview] .m-mask__img {
+    transform: none;
+    transition: none;
+  }
+
+  .m-parallax {
+    transform: none;
+  }
+}

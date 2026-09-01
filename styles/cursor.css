@@ -1,0 +1,87 @@
+/*
+ * ============================================================================
+ * CUSTOM CURSOR — CSS  (design.md A7)  tasks.md 4.4
+ * ============================================================================
+ * Desktop pointer:fine ONLY. A controlled vocabulary of exactly THREE labels:
+ * VIEW, OPEN, DRAG. It appears only over elements that declare an interaction
+ * via data-cursor="view|open|drag". Normal links/buttons/nav declare nothing
+ * and keep the native pointer.
+ *
+ * The cursor is a small dot that grows into a labelled pill on an interactive
+ * target. It never replaces a visible on-element affordance (arrows/underlines
+ * live on the elements themselves).
+ *
+ * Only shown when the root has .cursor-enabled (set by the controller after it
+ * confirms a fine pointer). On touch/coarse pointers it is never rendered.
+ * ============================================================================
+ */
+
+.cursor-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  pointer-events: none;
+  /* follows pointer via translate set by the controller */
+  transform: translate3d(var(--cursor-x, -100px), var(--cursor-y, -100px), 0);
+  will-change: transform;
+}
+
+.cursor-dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 50%;
+  /* inverts by surface: uses currentColor set from the surface under it */
+  background: var(--cursor-color, var(--ivory));
+  transition:
+    width var(--dur-state) var(--ease-out),
+    height var(--dur-state) var(--ease-out),
+    opacity var(--dur-state) var(--ease-out);
+}
+
+.cursor-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-s);
+  background: var(--crimson);
+  color: var(--ivory);
+  opacity: 0;
+  white-space: nowrap;
+  transition: opacity var(--dur-state) var(--ease-out);
+}
+
+/* Active interaction: hide the dot, show the label. */
+.cursor-root[data-cursor="view"] .cursor-dot,
+.cursor-root[data-cursor="open"] .cursor-dot,
+.cursor-root[data-cursor="drag"] .cursor-dot {
+  opacity: 0;
+}
+
+.cursor-root[data-cursor="view"] .cursor-label,
+.cursor-root[data-cursor="open"] .cursor-label,
+.cursor-root[data-cursor="drag"] .cursor-label {
+  opacity: 1;
+}
+
+/* Coarse pointer / touch: never show, and never hide the native cursor. */
+@media (hover: none), (pointer: coarse) {
+  .cursor-root {
+    display: none;
+  }
+}
+
+/* Reduced motion: no follow smoothing / grow transition; the cursor still
+ * appears (it conveys interaction, which is information), but without easing. */
+@media (prefers-reduced-motion: reduce) {
+  .cursor-dot,
+  .cursor-label {
+    transition: none;
+  }
+}

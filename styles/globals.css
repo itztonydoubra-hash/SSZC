@@ -1,0 +1,40 @@
+/*
+ * Global baseline. Full base typography lands in Phase 2 (Task 2.2).
+ * Phase 0/1: box-sizing reset + token import + default reading surface.
+ */
+@import "./tokens.css";
+@import "./type.css";
+@import "./grid.css";
+@import "./motion.css";
+@import "./transition.css";
+@import "./cursor.css";
+@import "./a11y.css";
+@import "./chrome.css";
+@import "./leadership.css";
+@import "./chapters.css";
+@import "./publications.css";
+@import "./impact.css";
+@import "./contact.css";
+@import "./pages.css";
+@import "./home.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Default page surface is ivory (the reading surface — design.md A2).
+ * Uses the surface role tokens so the base matches the surface system. */
+body {
+  background: var(--surface-bg);
+  color: var(--surface-text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}

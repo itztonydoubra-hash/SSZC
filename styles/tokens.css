@@ -1,0 +1,175 @@
+/*
+ * ============================================================================
+ * DESIGN TOKENS — THE SINGLE SOURCE OF TRUTH FOR ALL VALUES
+ * ============================================================================
+ * Encodes docs/design.md A2 (colour), A4 (spacing/grid), A6.3 (motion) exactly.
+ * See docs/decisions.md D1. No literal visual values may exist outside this file
+ * (enforced by stylelint color-no-hex / color-named).
+ *
+ * Rule of restraint: this file contains ONLY tokens that design.md requires.
+ * No extra palette steps, no shadow tokens, no gradient tokens, no radius scale.
+ * If a new token becomes genuinely necessary it must be flagged in
+ * docs/decisions.md before being added.
+ * ============================================================================
+ */
+
+:root {
+  /* ==========================================================================
+   * 1. COLOUR  (design.md A2.1)
+   * Nine named colours + functional alphas. Crimson is an ACCENT ONLY
+   * (A1.2 / A2.2): index numbers, active state in a set, a single rule,
+   * selected node/state, a closing/urgent date. Never a fill, never a
+   * default button colour, never long body text.
+   * ========================================================================== */
+  --ink: #0b0d0f;        /* darkest surface; primary text on ivory            */
+  --ink-800: #15181b;    /* ghost numerals, faint dividers on ink             */
+  --ivory: #f4f0e8;      /* primary reading surface; text on ink              */
+  --ivory-200: #fbf9f4;  /* inset / hovered ivory (used sparingly)            */
+  --crimson: #a51c30;    /* ACCENT: record/locate only                        */
+  --crimson-700: #7e1425;/* pressed crimson (rare)                            */
+  --stone: #b8b2a7;      /* large muted text, metadata on ink, placeholders   */
+  --stone-600: #6b665c;  /* muted text that must stay legible on ivory (AA body
+                            5.02:1; darkened from #8a857b which was 3.23:1 and
+                            failed AA body — see docs/decisions.md D3)          */
+  --white: #fff;         /* one emphasised figure/word maximum per view       */
+
+  /* Functional alphas (A2.1) — scrims under text on photos, and hairlines
+   * that REPLACE borders/boxes (A3.2). These are the only permitted uses of
+   * translucency; there are no decorative overlays. */
+  --scrim-ink-70: rgb(11 13 15 / 70%);
+  --scrim-ink-40: rgb(11 13 15 / 40%);
+  --hairline-on-ink: rgb(244 240 232 / 14%);
+  --hairline-on-ivory: rgb(11 13 15 / 12%);
+
+  /* --------------------------------------------------------------------------
+   * SURFACE CONTEXT (A2)  — semantic aliases resolved per section.
+   * A section sets its surface (see .surface-ink / .surface-ivory below) and
+   * components reference these role tokens instead of raw colours, so the same
+   * component auto-inverts on ink vs ivory. Default here = ivory (reading).
+   * -------------------------------------------------------------------------- */
+  --surface-bg: var(--ivory);
+  --surface-text: var(--ink);           /* body text on this surface           */
+  --surface-text-muted: var(--stone-600); /* metadata/labels on this surface   */
+  --surface-hairline: var(--hairline-on-ivory);
+  /* Crimson is surface-independent (accent), so it is NOT aliased per surface. */
+
+  /* ==========================================================================
+   * 2. SPACING  (design.md A4.1)
+   * 8-based with editorial jumps. Section rhythm uses the large end (96–256)
+   * to create magazine "air"; intra-block uses the small end. This is an
+   * editorial scale, NOT a SaaS card-padding scale.
+   * ========================================================================== */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+  --space-11: 192px;
+  --space-12: 256px;
+
+  /* ==========================================================================
+   * 3. RADIUS  (design.md A5)
+   * Corners are square by default. The ONLY radius that exists is for form
+   * controls/buttons. There is deliberately no radius scale (guards against
+   * rounded "app" cards — Part D §4).
+   * ========================================================================== */
+  --radius-s: 2px;
+
+  /* ==========================================================================
+   * 4. GRID  (design.md A4.2)
+   * 12 / 8 / 4 columns at desktop / tablet / mobile. Margins and gutters are
+   * tokens; the responsive VALUES are applied in the layout system (Phase 3),
+   * which redefines --grid-margin / --grid-cols per breakpoint via media query.
+   * These :root values are the DESKTOP defaults.
+   * ========================================================================== */
+  --grid-max-width: 1440px;
+  --grid-cols: 12;
+  --grid-margin: 96px; /* desktop outer margin (fluid 48→96 handled in Phase 3) */
+  --grid-gutter: 24px;
+
+  /* ==========================================================================
+   * 5. MOTION  (design.md A6.3)
+   * Described by ROLE and BEHAVIOUR, never by library (A6.3 / requirements 26.3).
+   * These support the four-tier hierarchy and per-experience budgets (A6.0):
+   * they enable restrained, purposeful motion — they do not encourage it.
+   * ========================================================================== */
+  /* Durations by role */
+  --dur-state: 200ms;      /* hover / small state change                       */
+  --dur-reveal: 500ms;     /* line-rise reveal of titles/standfirsts           */
+  --dur-settle: 700ms;     /* mask-open / parallax settle / person-cross       */
+  --dur-page-min: 700ms;   /* page transition lower bound                      */
+  --dur-page-max: 900ms;   /* page transition upper bound                      */
+  --dur-count: 1000ms;     /* Impact count-up (once, on enter)                 */
+
+  /* Stagger for list/line reveals (A6.1 / B-experiences) */
+  --stagger: 60ms;
+
+  /* Easing character (A6.3):
+   *  - reveals & counters decelerate (ease-out)
+   *  - masks & transitions are symmetric (ease-in-out) */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Motion magnitude caps (A6.1) — kept as tokens so no component invents a
+   * bigger move. Parallax never exceeds this; hover shifts use the small ones. */
+  --parallax-max: 8%;      /* large photos only, never small images            */
+  --shift-row: 8px;        /* ledger-row / directory hover text shift          */
+  --shift-link: 4px;       /* colophon/link hover shift                        */
+}
+
+/* ============================================================================
+ * SURFACE CONTEXT CLASSES  (design.md A2)
+ * Applied by SurfaceSection (Phase 6). Setting a surface re-points the role
+ * tokens so descendants invert automatically. Crimson is unchanged (accent).
+ * ============================================================================ */
+.surface-ivory {
+  --surface-bg: var(--ivory);
+  --surface-text: var(--ink);
+  --surface-text-muted: var(--stone-600);
+  --surface-hairline: var(--hairline-on-ivory);
+  background: var(--surface-bg);
+  color: var(--surface-text);
+}
+
+.surface-ink {
+  --surface-bg: var(--ink);
+  --surface-text: var(--ivory);
+  --surface-text-muted: var(--stone);
+  --surface-hairline: var(--hairline-on-ink);
+  background: var(--surface-bg);
+  color: var(--surface-text);
+}
+
+/* Photographic surface: image is the background; text sits over a functional
+ * scrim (A2 / A5). Text defaults to ivory; the scrim is applied by the
+ * component that lays type over the photo, not globally. */
+.surface-photo {
+  --surface-text: var(--ivory);
+  --surface-text-muted: var(--stone);
+  --surface-hairline: var(--hairline-on-ink);
+  color: var(--surface-text);
+}
+
+/* ============================================================================
+ * REDUCED MOTION  (design.md A6.2 / A8)
+ * Global collapse of motion durations. The JS motion layer (Phase 4) also
+ * gates behaviour; this ensures any CSS transition/animation is neutralised
+ * even before that layer loads.
+ * ============================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-state: 1ms;
+    --dur-reveal: 1ms;
+    --dur-settle: 1ms;
+    --dur-page-min: 1ms;
+    --dur-page-max: 1ms;
+    --dur-count: 1ms;
+    --stagger: 0ms;
+    --parallax-max: 0%;
+  }
+}

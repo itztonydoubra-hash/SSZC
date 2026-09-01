@@ -1,0 +1,162 @@
+/*
+ * Remaining production pages (design.md C4–C11). tasks.md 14.x
+ * About, Projects, Events, News, Media, Archive, Opportunities, Partners.
+ * Composition-led, token-only, reuses layout/ledger/mask primitives. No cards.
+ */
+
+/* ---- Shared editorial spread (Projects/Events) ---------------------------- */
+.pg-spread {
+  padding-block: var(--space-8);
+}
+
+.pg-spread__meta {
+  color: var(--surface-text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-3);
+}
+
+/* ---- About ---------------------------------------------------------------- */
+.pg-about__module {
+  padding-block: var(--space-8);
+}
+
+.pg-about__values {
+  list-style: none;
+  margin: var(--space-5) 0 0;
+  padding: 0;
+}
+
+.pg-about__values li {
+  border-top: 1px solid var(--surface-hairline);
+  padding-block: var(--space-4);
+}
+
+/* ---- Ledger meta rows (News/Events past/Opportunities/related) ------------ */
+.pg-ledger {
+  list-style: none;
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  border-top: 1px solid var(--surface-hairline);
+}
+
+.pg-ledger__row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: var(--space-5);
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--surface-hairline);
+  color: var(--surface-text);
+  text-decoration: none;
+}
+
+.pg-ledger__date {
+  color: var(--surface-text-muted);
+  white-space: nowrap;
+}
+
+.pg-ledger__meta {
+  color: var(--surface-text-muted);
+  white-space: nowrap;
+}
+
+@media (width <= 767px) {
+  .pg-ledger__row {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+}
+
+/* ---- Events: upcoming horizontal DRAG strip ------------------------------- */
+.pg-strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(280px, 34vw);
+  gap: var(--grid-gutter);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: var(--space-5);
+  -webkit-overflow-scrolling: touch;
+}
+
+.pg-strip__item {
+  scroll-snap-align: start;
+}
+
+.pg-register-link {
+  color: var(--crimson);
+  display: inline-flex;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+/* ---- Media: importance-sized masonry -------------------------------------- */
+.pg-media {
+  columns: 3;
+  column-gap: var(--grid-gutter);
+}
+
+.pg-media__item {
+  break-inside: avoid;
+  margin-bottom: var(--grid-gutter);
+}
+
+.pg-media__caption {
+  color: var(--surface-text-muted);
+  margin-top: var(--space-2);
+}
+
+@media (width <= 1023px) {
+  .pg-media { columns: 2; }
+}
+
+@media (width <= 767px) {
+  .pg-media { columns: 1; }
+}
+
+/* ---- Archive: crimson-spine timeline -------------------------------------- */
+.pg-timeline {
+  list-style: none;
+  margin: var(--space-7) 0 0;
+  padding-left: var(--space-6);
+  border-left: 2px solid var(--crimson);
+}
+
+.pg-timeline__node {
+  padding-block: var(--space-6);
+}
+
+/* ---- Opportunities -------------------------------------------------------- */
+.pg-opp__deadline {
+  color: var(--surface-text-muted);
+}
+
+.pg-opp__deadline[data-soon="true"] {
+  color: var(--crimson);
+}
+
+.pg-opp__closed {
+  color: var(--stone-600);
+}
+
+.pg-apply {
+  color: var(--crimson);
+  display: inline-flex;
+  gap: var(--space-2);
+}
+
+/* ---- Partners: restrained logo row ---------------------------------------- */
+.pg-partners {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-8);
+  margin-top: var(--space-6);
+}
+
+.pg-partners__logo {
+  filter: grayscale(1);
+  opacity: 0.85;
+}

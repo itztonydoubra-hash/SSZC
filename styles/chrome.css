@@ -1,0 +1,204 @@
+/*
+ * ============================================================================
+ * SITE CHROME & SHARED PRIMITIVES — CSS  (design.md A8 / C1 / C12)  tasks.md 6.x
+ * ============================================================================
+ * Structural, token-only. No cards, no utility soup, no new abstractions. The
+ * editorial composition is carried by the layout primitives (Phase 3) + type
+ * roles (Phase 2); this file styles the header, the full-screen menu, and the
+ * small shared primitives (IndexTitle, EmptyState).
+ * ============================================================================
+ */
+
+/* --------------------------------------------------------------------------
+ * INDEX TITLE (the recurring "NN — TITLE" eyebrow, design.md A3.2 / C12).
+ * Surface-aware per decisions.md D4: on IVORY the small index may be crimson;
+ * on INK the small index uses the surface text colour (crimson small text fails
+ * AA on ink). The label text itself always uses the surface text/muted colour.
+ * -------------------------------------------------------------------------- */
+.c-index {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  color: var(--surface-text-muted);
+}
+
+/* Default index colour = surface text (safe on any surface). */
+.c-index__num {
+  color: var(--surface-text);
+}
+
+/* On ivory surfaces only, the index numeral takes the crimson accent (D4). */
+.surface-ivory .c-index__num {
+  color: var(--crimson);
+}
+
+/* --------------------------------------------------------------------------
+ * SITE HEADER (design.md A8) — fixed, minimal: wordmark left, MENU right.
+ * Transparent over the hero; after ~1 viewport it gains a hairline and a
+ * subtle surface tint. Colour inverts to match the surface beneath via the
+ * data-surface attribute set by the header controller.
+ * -------------------------------------------------------------------------- */
+.c-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--grid-margin);
+  color: var(--ivory);
+  transition:
+    background-color var(--dur-state) var(--ease-out),
+    color var(--dur-state) var(--ease-out),
+    border-color var(--dur-state) var(--ease-out);
+  border-bottom: 1px solid transparent;
+}
+
+/* Over a light surface beneath, header text is ink. */
+.c-header[data-surface="ivory"] {
+  color: var(--ink);
+}
+
+.c-header[data-surface="ink"] {
+  color: var(--ivory);
+}
+
+/* After scroll, gain a hairline + faint tint of the surface beneath. */
+.c-header[data-scrolled="true"][data-surface="ivory"] {
+  background-color: var(--ivory);
+  border-bottom-color: var(--hairline-on-ivory);
+}
+
+.c-header[data-scrolled="true"][data-surface="ink"] {
+  background-color: var(--ink);
+  border-bottom-color: var(--hairline-on-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .c-header {
+    transition: none;
+  }
+}
+
+.c-header__wordmark {
+  color: inherit;
+  text-decoration: none;
+}
+
+.c-header__menu {
+  color: inherit;
+  background: none;
+  border: none;
+  padding: var(--space-2);
+  margin: calc(-1 * var(--space-2));
+  cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+ * FULL-SCREEN MENU (design.md C1) — an ink plate composed as a site INDEX, not
+ * a centered link stack. It covers from the top; items are serif, spine-aligned.
+ * The cover animation is the menu's own mechanism (its "page transition"); it is
+ * gated by reduced motion (crossfade, no wipe).
+ * -------------------------------------------------------------------------- */
+.c-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  background: var(--ink);
+  color: var(--ivory);
+  overflow-y: auto;
+  /* rest: fully above the viewport (covering from the top on open) */
+  transform: translateY(-100%);
+  transition: transform var(--dur-page-max) var(--ease-in-out);
+}
+
+.c-menu[data-open="true"] {
+  transform: translateY(0);
+}
+
+.c-menu[hidden] {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .c-menu {
+    transform: none;
+    opacity: 0;
+    transition: opacity 180ms linear;
+  }
+
+  .c-menu[data-open="true"] {
+    opacity: 1;
+  }
+}
+
+.c-menu__inner {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: calc(var(--space-9) + var(--space-6));
+  padding-bottom: var(--space-8);
+}
+
+.c-menu__group {
+  border-top: 1px solid var(--hairline-on-ink);
+  padding-block: var(--space-6);
+}
+
+.c-menu__item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  color: var(--ivory);
+  text-decoration: none;
+  transition: color var(--dur-state) var(--ease-out);
+}
+
+/* hover/focus: item turns crimson (crimson on ink is only used here for the
+ * LARGE serif item, display-l >= 24px, which is the approved large-numeral/UI
+ * exception — not small text; see decisions.md D4). A leading arrow slides in. */
+.c-menu__item:hover,
+.c-menu__item:focus-visible {
+  color: var(--crimson);
+}
+
+.c-menu__arrow {
+  display: inline-block;
+  opacity: 0;
+  transform: translateX(calc(-1 * var(--shift-row)));
+  transition:
+    opacity var(--dur-state) var(--ease-out),
+    transform var(--dur-state) var(--ease-out);
+  color: var(--crimson);
+}
+
+.c-menu__item:hover .c-menu__arrow,
+.c-menu__item:focus-visible .c-menu__arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* active route marker (a crimson dot, non-text mark — allowed on ink). */
+.c-menu__dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--crimson);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .c-menu__item,
+  .c-menu__arrow {
+    transition: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+ * EMPTY STATE (design.md C10 / C12) — a composed full section for "no content
+ * yet", used by Opportunities/filters/events later. Structural only.
+ * -------------------------------------------------------------------------- */
+.c-empty {
+  padding-block: var(--space-9);
+}
