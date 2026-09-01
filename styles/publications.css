@@ -78,7 +78,7 @@
 
 .pub-row {
   display: grid;
-  grid-template-columns: auto auto 1fr auto auto;
+  grid-template-columns: auto 1fr auto auto;
   align-items: baseline;
   gap: var(--space-5);
   padding: var(--space-5) 0;
@@ -139,6 +139,16 @@
   flex-wrap: wrap;
   gap: var(--space-4);
   margin-block: var(--space-5);
+}
+
+/* Editorial lead separator used when an article has no feature image — a short
+ * crimson rule that carries the top of the reading page (no placeholder image). */
+.pub-article__rule {
+  width: var(--space-8);
+  height: 2px;
+  background: var(--crimson);
+  border: 0;
+  margin: var(--space-6) 0 0;
 }
 
 .pub-article__body {

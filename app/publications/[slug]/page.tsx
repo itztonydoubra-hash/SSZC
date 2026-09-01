@@ -15,9 +15,6 @@ import { Container } from "@/components/layout/Grid";
 function find(slug: string) {
   return getPublications().items.find((i) => i.slug === slug);
 }
-function catLabel(id: string) {
-  return getPublications().categories.find((c) => c.id === id)?.label ?? id;
-}
 function fmtDate(iso: string) {
   const d = new Date(iso);
   return Number.isNaN(d.getTime()) ? iso : d.toLocaleDateString("en-GB", { day: "2-digit", month: "long", year: "numeric" });
@@ -41,14 +38,18 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
     <SurfaceSection surface="ivory" contained={false}>
       <Container>
         <article className="pub-article measure" style={{ maxWidth: "72ch", paddingTop: "calc(var(--space-9) + var(--space-6))" }}>
-          <p className="pub-featured__cat type-label">{catLabel(p.category)}</p>
+          {/* Photo-free editorial lead: a crimson eyebrow + rule carries the
+              page when no feature image is supplied (no fabricated imagery). */}
+          <p className="pub-featured__cat type-label">Publications</p>
           <DisplayHeading as="h1" size="l" style={{ marginTop: "var(--space-3)" }}>{p.title}</DisplayHeading>
           <p className="pub-article__meta type-body-s tnum">
             <span>{p.author}</span>
             <span>{fmtDate(p.date)}</span>
           </p>
-          {p.featureImage && (
+          {p.featureImage ? (
             <MaskImage src={p.featureImage.src} alt={p.featureImage.alt} ratio={p.featureImage.ratio} sizes="72ch" />
+          ) : (
+            <hr className="pub-article__rule" />
           )}
           <div className="pub-article__body type-body-m">
             {p.body ? (
