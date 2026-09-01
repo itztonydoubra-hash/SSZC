@@ -188,7 +188,7 @@ export function OrgNetwork({
         {states.length === 0 ? (
           <p className="cn-side__count type-body-m measure">
             The recognised chapters across the South South Zone will be mapped
-            here, state by state. Chapter records — [NEEDS CONTENT].
+            here, state by state.
           </p>
         ) : selectedState ? (
           <>

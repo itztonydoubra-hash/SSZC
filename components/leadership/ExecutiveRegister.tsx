@@ -62,11 +62,7 @@ function Portrait({
             style={{ objectFit: "cover" }}
           />
         ) : (
-          <div className="lr-portrait__placeholder">
-            <span className="type-label-s" style={{ color: "var(--stone)" }}>
-              {exec.portrait.alt}
-            </span>
-          </div>
+          <div className="lr-portrait__placeholder" aria-hidden />
         )}
       </div>
     </div>
@@ -164,8 +160,8 @@ export function ExecutiveRegister({ execs }: { execs: ZonalExecutive[] }) {
             The zonal executives will be introduced here.
           </p>
           <p className="type-body-m" style={{ color: "var(--stone)", marginTop: "var(--space-4)" }}>
-            Portraits, roles and names of the South South Zone executives —
-            [NEEDS CONTENT].
+            The portraits, roles and names of the zonal executives will appear
+            here.
           </p>
         </div>
       </div>
@@ -192,9 +188,7 @@ export function ExecutiveRegister({ execs }: { execs: ZonalExecutive[] }) {
               {exec.portrait.src ? (
                 <Image src={exec.portrait.src} alt={exec.portrait.alt} fill sizes="100vw" style={{ objectFit: "cover" }} />
               ) : (
-                <div className="lr-portrait__placeholder">
-                  <span className="type-label-s" style={{ color: "var(--stone)" }}>{exec.portrait.alt}</span>
-                </div>
+                <div className="lr-portrait__placeholder" aria-hidden />
               )}
             </div>
             <div className="lr-panel__type">

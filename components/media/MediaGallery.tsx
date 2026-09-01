@@ -35,7 +35,8 @@ export function MediaGallery({ items }: { items: MediaItem[] }) {
     return (
       <p className="type-body-l" style={{ color: "var(--stone)", marginTop: "var(--space-7)" }}>
         {/* CLIENT-SUPPLIED MEDIA — files not yet intaken. */}
-        Media gallery — [OFFICIAL IMAGE] (client-supplied photographs).
+        Photographs from the zone&rsquo;s conventions, competitions, trainings and
+        outreach will be gathered here.
       </p>
     );
   }

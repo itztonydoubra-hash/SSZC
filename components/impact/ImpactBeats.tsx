@@ -18,11 +18,12 @@ export function ImpactBeats({ stats }: { stats: ImpactStat[] }) {
         <Container>
           <div style={{ paddingTop: "calc(var(--space-9) + var(--space-6))", paddingBottom: "var(--space-9)" }}>
             <IndexTitle index="06" title="THE NUMBERS" />
-            <p id="impact-title" className="type-display-l" style={{ marginTop: "var(--space-4)" }}>
-              Confirmed impact figures — [OFFICIAL STATISTIC].
+            <p id="impact-title" className="type-display-l measure" style={{ marginTop: "var(--space-4)" }}>
+              The numbers behind the movement.
             </p>
             <p className="type-body-m measure" style={{ color: "var(--stone-600)", marginTop: "var(--space-4)" }}>
-              Statistics are shown only once officially confirmed.
+              Confirmed figures on the zone&rsquo;s scale and reach will be shown
+              here.
             </p>
           </div>
         </Container>

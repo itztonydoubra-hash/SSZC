@@ -58,7 +58,7 @@ export default function ExecutiveDetail({ params }: { params: { slug: string } }
                 <Image src={exec.portrait.src} alt={exec.portrait.alt} fill sizes="(max-width: 767px) 100vw, 40vw" style={{ objectFit: "cover" }} />
               ) : (
                 <div className="lr-portrait__placeholder">
-                  <span className="type-label-s" style={{ color: "var(--stone)" }}>{exec.portrait.alt}</span>
+                  <span className="visually-hidden">Portrait to follow</span>
                 </div>
               )}
             </div>

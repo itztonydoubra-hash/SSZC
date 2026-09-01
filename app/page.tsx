@@ -11,6 +11,7 @@ import {
   getAbout, getChapters, getImpact, getLeadership, getNews, getProjects, getPublications,
 } from "@/content";
 import { fmtDate } from "@/lib/date";
+import { isPlaceholder } from "@/lib/content-display";
 import { Container, Grid, GridItem } from "@/components/layout/Grid";
 import { SurfaceSection } from "@/components/chrome/SurfaceSection";
 import { DisplayHeading } from "@/components/chrome/DisplayHeading";
@@ -41,6 +42,11 @@ export default function Home() {
   const firstProject = projects[0];
   const firstStat = impact.stats[0]; // already confirmed-only
 
+  // A "real" lead has a supplied name (not the [OFFICIAL …] placeholder).
+  const realExec =
+    firstExec && !isPlaceholder(firstExec.name) ? firstExec : undefined;
+  const zoneStatementReady = !isPlaceholder(about.statement);
+
   return (
     <>
       {/* 1. WHO WE ARE — hero */}
@@ -62,7 +68,9 @@ export default function Home() {
       {/* 2. definition of the Zone (→ from face to meaning) */}
       <SurfaceSection surface="ivory" index="01" title="THE ZONE">
         <div className="hp-move">
-          <DisplayHeading as="h2" size="l" className="measure">{about.statement}</DisplayHeading>
+          <DisplayHeading as="h2" size="l" className="measure">
+            {zoneStatementReady ? about.statement : "The Law Students' Association of Nigeria, South South Zone."}
+          </DisplayHeading>
           <TransitionLink href="/about" label={{ num: "01", title: "THE ZONE" }} className="hp-move__link type-label">Read more <span aria-hidden>→</span></TransitionLink>
         </div>
       </SurfaceSection>
@@ -74,35 +82,39 @@ export default function Home() {
           <p className="type-body-m" style={{ color: "var(--stone)", marginTop: "var(--space-4)" }}>
             {chapters.states.length > 0
               ? `${chapters.states.length} states across the South South Zone.`
-              : "Recognised chapters — [NEEDS CONTENT]."}
+              : "The recognised chapters across the zone will be mapped here."}
           </p>
           <TransitionLink href="/chapters" label={{ num: "03", title: "CHAPTERS" }} className="hp-move__link type-label">Explore the network <span aria-hidden>→</span></TransitionLink>
         </div>
       </SurfaceSection>
 
-      {/* 4. WHO LEADS US — one static portrait beat */}
-      {firstExec && (
-        <SurfaceSection surface="ink" index="04" title="LEADERSHIP">
-          <div className="hp-move">
+      {/* 4. WHO LEADS US — one static portrait beat when a real exec exists;
+           otherwise a composed statement that still hands off to /leadership. */}
+      <SurfaceSection surface="ink" index="04" title="LEADERSHIP">
+        <div className="hp-move">
+          {realExec ? (
             <Grid rowGap="var(--space-5)">
               <GridItem span={5} spanMd={8} spanSm={4}>
-                {firstExec.portrait.src ? (
-                  <MaskImage src={firstExec.portrait.src} alt={firstExec.portrait.alt} ratio="4 / 5" sizes="(max-width:767px) 100vw, 40vw" />
+                {realExec.portrait.src ? (
+                  <MaskImage src={realExec.portrait.src} alt={realExec.portrait.alt} ratio="4 / 5" sizes="(max-width:767px) 100vw, 40vw" />
                 ) : (
-                  <div style={{ aspectRatio: "4 / 5", background: "var(--ink-800)", display: "flex", alignItems: "flex-end", padding: "var(--space-4)" }}>
-                    <span className="type-label-s" style={{ color: "var(--stone)" }}>[OFFICIAL IMAGE]</span>
-                  </div>
+                  <div style={{ aspectRatio: "4 / 5", background: "var(--ink-800)" }} aria-hidden />
                 )}
               </GridItem>
               <GridItem span={6} start={7} spanMd={8} startMd={1} spanSm={4} style={{ alignSelf: "end" }}>
-                <p className="type-label" style={{ color: "var(--stone)" }}>{firstExec.role}</p>
-                <DisplayHeading as="h2" size="xl" style={{ marginTop: "var(--space-3)" }}>{firstExec.name}</DisplayHeading>
+                <p className="type-label" style={{ color: "var(--stone)" }}>{realExec.role}</p>
+                <DisplayHeading as="h2" size="xl" style={{ marginTop: "var(--space-3)" }}>{realExec.name}</DisplayHeading>
                 <TransitionLink href="/leadership" label={{ num: "04", title: "LEADERSHIP" }} className="hp-move__link type-label">Meet the people <span aria-hidden>→</span></TransitionLink>
               </GridItem>
             </Grid>
-          </div>
-        </SurfaceSection>
-      )}
+          ) : (
+            <>
+              <DisplayHeading as="h2" size="l" className="measure">The people behind the movement.</DisplayHeading>
+              <TransitionLink href="/leadership" label={{ num: "04", title: "LEADERSHIP" }} className="hp-move__link type-label">Meet the people <span aria-hidden>→</span></TransitionLink>
+            </>
+          )}
+        </div>
+      </SurfaceSection>
 
       {/* 5. WHAT WE DO — one project story (or skip) */}
       {firstProject && (
@@ -140,7 +152,7 @@ export default function Home() {
               ) : (
                 <>
                   <DisplayHeading as="h2" size="l">A register of legal and leadership thought.</DisplayHeading>
-                  <p className="type-body-m" style={{ color: "var(--stone-600)", marginTop: "var(--space-3)" }}>Publications — [NEEDS CONTENT].</p>
+                  <p className="type-body-m" style={{ color: "var(--stone-600)", marginTop: "var(--space-3)" }}>Articles, reports and opinion will be published here.</p>
                   <TransitionLink href="/publications" label={{ num: "05", title: "PUBLICATIONS" }} className="hp-move__link type-label">Visit the hub <span aria-hidden>→</span></TransitionLink>
                 </>
               )}
@@ -157,7 +169,7 @@ export default function Home() {
                   ))}
                 </div>
               ) : (
-                <p className="type-body-s" style={{ color: "var(--stone-600)", marginTop: "var(--space-3)" }}>News &amp; updates — [NEEDS CONTENT].</p>
+                <p className="type-body-s" style={{ color: "var(--stone-600)", marginTop: "var(--space-3)" }}>Updates from the zone will appear here.</p>
               )}
             </GridItem>
           </Grid>

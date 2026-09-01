@@ -21,7 +21,7 @@ export default function ProjectsPage() {
 
         {projects.length === 0 ? (
           <EmptyState headline="Project stories are on the way.">
-            Projects & initiatives — [NEEDS CONTENT].
+            The zone&rsquo;s projects and initiatives will be told here as stories.
           </EmptyState>
         ) : (
           projects.map((p, i) => {
@@ -34,7 +34,7 @@ export default function ProjectsPage() {
                       <MaskImage src={p.images[0].src} alt={p.images[0].alt} ratio={p.images[0].ratio} sizes="(max-width:767px) 100vw, 58vw" />
                     ) : (
                       <div style={{ aspectRatio: "3 / 2", background: "var(--ink-800)", display: "flex", alignItems: "flex-end", padding: "var(--space-4)" }}>
-                        <span className="type-label-s" style={{ color: "var(--ivory)" }}>[OFFICIAL IMAGE]</span>
+                        <span className="visually-hidden">Image to follow</span>
                       </div>
                     )}
                   </GridItem>

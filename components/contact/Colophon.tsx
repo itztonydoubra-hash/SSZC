@@ -45,7 +45,7 @@ export function Colophon() {
                     {c.phone && <a className="col-line type-body-m" href={`tel:${c.phone.replace(/\s+/g, "")}`}>{c.phone}</a>}
                   </>
                 ) : (
-                  <p className="type-body-m" style={{ color: "var(--stone)" }}>Email &amp; phone — [NEEDS CONTENT]</p>
+                  <p className="type-body-m" style={{ color: "var(--stone)" }}>Official email and phone to be published.</p>
                 )}
               </div>
 
@@ -73,7 +73,7 @@ export function Colophon() {
                     )}
                   </>
                 ) : (
-                  <p className="type-body-m" style={{ color: "var(--stone)" }}>Office address — [NEEDS CONTENT]</p>
+                  <p className="type-body-m" style={{ color: "var(--stone)" }}>Office address to be published.</p>
                 )}
               </div>
             </div>

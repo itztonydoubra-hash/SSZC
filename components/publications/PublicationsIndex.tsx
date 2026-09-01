@@ -87,7 +87,7 @@ export function PublicationsIndex({ data }: { data: Publications }) {
                 />
               ) : (
                 <div style={{ aspectRatio: "3 / 2", background: "var(--ink-800)", display: "flex", alignItems: "flex-end", padding: "var(--space-4)" }}>
-                  <span className="type-label-s" style={{ color: "var(--ivory)" }}>[OFFICIAL IMAGE]</span>
+                  <span className="visually-hidden">Feature image to follow</span>
                 </div>
               )}
             </GridItem>

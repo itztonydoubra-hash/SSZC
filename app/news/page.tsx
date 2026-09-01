@@ -18,7 +18,7 @@ export default function NewsPage() {
       <div style={{ paddingBottom: "var(--space-9)" }}>
         <DisplayHeading as="h1" id="news-title" size="xl">News &amp; updates.</DisplayHeading>
         {news.length === 0 ? (
-          <EmptyState headline="No updates recorded yet.">News & updates — [NEEDS CONTENT].</EmptyState>
+          <EmptyState headline="No updates recorded yet.">Announcements and updates from the zone will appear here.</EmptyState>
         ) : (
           <ul className="pg-ledger">
             {news.map((n) => (

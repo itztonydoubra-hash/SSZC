@@ -96,8 +96,8 @@ export function Menu({
             Connect
           </p>
           <p className="type-body-s" style={{ color: "var(--stone)", marginTop: "var(--space-3)" }}>
-            {/* [NEEDS CONTENT] — official email + social links (design.md C1/C13) */}
-            Official email and social links — [NEEDS CONTENT]
+            {/* Official email + social links render here once supplied (C1/C13). */}
+            Official channels to be published.
           </p>
         </div>
       </div>

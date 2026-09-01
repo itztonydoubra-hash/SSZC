@@ -55,9 +55,9 @@ export function LeadershipDirectory({ states }: { states: StateLeadership[] }) {
 
   if (states.length === 0) {
     return (
-      <p className="type-body-m" style={{ color: "var(--stone-600)" }}>
+      <p className="type-body-m measure" style={{ color: "var(--stone-600)" }}>
         {/* Official states + per-state leadership not yet supplied. */}
-        State, campus and deputy leadership — [NEEDS CONTENT].
+        State, campus and deputy leadership across the zone will be listed here.
       </p>
     );
   }

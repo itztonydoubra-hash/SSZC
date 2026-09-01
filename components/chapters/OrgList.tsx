@@ -36,7 +36,7 @@ export function OrgList({
       {states.length === 0 ? (
         <p className="cn-tbd type-body-m" style={{ marginTop: "var(--space-6)" }}>
           {/* Official states + recognised chapters not yet supplied. */}
-          Recognised chapters — [NEEDS CONTENT].
+          The recognised chapters across the zone will be listed here, state by state.
         </p>
       ) : (
         <ul className="cn-list" style={{ marginTop: "var(--space-6)" }}>

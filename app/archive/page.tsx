@@ -16,7 +16,7 @@ export default function ArchivePage() {
       <div style={{ paddingBottom: "var(--space-9)" }}>
         <DisplayHeading as="h1" id="archive-title" size="xl">The record of past leadership.</DisplayHeading>
         {admins.length === 0 ? (
-          <EmptyState headline="Past administrations will be recorded here.">Administration archive — [NEEDS CONTENT].</EmptyState>
+          <EmptyState headline="Past administrations will be recorded here.">A chronological record of the zone&rsquo;s past administrations will appear here.</EmptyState>
         ) : (
           <ol className="pg-timeline">
             {admins.map((a) => (

@@ -23,7 +23,7 @@ export default function EventsPage() {
         <DisplayHeading as="h1" id="events-title" size="xl">Events.</DisplayHeading>
 
         {events.length === 0 ? (
-          <EmptyState headline="No events currently scheduled.">Events — [NEEDS CONTENT].</EmptyState>
+          <EmptyState headline="No events currently scheduled.">Upcoming and past events of the zone will appear here.</EmptyState>
         ) : (
           <>
             {/* Upcoming — horizontal DRAG strip */}

@@ -61,7 +61,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
                 </a>
               </p>
             ) : (
-              <p style={{ color: "var(--stone-600)" }}>Full text — [NEEDS CONTENT].</p>
+              <p style={{ color: "var(--stone-600)" }}>The full text of this piece will be published here.</p>
             )}
           </div>
           {p.pdf && (
