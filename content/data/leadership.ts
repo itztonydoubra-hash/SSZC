@@ -1,37 +1,35 @@
 /*
- * Leadership content (design.md B1). PLACEHOLDER STATE — no real names/roles.
- * Every human-supplied field is [OFFICIAL NAME] / [OFFICIAL ROLE] / [OFFICIAL
- * IMAGE]. The shapes exist so the experience can be built/reviewed; nothing is
- * fabricated. States/campuses are EMPTY until LAWSAN supplies the official list
- * (design.md B1.2 renders "— to be announced" for missing tiers, not invented
- * people). Replace these with real content when supplied (see content/README).
+ * Leadership content (design.md B1).
+ *
+ * Zonal Director is VERIFIED (client-confirmed + corroborated — see
+ * content/SOURCES.md). Other zonal roles (Deputy Zonal Director, Director of
+ * Editorials & Writing, etc.) surfaced as research leads but could NOT be
+ * independently verified from accessible sources (they live on the official
+ * Instagram, which is not programmatically accessible). Per the content-honesty
+ * rule they are LEFT OUT until officially confirmed — never fabricated.
+ *
+ * States/campuses remain EMPTY until the authoritative South South list is
+ * supplied (the Directory renders "— to be announced" / an empty state).
+ *
+ * Portrait: the client supplied the Zonal Director's official portrait. Place
+ * the file at public/leadership/effiong-valour-daniel.jpg. Until the file is
+ * present, the component renders a clean placeholder (no marker text).
  */
 import type { Leadership } from "../types";
 
 export const leadership: Leadership = {
-  // Zonal executives: placeholder rows so the Register composition can be built.
-  // index/role/name/portrait are required by the design even in placeholder form.
   zonal: [
     {
       index: "01",
-      role: "[OFFICIAL ROLE]",
-      name: "[OFFICIAL NAME]",
-      portrait: { src: "", alt: "[OFFICIAL IMAGE] — zonal executive portrait", ratio: "4 / 5" },
-    },
-    {
-      index: "02",
-      role: "[OFFICIAL ROLE]",
-      name: "[OFFICIAL NAME]",
-      portrait: { src: "", alt: "[OFFICIAL IMAGE] — zonal executive portrait", ratio: "4 / 5" },
-    },
-    {
-      index: "03",
-      role: "[OFFICIAL ROLE]",
-      name: "[OFFICIAL NAME]",
-      portrait: { src: "", alt: "[OFFICIAL IMAGE] — zonal executive portrait", ratio: "4 / 5" },
+      role: "Zonal Director — Directorate of Programs, Policies and Projects",
+      name: "Effiong Valour Daniel, COL",
+      portrait: {
+        src: "/leadership/effiong-valour-daniel.jpg",
+        alt: "Effiong Valour Daniel, South South Zonal Director",
+        ratio: "4 / 5",
+      },
     },
   ],
-  // Official states + per-state/campus leadership NOT yet supplied — empty.
-  // (Do not invent states, institutions, or people.)
+  // Official states + per-state/campus leadership not yet supplied — empty.
   states: [],
 };
