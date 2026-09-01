@@ -251,16 +251,19 @@ export type NewsItem = {
 /* Media (design.md C8 / line 427) — CLIENT-SUPPLIED production content ------ */
 
 export type MediaItem = {
-  /** path under /public/media */
+  /** path under /public/media, e.g. "/media/convention/2026-convention-opening.jpg" */
   src: string;
-  type: "image" | "video";
+  /** defaults to "image" — only set "video" for video items */
+  type?: "image" | "video";
   /** for videos: poster shown before interaction */
   poster?: ImageRef;
-  /** native ratio, measured — not a forced uniform crop */
-  ratio: string;
-  /** REQUIRED factual alt for accessibility */
+  /** native ratio, e.g. "3 / 2" or "4 / 5". Optional — omit to use the default
+   *  masonry ratio; set it for the most faithful crop. */
+  ratio?: string;
+  /** REQUIRED factual alt for accessibility. Use "[NEEDS CONTENT]" only if a
+   *  factual description genuinely cannot be given. */
   alt: string;
-  /** the following are used ONLY if the client supplied them; never fabricated */
+  /** the following are used ONLY if actually supplied/verified — never fabricated */
   caption?: string;
   event?: string;
   year?: string;
