@@ -43,6 +43,9 @@ export function Colophon() {
                       <a className="col-line col-line--email type-body-l" href={`mailto:${c.email}`}>{c.email}</a>
                     )}
                     {c.phone && <a className="col-line type-body-m" href={`tel:${c.phone.replace(/\s+/g, "")}`}>{c.phone}</a>}
+                    {c.phoneName && (
+                      <span className="col-line type-label" style={{ color: "var(--stone)" }}>{c.phoneName}</span>
+                    )}
                   </>
                 ) : (
                   <p className="type-body-m" style={{ color: "var(--stone)" }}>Official email and phone to be published.</p>

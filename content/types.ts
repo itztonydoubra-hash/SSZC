@@ -171,6 +171,8 @@ export type Contact = {
   closingStatement?: string;
   email?: string;
   phone?: string;
+  /** name of the person the phone/enquiries line belongs to (optional) */
+  phoneName?: string;
   address?: string;
   mapUrl?: string;
   socials: SocialLink[];

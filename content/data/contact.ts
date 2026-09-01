@@ -16,7 +16,10 @@ import type { Contact } from "../types";
 export const contact: Contact = {
   orgName: "Law Students' Association of Nigeria, South South Zone",
   // closingStatement omitted — no slogan forced (design.md B5).
-  // email/phone/address/mapUrl omitted — [NEEDS CONTENT], never invented.
-  socials: [], // [NEEDS CONTENT] — official social URLs not yet supplied.
-  // session omitted — [NEEDS CONTENT].
+  // Verified contact line supplied by the client (site owner):
+  phone: "09017467997",
+  phoneName: "Effiong Valour",
+  // email/address/mapUrl omitted — not yet supplied, never invented.
+  socials: [], // official social URLs not yet supplied.
+  // session omitted — not yet supplied.
 };
