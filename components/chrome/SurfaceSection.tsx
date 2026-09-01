@@ -19,6 +19,7 @@ export function SurfaceSection({
   title,
   labelledById,
   contained = true,
+  clearHeader,
   className,
   style,
   children,
@@ -31,6 +32,9 @@ export function SurfaceSection({
   labelledById?: string;
   /** wrap children in the max-width container; set false for full-bleed sections */
   contained?: boolean;
+  /** add top padding so the section's first content clears the fixed header.
+   *  Defaults to true when an eyebrow is present (route-opening sections). */
+  clearHeader?: boolean;
   className?: string;
   style?: CSSProperties;
   children: ReactNode;
@@ -58,10 +62,11 @@ export function SurfaceSection({
   // Only ink/ivory are sampled; photographic sections declare their effective
   // reading surface (default ink, since text over photos sits on a dark scrim).
   const dataSurface = surface === "ivory" ? "ivory" : "ink";
+  const doClear = clearHeader ?? Boolean(eyebrow);
 
   return (
     <section
-      className={join(surfaceClass, className)}
+      className={join(surfaceClass, doClear && "c-section-clear", className)}
       data-surface={dataSurface}
       style={style}
       aria-labelledby={labelledById}

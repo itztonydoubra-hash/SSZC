@@ -59,10 +59,18 @@ export function PublicationsIndex({ data }: { data: Publications }) {
       </div>
 
       {data.items.length === 0 && (
-        <p className="type-body-l" style={{ color: "var(--stone-600)", marginTop: "var(--space-7)" }}>
-          {/* No publications supplied yet — never fabricated. */}
-          The knowledge hub — [NEEDS CONTENT].
-        </p>
+        <div style={{ marginTop: "var(--space-7)" }}>
+          {/* Deliberate empty state — structurally complete; no fabricated pieces.
+              The approved category taxonomy remains visible below. */}
+          <p className="type-display-m" style={{ maxWidth: "28ch" }}>
+            No publications have been published yet.
+          </p>
+          <p className="type-body-m measure" style={{ color: "var(--stone-600)", marginTop: "var(--space-4)" }}>
+            The Knowledge Hub will collect the South South Zone&rsquo;s articles,
+            legal writing, leadership pieces, reports and opinion. Categories are
+            shown below.
+          </p>
+        </div>
       )}
 
       {/* Featured band — image bleeds right; type brackets left + below. */}
@@ -99,8 +107,9 @@ export function PublicationsIndex({ data }: { data: Publications }) {
         </article>
       )}
 
-      {/* Filter */}
-      {data.items.length > 0 && (
+      {/* Filter — interactive when there are pieces; a static taxonomy preview
+          (approved categories) when empty so the page reads structurally whole. */}
+      {data.items.length > 0 ? (
         <ul className="pub-filter" aria-label="Filter by category">
           {[{ id: "all", label: "All" }, ...data.categories].map((c) => (
             <li key={c.id}>
@@ -112,6 +121,16 @@ export function PublicationsIndex({ data }: { data: Publications }) {
               >
                 {c.label}
               </button>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <ul className="pub-filter" aria-label="Categories">
+          {data.categories.map((c) => (
+            <li key={c.id}>
+              <span className="pub-filter__btn type-label" style={{ cursor: "default", color: "var(--stone-600)" }}>
+                {c.label}
+              </span>
             </li>
           ))}
         </ul>

@@ -16,7 +16,7 @@ export default function ProjectsPage() {
   const projects = getProjects();
   return (
     <SurfaceSection surface="ivory" index="02" title="PROJECTS & INITIATIVES" labelledById="projects-title">
-      <div style={{ paddingTop: "calc(var(--space-9) + var(--space-6))", paddingBottom: "var(--space-9)" }}>
+      <div style={{ paddingBottom: "var(--space-9)" }}>
         <DisplayHeading as="h1" id="projects-title" size="xl">What we do.</DisplayHeading>
 
         {projects.length === 0 ? (

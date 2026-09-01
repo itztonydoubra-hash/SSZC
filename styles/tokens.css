@@ -92,6 +92,10 @@
   --grid-margin: 96px; /* desktop outer margin (fluid 48→96 handled in Phase 3) */
   --grid-gutter: 24px;
 
+  /* Fixed-header clearance: offset a section's first content needs so it clears
+   * the fixed SiteHeader (header = space-4 top+bottom padding + cap height). */
+  --header-clear: calc(var(--space-9) + var(--space-4));
+
   /* ==========================================================================
    * 5. MOTION  (design.md A6.3)
    * Described by ROLE and BEHAVIOUR, never by library (A6.3 / requirements 26.3).

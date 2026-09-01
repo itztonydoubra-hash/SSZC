@@ -19,7 +19,7 @@ export default function EventsPage() {
 
   return (
     <SurfaceSection surface="ivory" index="02" title="EVENTS" labelledById="events-title">
-      <div style={{ paddingTop: "calc(var(--space-9) + var(--space-6))", paddingBottom: "var(--space-9)" }}>
+      <div style={{ paddingBottom: "var(--space-9)" }}>
         <DisplayHeading as="h1" id="events-title" size="xl">Events.</DisplayHeading>
 
         {events.length === 0 ? (

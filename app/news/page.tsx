@@ -15,7 +15,7 @@ export default function NewsPage() {
   const news = [...getNews()].sort((a, b) => (a.date < b.date ? 1 : -1));
   return (
     <SurfaceSection surface="ivory" index="02" title="NEWS & UPDATES" labelledById="news-title">
-      <div style={{ paddingTop: "calc(var(--space-9) + var(--space-6))", paddingBottom: "var(--space-9)" }}>
+      <div style={{ paddingBottom: "var(--space-9)" }}>
         <DisplayHeading as="h1" id="news-title" size="xl">News &amp; updates.</DisplayHeading>
         {news.length === 0 ? (
           <EmptyState headline="No updates recorded yet.">News & updates — [NEEDS CONTENT].</EmptyState>

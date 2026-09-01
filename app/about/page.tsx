@@ -14,7 +14,7 @@ export default function AboutPage() {
   const a = getAbout();
   return (
     <SurfaceSection surface="ivory" index="01" title="THE ZONE" labelledById="about-title">
-      <div style={{ paddingTop: "calc(var(--space-9) + var(--space-6))", paddingBottom: "var(--space-9)" }}>
+      <div style={{ paddingBottom: "var(--space-9)" }}>
         <DisplayHeading as="h1" id="about-title" size="xl" className="measure">{a.statement}</DisplayHeading>
 
         {/* History */}

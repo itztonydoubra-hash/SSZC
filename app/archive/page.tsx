@@ -13,7 +13,7 @@ export default function ArchivePage() {
   const admins = getAdministrations();
   return (
     <SurfaceSection surface="ivory" index="01" title="THE ARCHIVE" labelledById="archive-title">
-      <div style={{ paddingTop: "calc(var(--space-9) + var(--space-6))", paddingBottom: "var(--space-9)" }}>
+      <div style={{ paddingBottom: "var(--space-9)" }}>
         <DisplayHeading as="h1" id="archive-title" size="xl">The record of past leadership.</DisplayHeading>
         {admins.length === 0 ? (
           <EmptyState headline="Past administrations will be recorded here.">Administration archive — [NEEDS CONTENT].</EmptyState>

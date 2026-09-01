@@ -22,7 +22,7 @@ export default function OpportunitiesPage() {
 
   return (
     <SurfaceSection surface="ivory" index="02" title="OPPORTUNITIES" labelledById="opp-title">
-      <div style={{ paddingTop: "calc(var(--space-9) + var(--space-6))", paddingBottom: "var(--space-9)" }}>
+      <div style={{ paddingBottom: "var(--space-9)" }}>
         <DisplayHeading as="h1" id="opp-title" size="xl">Opportunities.</DisplayHeading>
 
         {all.length === 0 ? (

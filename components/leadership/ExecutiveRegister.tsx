@@ -150,11 +150,25 @@ export function ExecutiveRegister({ execs }: { execs: ZonalExecutive[] }) {
     setActive(idx);
   };
 
-  if (execs.length === 0) {
+  // A "real" executive has a supplied name (not the [OFFICIAL …] placeholder).
+  const hasRealExecs = execs.some((e) => e.name && !e.name.startsWith("[OFFICIAL"));
+
+  // Empty / placeholder-only state: render a deliberate editorial note rather
+  // than the pinned register full of clipped placeholder names (design B1 /
+  // content-honesty). No fabricated people.
+  if (execs.length === 0 || !hasRealExecs) {
     return (
-      <p className="type-body-m" style={{ color: "var(--stone)", paddingBlock: "var(--space-9)" }}>
-        Zonal executive profiles — [NEEDS CONTENT].
-      </p>
+      <div className="l-container" style={{ paddingTop: "var(--space-7)", paddingBottom: "var(--space-11)" }}>
+        <div style={{ maxWidth: "36ch" }}>
+          <p className="type-display-m" style={{ color: "var(--ivory)" }}>
+            The zonal executives will be introduced here.
+          </p>
+          <p className="type-body-m" style={{ color: "var(--stone)", marginTop: "var(--space-4)" }}>
+            Portraits, roles and names of the South South Zone executives —
+            [NEEDS CONTENT].
+          </p>
+        </div>
+      </div>
     );
   }
 

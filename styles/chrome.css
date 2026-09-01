@@ -202,3 +202,10 @@
 .c-empty {
   padding-block: var(--space-9);
 }
+
+/* A section that opens with an eyebrow clears the fixed header so the eyebrow is
+ * never overlapped. Applied by SurfaceSection when an eyebrow is present and the
+ * section is the first meaningful block on a route. */
+.c-section-clear {
+  padding-top: var(--header-clear);
+}

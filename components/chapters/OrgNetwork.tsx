@@ -29,7 +29,8 @@ import { usePrefersReducedMotion } from "@/lib/motion/useReducedMotion";
 
 /* Designed coordinate space, 0..100 on both axes (NON-geographic). */
 const VB = 100;
-const ZONE = { x: 22, y: 50 };
+const ZONE_WITH_STATES = { x: 22, y: 50 };
+const ZONE_EMPTY = { x: 42, y: 46 };
 
 export function OrgNetwork({
   data,
@@ -40,6 +41,10 @@ export function OrgNetwork({
 }) {
   const reduced = usePrefersReducedMotion();
   const { zoneLabel, states } = data;
+  // When there are no state satellites, centre the lone Zone anchor so the empty
+  // stage reads as deliberate (not a node floating off to one side).
+  const ZONE = states.length === 0 ? ZONE_EMPTY : ZONE_WITH_STATES;
+  const zoneLabelBelow = states.length === 0;
 
   const [hovered, setHovered] = useState<number | null>(null);
   const [selected, setSelected] = useState<number | null>(null);
@@ -148,6 +153,7 @@ export function OrgNetwork({
         <div className="cn-overlay" aria-hidden="false">
           <span
             className="cn-overlay__zone type-display-m"
+            data-below={zoneLabelBelow ? "true" : "false"}
             style={{ left: `${ZONE.x}%`, top: `${ZONE.y}%` }}
           >
             {zoneLabel}
@@ -180,7 +186,10 @@ export function OrgNetwork({
         {statement && <p className="cn-statement type-display-l">{statement}</p>}
 
         {states.length === 0 ? (
-          <p className="cn-side__count type-body-m">Recognised chapters — [NEEDS CONTENT].</p>
+          <p className="cn-side__count type-body-m measure">
+            The recognised chapters across the South South Zone will be mapped
+            here, state by state. Chapter records — [NEEDS CONTENT].
+          </p>
         ) : selectedState ? (
           <>
             <p className="cn-side__count type-label tnum">

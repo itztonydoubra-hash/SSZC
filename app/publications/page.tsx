@@ -14,7 +14,7 @@ export default function PublicationsPage() {
   const data = getPublications();
   return (
     <SurfaceSection surface="ivory" index="05" title="THE KNOWLEDGE HUB">
-      <div style={{ paddingTop: "calc(var(--space-9) + var(--space-6))", paddingBottom: "var(--space-9)" }}>
+      <div style={{ paddingBottom: "var(--space-9)" }}>
         <Suspense fallback={null}>
           <PublicationsIndex data={data} />
         </Suspense>

@@ -172,6 +172,12 @@
   pointer-events: none;
 }
 
+/* Empty state: the lone Zone anchor's label sits clearly BELOW the dot (not
+ * overlapping it) so the single node reads as intentional. */
+.cn-overlay__zone[data-below="true"] {
+  transform: translate(-50%, var(--space-6));
+}
+
 /* State labels — real buttons; ordinary pointer (NO custom cursor label). */
 .cn-overlay__state {
   position: absolute;

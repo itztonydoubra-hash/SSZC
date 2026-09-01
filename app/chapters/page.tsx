@@ -23,8 +23,11 @@ export const metadata: Metadata = {
     "The network of officially recognised chapters across the South South Zone of the Law Students' Association of Nigeria.",
 };
 
-// [OFFICIAL] — approved "one network" statement not yet supplied.
-const NETWORK_STATEMENT = "[OFFICIAL — network statement]";
+// The section's communicated idea from design.md B2 ("many institutions, one
+// network") — a design concept, not fabricated organisational content. A custom
+// approved tagline can replace this later, but this is a finished, honest
+// headline rather than a raw placeholder.
+const NETWORK_STATEMENT = "Many institutions. One network.";
 
 export default function ChaptersPage() {
   const data = getChapters();
