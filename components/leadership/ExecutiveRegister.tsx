@@ -30,6 +30,7 @@ import type { ZonalExecutive } from "@/content/types";
 import { usePrefersReducedMotion } from "@/lib/motion/useReducedMotion";
 import { usePageTransition } from "@/lib/motion/pageTransition";
 import { Reveal } from "@/components/motion/Reveal";
+import { assetPath } from "@/lib/asset";
 
 function useIsMobile() {
   const [mobile, setMobile] = useState(false);
@@ -55,7 +56,7 @@ function Portrait({
       <div className="lr-portrait__img">
         {exec.portrait.src ? (
           <Image
-            src={exec.portrait.src}
+            src={assetPath(exec.portrait.src)}
             alt={exec.portrait.alt}
             fill
             sizes="58vw"
@@ -186,7 +187,7 @@ export function ExecutiveRegister({ execs }: { execs: ZonalExecutive[] }) {
           <article className="lr-panel" key={exec.index} aria-label={`${exec.role}: ${exec.name}`}>
             <div className="lr-panel__portrait">
               {exec.portrait.src ? (
-                <Image src={exec.portrait.src} alt={exec.portrait.alt} fill sizes="100vw" style={{ objectFit: "cover" }} />
+                <Image src={assetPath(exec.portrait.src)} alt={exec.portrait.alt} fill sizes="100vw" style={{ objectFit: "cover" }} />
               ) : (
                 <div className="lr-portrait__placeholder" aria-hidden />
               )}

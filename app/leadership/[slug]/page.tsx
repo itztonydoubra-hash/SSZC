@@ -15,6 +15,7 @@ import { getLeadership } from "@/content";
 import { SurfaceSection } from "@/components/chrome/SurfaceSection";
 import { DisplayHeading } from "@/components/chrome/DisplayHeading";
 import { Container, Grid, GridItem, Stack } from "@/components/layout/Grid";
+import { assetPath } from "@/lib/asset";
 
 function findExec(slug: string) {
   return getLeadership().zonal.find((e) => e.slug === slug);
@@ -55,7 +56,7 @@ export default function ExecutiveDetail({ params }: { params: { slug: string } }
           <GridItem span={5} spanMd={8} spanSm={4}>
             <div style={{ position: "relative", aspectRatio: "4 / 5", overflow: "hidden" }}>
               {exec.portrait.src ? (
-                <Image src={exec.portrait.src} alt={exec.portrait.alt} fill sizes="(max-width: 767px) 100vw, 40vw" style={{ objectFit: "cover" }} />
+                <Image src={assetPath(exec.portrait.src)} alt={exec.portrait.alt} fill sizes="(max-width: 767px) 100vw, 40vw" style={{ objectFit: "cover" }} />
               ) : (
                 <div className="lr-portrait__placeholder">
                   <span className="visually-hidden">Portrait to follow</span>
