@@ -143,8 +143,15 @@
   transition: fill var(--dur-state) var(--ease-out), r var(--dur-state) var(--ease-out);
 }
 
+/* Crimson is allowed on ink for NON-TEXT marks (D4/D5), but crimson-on-ink is
+ * 2.60:1 — under the 3:1 floor WCAG 1.4.11 sets for a graphical object that
+ * carries meaning. The selected dot is the canvas's primary selection cue, so it
+ * gets an ivory ring: the mark's own edge is then ivory-on-ink (19:1) and the
+ * crimson reads as fill, not as the thing you must perceive. */
 .cn-state-dot[data-selected="true"] {
   fill: var(--crimson);
+  stroke: var(--ivory);
+  stroke-width: 0.5;
 }
 
 .cn-state-dot[data-muted="true"] {
@@ -163,10 +170,12 @@
   pointer-events: none; /* only the labels/buttons capture events */
 }
 
-/* Zone label — largest, serif; anchored at the zone point, offset below. */
+/* Zone label — largest, serif. Sits ENTIRELY to the LEFT of the hub dot: every
+ * state edge leaves the hub rightward, so the region left of the hub is the only
+ * place a wide serif label is guaranteed never to be crossed by an edge. */
 .cn-overlay__zone {
   position: absolute;
-  transform: translate(-50%, var(--space-4));
+  transform: translate(calc(-100% - var(--cn-sq, 0px) * var(--cn-hub-gap, 5) / 100), -50%);
   color: var(--ivory);
   white-space: nowrap;
   pointer-events: none;
@@ -178,10 +187,17 @@
   transform: translate(-50%, var(--space-6));
 }
 
-/* State labels — real buttons; ordinary pointer (NO custom cursor label). */
+/* State labels — real buttons; ordinary pointer (NO custom cursor label).
+ *
+ * Set to the RIGHT of the node, BEYOND the chapter fan (--cn-lbl-gap designed
+ * units, which the component keeps greater than the fan's reach). Three regions
+ * were tried and measured: beside the node fails (text began 20px from centre
+ * while the selected dot's radius IS 20px); the near-right wedge fails (the fan's
+ * EDGES, not just its dots, sweep it); and the whole LEFT side fails (it is
+ * crossed by the other five states' hub edges). Only past the fan is clear. */
 .cn-overlay__state {
   position: absolute;
-  transform: translate(var(--space-3), -50%);
+  transform: translate(calc(var(--cn-sq, 0px) * var(--cn-lbl-gap, 14) / 100), -50%);
   appearance: none;
   background: none;
   border: 0;

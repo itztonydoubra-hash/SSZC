@@ -24,12 +24,17 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import type { CSSProperties } from "react";
 import type { Chapters } from "@/content/types";
 import { usePrefersReducedMotion } from "@/lib/motion/useReducedMotion";
 
 /* Designed coordinate space, 0..100 on both axes (NON-geographic). */
 const VB = 100;
-const ZONE_WITH_STATES = { x: 22, y: 50 };
+// x=34 (not further left) so the hub's wide serif label fits ENTIRELY to its
+// left even on the narrowest canvas that renders the graph. Every edge leaves
+// the hub rightward, so the region left of the hub is the one place a wide label
+// can never be crossed by an edge.
+const ZONE_WITH_STATES = { x: 34, y: 50 };
 const ZONE_EMPTY = { x: 42, y: 46 };
 
 export function OrgNetwork({
@@ -52,6 +57,34 @@ export function OrgNetwork({
   const canvasRef = useRef<HTMLDivElement>(null);
 
   const active = selected ?? hovered;
+
+  /* The SVG is `preserveAspectRatio="xMidYMid meet"`, so its 0..100 space maps to
+   * the largest CENTRED SQUARE inside the canvas — NOT the canvas box. Positioning
+   * the HTML label overlay with plain percentages of the canvas therefore drifts
+   * from the dots whenever the canvas is not square (up to ~88px at 1024px, where
+   * the canvas is 667x900). Publish the square's size/offset as custom properties
+   * so the overlay resolves in exactly the SVG's coordinate space. */
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const sync = () => {
+      const r = canvas.getBoundingClientRect();
+      const size = Math.min(r.width, r.height);
+      canvas.style.setProperty("--cn-sq", `${size}px`);
+      canvas.style.setProperty("--cn-sq-x", `${(r.width - size) / 2}px`);
+      canvas.style.setProperty("--cn-sq-y", `${(r.height - size) / 2}px`);
+    };
+    sync();
+    const ro = new ResizeObserver(sync);
+    ro.observe(canvas);
+    return () => ro.disconnect();
+  }, []);
+
+  /** Map a designed 0..100 coordinate onto the SVG's rendered square. */
+  const at = (x: number, y: number) => ({
+    left: `calc(var(--cn-sq-x, 0px) + var(--cn-sq, 100%) * ${x} / 100)`,
+    top: `calc(var(--cn-sq-y, 0px) + var(--cn-sq, 100%) * ${y} / 100)`,
+  });
 
   useEffect(() => {
     if (reduced) return;
@@ -79,13 +112,26 @@ export function OrgNetwork({
   const selectedState = selected != null ? states[selected] : undefined;
   const activeCount = selectedState?.chapters.length ?? 0;
 
+  /* Chapter fan geometry, in designed units. Deliberately COMPACT: the fan must
+   * stay inside x +FAN_NEAR..+FAN_FAR so the state label (set at +LABEL_GAP) is
+   * never struck by a fan edge. A wider fan is not available — the region left of
+   * each node is swept by the other states' hub edges, so the label has nowhere
+   * else to go. SPREAD is wide enough that 7 dots (Delta, the largest chapter
+   * count) do not touch at r=0.9. */
+  const FAN_OFFSET = 4;
+  const FAN_RADIUS = 8;
+  const FAN_SPREAD = 55; // degrees either side of horizontal
+  const LABEL_GAP = 14; // > FAN_OFFSET + FAN_RADIUS (= 12)
+
   const chapterPos = useMemo(() => {
     return states.map((s) => {
       const n = s.chapters.length;
       return s.chapters.map((_, i) => {
-        const angle = (-40 + (n > 1 ? (80 * i) / (n - 1) : 0)) * (Math.PI / 180);
-        const rad = 12;
-        return { x: s.layout.x + Math.cos(angle) * rad + 6, y: s.layout.y + Math.sin(angle) * rad };
+        const angle = (-FAN_SPREAD + (n > 1 ? (2 * FAN_SPREAD * i) / (n - 1) : 0)) * (Math.PI / 180);
+        return {
+          x: s.layout.x + FAN_OFFSET + Math.cos(angle) * FAN_RADIUS,
+          y: s.layout.y + Math.sin(angle) * FAN_RADIUS,
+        };
       });
     });
   }, [states]);
@@ -150,11 +196,18 @@ export function OrgNetwork({
 
         {/* Accessible interaction + labels: HTML overlay positioned by percentage.
             The Zone label and each State are real elements; states are <button>s. */}
-        <div className="cn-overlay" aria-hidden="false">
+        {/* Label offsets are published in DESIGNED UNITS so CSS resolves them in
+            the same coordinate space as the SVG (via --cn-sq), not in fixed px
+            that would drift as the canvas resizes. */}
+        <div
+          className="cn-overlay"
+          aria-hidden="false"
+          style={{ "--cn-lbl-gap": LABEL_GAP, "--cn-hub-gap": 5 } as CSSProperties}
+        >
           <span
             className="cn-overlay__zone type-display-m"
             data-below={zoneLabelBelow ? "true" : "false"}
-            style={{ left: `${ZONE.x}%`, top: `${ZONE.y}%` }}
+            style={at(ZONE.x, ZONE.y)}
           >
             {zoneLabel}
           </span>
@@ -163,7 +216,7 @@ export function OrgNetwork({
               key={`btn-${s.state}`}
               type="button"
               className="cn-overlay__state type-label"
-              style={{ left: `${s.layout.x}%`, top: `${s.layout.y}%` }}
+              style={at(s.layout.x, s.layout.y)}
               data-muted={active != null && active !== i ? "true" : "false"}
               aria-pressed={selected === i}
               onMouseEnter={() => setHovered(i)}
