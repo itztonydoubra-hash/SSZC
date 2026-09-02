@@ -282,3 +282,55 @@ Both pass: every image decodes and nothing 404s at either base path.
 `docs/` become public with it. SOURCES.md is an internal verification log that
 names individuals whose roles are recorded as *unconfirmed*; move or redact it
 before making the repository public.
+
+## D9 — About modules are ordered BLOCKS, not single strings (The Zone content)
+
+**Trigger:** the client supplied the full approved copy for The Zone. It has real
+editorial structure that the C4 data line — `about = { statement, history,
+purpose, vision, mission, values[], scope, roleInLawsan, images[] }`, where each
+narrative field is a single string — cannot hold without destroying it:
+
+- a **beat** sits BETWEEN two paragraphs ("The work has continued to evolve.");
+- sets of **parallel statements** sit mid-module ("It connects… It creates…");
+- **values** and the Zone's **dimensions** are a name PLUS a qualifying sentence,
+  not bare words, so `values: string[]` loses half the content;
+- **constitutional notes** close two movements in a quieter register.
+
+**Change:** each narrative field is now an `AboutModule` = `{ heading, blocks[] }`,
+where a block is one of `prose | beat | list | principles | note`. A tiny, closed
+vocabulary — not a rich-text engine — that preserves the approved ORDER exactly
+and maps straight onto a CMS block/portable-text field later. `vision` and
+`mission` stay plain strings (they are single statements, per C4). Two fields were
+added: `title` (the Zone's formal name) and `coda` (the closing line).
+
+**What is preserved from C4:** ivory throughout, Manrope-dominant, serif only at
+the opening statement / movement headings / the two statements, spine + margin
+note per movement, crimson index in the margin (AA on ivory — D4), values as a
+Manrope list rather than a word-cloud, the scope module beside a **reused network
+motif**, and *"prose does not animate"*.
+
+**Two deliberate departures from C4, both for honesty reasons:**
+
+1. **`purpose` is a narrative movement, not a short serif statement.** C4 grouped
+   Purpose/Vision/Mission as three short statements; the supplied purpose copy is
+   several paragraphs of argument. It is set as prose, and Vision/Mission remain
+   the two serif statements.
+2. **The photograph is NOT placed in the history movement, and is NOT duotone.**
+   C4 asks for duotone imagery in history to signal "past". The single supplied
+   photograph documents something **unconfirmed** (SOURCES.md: no event, place or
+   date attached). Putting it under History, or giving it an archival duotone
+   treatment, would both assert that it depicts the Zone's history — a claim we
+   cannot make. It sits as a general plate after the opening, uncaptioned.
+
+**The motif now references a map.** C4's "small network motif (ties back to B2)"
+is implemented as `ZoneMotif`, which reuses the REAL geography from
+`components/chapters/nigeria-geography.ts` — Nigeria in hairlines with the six
+South South states filled in ink. Since B2 became a geographic map (D6), the
+motif is geographic too, and it costs no extra bytes because the geometry module
+is already in the bundle.
+
+**Copy integrity.** The copy is transcribed verbatim and is deliberately
+unspecific in places ("during the tenure of an early zonal leadership", "the
+second convention", "a growing collection of law faculties"). Those hedges are
+the approved wording because the underlying dates, names and figures are NOT
+verified. They must not be sharpened into specifics.

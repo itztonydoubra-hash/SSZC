@@ -17,21 +17,7 @@
   margin-top: var(--space-3);
 }
 
-/* ---- About ---------------------------------------------------------------- */
-.pg-about__module {
-  padding-block: var(--space-8);
-}
-
-.pg-about__values {
-  list-style: none;
-  margin: var(--space-5) 0 0;
-  padding: 0;
-}
-
-.pg-about__values li {
-  border-top: 1px solid var(--surface-hairline);
-  padding-block: var(--space-4);
-}
+/* ---- About: see styles/about.css (design.md C4 / decisions.md D9) -------- */
 
 /* ---- Ledger meta rows (News/Events past/Opportunities/related) ------------ */
 .pg-ledger {

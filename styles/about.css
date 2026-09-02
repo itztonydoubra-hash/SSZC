@@ -1,0 +1,261 @@
+/*
+ * ============================================================================
+ * THE ZONE / ABOUT  (design.md C4)
+ * ============================================================================
+ * A READING page. Manrope leads; serif appears only at the opening statement,
+ * the movement headings and the two statements (vision, mission). Hierarchy is
+ * built from SCALE + SPACE + HAIRLINES only — no extra weights, no dividers as
+ * decoration, no cards, no boxes.
+ *
+ * Ivory throughout (C4: reading flow beats forced alternation), so crimson is
+ * available as the accent and is spent on exactly one thing: the movement
+ * numeral in the margin (6.58:1 on ivory — decisions.md D4).
+ *
+ * Prose never animates (C4). Only the headings line-rise and the one plate
+ * mask-opens, both via the shared primitives.
+ * ============================================================================
+ */
+
+.ab {
+  padding-bottom: var(--space-10);
+}
+
+/* ==========================================================================
+ * OPENING — the formal name as the record, the statement as the institution.
+ * ========================================================================== */
+
+.ab-open {
+  padding-bottom: var(--space-8);
+}
+
+/* The Zone's formal name: Manrope, quieter than the statement it introduces.
+ * 62ch keeps it on one line at desktop — it is a name, and a name should not
+ * break across lines when there is room for it. */
+.ab-open__name {
+  color: var(--stone-600);
+  max-width: 62ch;
+  margin-top: var(--space-5);
+}
+
+.ab-open__statement {
+  margin-top: var(--space-6);
+  max-width: 26ch; /* the one idea, held to a few strong lines */
+}
+
+/* The single pull line that closes the opening. Serif, but small enough that it
+ * reads as a turn in the argument rather than a second headline. */
+.ab-pull {
+  margin-top: var(--space-7);
+  max-width: 34ch;
+  color: var(--ink);
+}
+
+/* ==========================================================================
+ * PLATE — the one supplied photograph. Offset from the spine so it reads as a
+ * plate in a piece of writing, not a hero.
+ * ========================================================================== */
+
+.ab-plate {
+  margin: 0 0 var(--space-10);
+  max-width: 62%;
+  margin-left: auto; /* offset right, against the spine */
+}
+
+/* ==========================================================================
+ * MOVEMENTS
+ * ========================================================================== */
+
+.ab-movement {
+  padding-block: var(--space-9);
+  border-top: 1px solid var(--surface-hairline);
+}
+
+/* C4: between the statements, "generous space rather than dividers" — so these
+ * carry NO rule, and are separated by air alone. */
+.ab-statement {
+  padding-block: var(--space-10);
+}
+
+/* The one crimson in the page: the movement numeral, in the margin column. */
+.ab-movement__index {
+  color: var(--crimson);
+}
+
+.ab-movement__heading {
+  margin-bottom: var(--space-6);
+}
+
+/* ---- Blocks -------------------------------------------------------------- */
+
+.ab-prose {
+  color: var(--surface-text);
+}
+
+.ab-prose + .ab-prose {
+  margin-top: var(--space-5);
+}
+
+/* The opening statement's reveal wraps it in a clip box that hugs the text, so
+ * the standfirst beneath needs its own air or the two sit on one baseline. It is
+ * scoped to .ab-open (NOT an adjacent-sibling selector) precisely because that
+ * clip wrapper sits between the heading and the prose. */
+.ab-open .ab-prose {
+  margin-top: var(--space-6);
+}
+
+/* A beat: lifted out of the prose by scale and air, never by weight or colour. */
+.ab-beat {
+  color: var(--ink);
+  max-width: 40ch;
+  margin-block: var(--space-7);
+}
+
+/* Parallel statements as a hairline-divided set — the ledger logic, applied to
+ * sentences instead of records. */
+.ab-list {
+  list-style: none;
+  margin: var(--space-6) 0;
+  padding: 0;
+  border-top: 1px solid var(--surface-hairline);
+}
+
+.ab-list__item {
+  border-bottom: 1px solid var(--surface-hairline);
+  padding-block: var(--space-4);
+  color: var(--surface-text);
+  max-width: var(--measure-body-max);
+}
+
+/* Principles: a tracked Manrope name, then the sentence that qualifies it. */
+.ab-principles {
+  margin: var(--space-6) 0 0;
+  border-top: 1px solid var(--surface-hairline);
+}
+
+.ab-principles__row {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  column-gap: var(--grid-gutter);
+  align-items: baseline;
+  padding-block: var(--space-5);
+  border-bottom: 1px solid var(--surface-hairline);
+}
+
+.ab-principles__name {
+  color: var(--ink);
+}
+
+.ab-principles__desc {
+  margin: 0;
+  color: var(--stone-600);
+  max-width: 54ch;
+}
+
+/* A quieter reference — smaller and muted, so it reads as a footing to the
+ * movement rather than part of its argument. */
+.ab-note {
+  color: var(--stone-600);
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--surface-hairline);
+}
+
+/* ==========================================================================
+ * STATEMENTS — vision and mission. Generous space, no dividers between them.
+ * ========================================================================== */
+
+.ab-statement__label {
+  color: var(--stone-600);
+  margin: 0;
+}
+
+.ab-statement__text {
+  margin-top: var(--space-5);
+  max-width: 36ch;
+}
+
+/* ==========================================================================
+ * MOTIF — the reused Chapters geography, as a quiet plate (C4 → B2).
+ * On ivory the fills invert: the six states are ink, the country a hairline.
+ * ========================================================================== */
+
+.ab-motif {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.ab-motif__context path {
+  fill: none;
+  stroke: var(--hairline-on-ivory);
+  stroke-width: 1.2;
+  vector-effect: non-scaling-stroke;
+}
+
+.ab-motif__outline {
+  fill: none;
+  stroke: var(--stone-600);
+  stroke-opacity: 0.5;
+  stroke-width: 1.2;
+  vector-effect: non-scaling-stroke;
+}
+
+.ab-motif__zone path {
+  fill: var(--ink);
+  fill-opacity: 0.88;
+  stroke: none;
+}
+
+/* ==========================================================================
+ * CODA — the closing line.
+ * ========================================================================== */
+
+.ab-coda {
+  margin-top: var(--space-10);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--surface-hairline);
+  color: var(--ink);
+  max-width: 24ch;
+}
+
+/* ==========================================================================
+ * RECOMPOSITION — tablet and mobile.
+ * ========================================================================== */
+
+@media (width <= 1023px) {
+  /* The numeral moves from a margin column to a line above the heading. */
+  .ab-movement__index {
+    margin-bottom: var(--space-3);
+  }
+
+  .ab-plate {
+    max-width: 100%;
+  }
+
+  /* The motif follows the copy rather than sitting beside it. */
+  .ab-motif {
+    max-width: 340px;
+    margin-top: var(--space-8);
+  }
+}
+
+@media (width <= 767px) {
+  .ab-open__statement,
+  .ab-pull,
+  .ab-beat,
+  .ab-statement__text,
+  .ab-coda {
+    max-width: none;
+  }
+
+  /* Name above description — 10rem of label column is too much at 4 columns. */
+  .ab-principles__row {
+    grid-template-columns: 1fr;
+    row-gap: var(--space-2);
+  }
+
+  .ab-movement,
+  .ab-statement {
+    padding-block: var(--space-8);
+  }
+}

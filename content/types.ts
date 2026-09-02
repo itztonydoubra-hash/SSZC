@@ -204,17 +204,63 @@ export type Contact = {
   session?: string;
 };
 
-/* About (design.md C4 / line 393) ------------------------------------------ */
+/* About (design.md C4 / line 393, superseded in part by decisions.md D9) ---- */
+
+/** A named principle or dimension: the word, and the sentence qualifying it. */
+export type AboutPrinciple = {
+  /** e.g. "Equality", "Connect" */
+  name: string;
+  description: string;
+};
+
+/**
+ * One block of an About module. The modules are long-form editorial copy, so a
+ * module is an ORDERED sequence of typed blocks rather than a single string —
+ * that is the only way to keep the approved copy in its approved order (a beat
+ * sits between two paragraphs; a set of parallel statements sits mid-module).
+ *
+ * Deliberately a tiny, closed vocabulary — it is not a rich-text engine, and it
+ * maps directly onto a CMS block/portable-text field later.
+ */
+export type AboutBlock =
+  /** ordinary body copy (Manrope, reading measure) */
+  | { kind: "prose"; text: string }
+  /** a short line set apart from the prose by scale and space */
+  | { kind: "beat"; text: string }
+  /** parallel statements read as a hairline-divided set */
+  | { kind: "list"; items: string[] }
+  /** named principles/dimensions (name + qualifying sentence) */
+  | { kind: "principles"; items: AboutPrinciple[] }
+  /** a quieter closing reference, e.g. a constitutional note */
+  | { kind: "note"; text: string };
+
+/** A narrative module: its heading and its blocks, in order. */
+export type AboutModule = {
+  /** display heading, e.g. "A region, brought together" */
+  heading: string;
+  blocks: AboutBlock[];
+};
 
 export type About = {
+  /** the Zone's formal name — set as the record (Manrope) above the statement */
+  title: string;
+  /** the ONE idea of what the Zone is — the opening serif statement (C4) */
   statement: string;
-  history: string;
-  purpose: string;
+  /** opening body paragraphs beneath the statement */
+  intro: string[];
+  /** the single pull line that closes the opening */
+  pull?: string;
+  history: AboutModule;
+  purpose: AboutModule;
+  values: AboutModule;
+  roleInLawsan: AboutModule;
+  /** the two short serif statements (C4) */
   vision: string;
   mission: string;
-  values: string[];
-  scope: string;
-  roleInLawsan: string;
+  /** "The Zone today" — the Zone's present scope */
+  scope: AboutModule;
+  /** the closing line */
+  coda?: string;
   images: ImageRef[];
 };
 
