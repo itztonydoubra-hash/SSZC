@@ -109,17 +109,55 @@ check(
   declaredStates.join(", "),
 );
 
-/* No president content may be invented: the data file must not populate any
- * president field at all while the details are unverified. */
+/* Presidents: only the supplied ones may exist, each with a name AND a portrait
+ * file that is actually present. Nothing beyond what was supplied may appear. */
+const SUPPLIED_PRESIDENTS = {
+  "arthur-jarvis-university": ["Edem Divine Agbor, SAL", "edem-divine-agbor.jpg"],
+  "hensard-university": ["Elijah Christian Fonikimi", "elijah-christian-fonikimi.jpg"],
+  "michael-and-cecilia-ibru-university": ["Plaku Jessica Pere-ere, SAL", "plaku-jessica-pere-ere.jpg"],
+  "edo-state-university": ["Omorhienrhien Princess Abieyuwa", "omorhienrhien-princess-abieyuwa.jpg"],
+  "glorious-vision-university": ["Jude Ayobami Abe", "jude-ayobami-abe.jpg"],
+};
+const presidentBlocks = [...dataSrc.matchAll(/president:\s*\{/g)];
 check(
-  "data: no president name/portrait/social/contact/tenure populated",
-  !/president:/.test(dataSrc) &&
-    !/execs:/.test(dataSrc) &&
-    !/portrait:/.test(dataSrc) &&
+  `data: exactly ${Object.keys(SUPPLIED_PRESIDENTS).length} presidents populated`,
+  presidentBlocks.length === Object.keys(SUPPLIED_PRESIDENTS).length,
+  `found ${presidentBlocks.length}`,
+);
+
+const portraitDir = await readdir(`${ROOT}/public/chapters`);
+for (const [slug, [name, file]] of Object.entries(SUPPLIED_PRESIDENTS)) {
+  const block = dataSrc.split(`slug: "${slug}"`)[1]?.slice(0, 600) ?? "";
+  check(
+    `data: ${slug} president is "${name}" with ${file}`,
+    block.includes(`name: "${name}"`) && block.includes(`src: "/chapters/${file}"`),
+  );
+  check(`asset: public/chapters/${file} exists`, portraitDir.includes(file));
+}
+
+/* Names must not be invented for anyone else, and no unsupplied detail may be
+ * filled in for the presidents that DO exist. */
+const declaredNames = [...dataSrc.matchAll(/name:\s*"([^"]+)"/g)].map((m) => m[1]);
+const expectedNames = Object.values(SUPPLIED_PRESIDENTS).map(([n]) => n);
+check(
+  "data: no president name invented",
+  declaredNames.length === expectedNames.length &&
+    declaredNames.every((n) => expectedNames.includes(n)),
+  declaredNames.join(" | "),
+);
+check(
+  "data: no tenure / socials / execs / contact invented",
+  !/tenure:/.test(dataSrc) &&
     !/socials:/.test(dataSrc) &&
-    !/images:/.test(dataSrc) &&
+    !/execs:/.test(dataSrc) &&
     !/contact:/.test(dataSrc),
 );
+/* Every portrait file in public/chapters must be referenced — no stray or
+ * unrelated photograph may sit in the published folder. */
+const strayAssets = portraitDir.filter(
+  (f) => /\.(jpe?g|png|webp|avif)$/i.test(f) && !dataSrc.includes(`/chapters/${f}`),
+);
+check("asset: no unreferenced portrait in public/chapters", strayAssets.length === 0, strayAssets.join(", "));
 
 /* CMS-ready seam: components read the data-access layer, never the data files. */
 const offenders = [];
@@ -280,7 +318,7 @@ try {
       new URL(page.url()).searchParams.get("chapter") === "novena-university",
     );
     check(
-      "empty state: CHAPTER PRESIDENT / [NEEDS CONTENT]",
+      "empty state: CHAPTER PRESIDENT / [NEEDS CONTENT] for an unsupplied president",
       (await page.locator(".cm-profile").textContent())?.includes("[NEEDS CONTENT]") === true,
     );
     check(
@@ -288,25 +326,103 @@ try {
       (await page.locator(".cm-profile__frame-empty").count()) === 1 &&
         (await page.locator(".cm-profile img").count()) === 0,
     );
+
+    /* Every supplied president renders: the name, and a portrait that actually
+     * decoded (naturalWidth > 0 — a broken image would report 0). */
+    for (const [slug, [name, file]] of Object.entries(SUPPLIED_PRESIDENTS)) {
+      const stateSlug = Object.entries({
+        "arthur-jarvis-university": "cross-river",
+        "hensard-university": "bayelsa",
+        "michael-and-cecilia-ibru-university": "delta",
+        "edo-state-university": "edo",
+        "glorious-vision-university": "edo",
+      }).find(([s]) => s === slug)?.[1];
+      await page.goto(`${base}/chapters?state=${stateSlug}&chapter=${slug}`, {
+        waitUntil: "networkidle",
+      });
+      await page.waitForTimeout(700);
+      const shown = await page.locator(".cm-profile__person").textContent();
+      const img = await page.evaluate(() => {
+        const el = document.querySelector(".cm-profile img");
+        return el ? { src: el.getAttribute("src"), w: el.naturalWidth, alt: el.alt } : null;
+      });
+      check(`president: ${slug} shows "${name}"`, shown === name, shown ?? "(none)");
+      check(
+        `portrait: ${slug} renders ${file} and it loaded`,
+        img !== null && img.w > 0 && decodeURIComponent(img.src ?? "").includes(file),
+        img ? `src=${img.src} naturalWidth=${img.w}` : "(no img)",
+      );
+      check(
+        `portrait: ${slug} has factual alt naming the person and institution`,
+        (img?.alt ?? "").startsWith(name.replace(/,\s*SAL$/, "")) &&
+          (img?.alt ?? "").includes("chapter president"),
+        img?.alt ?? "",
+      );
+      check(
+        `president: ${slug} shows no placeholder alongside real content`,
+        !((await page.locator(".cm-profile").textContent()) ?? "").includes("[NEEDS CONTENT]"),
+      );
+    }
+
+    /* The 17 chapters with no supplied president must ALL still show the empty
+     * state — no portrait may leak from another chapter. */
+    let emptyProfiles = 0;
+    let realProfiles = 0;
+    for (const [stateName] of Object.entries(SUPPLIED)) {
+      const stateSlug = { "Cross River State": "cross-river", "Akwa Ibom State": "akwa-ibom", "Rivers State": "rivers", "Bayelsa State": "bayelsa", "Delta State": "delta", "Edo State": "edo" }[stateName];
+      await page.goto(`${base}/chapters?state=${stateSlug}`, { waitUntil: "networkidle" });
+      await page.waitForTimeout(400);
+      const chapterButtons = await page.locator(".cm-ledger__row").count();
+      for (let i = 0; i < chapterButtons; i++) {
+        await page.locator(".cm-ledger__row").nth(i).click();
+        await page.waitForTimeout(180);
+        const hasImg = (await page.locator(".cm-profile img").count()) > 0;
+        const hasFrame = (await page.locator(".cm-profile__frame-empty").count()) > 0;
+        if (hasImg && !hasFrame) realProfiles++;
+        else if (!hasImg && hasFrame) emptyProfiles++;
+      }
+    }
     check(
-      "no fabricated president content on the page",
-      !/\bPresident:\s*\w/.test((await page.locator(".cm-profile").textContent()) ?? ""),
+      "profiles: 5 portraits + 17 designed empty frames, never both",
+      realProfiles === 5 && emptyProfiles === 17,
+      `real=${realProfiles} empty=${emptyProfiles}`,
     );
 
-    /* No keyboard trap: focus keeps moving forward out of the ledger. */
+    await page.goto(`${base}/chapters?state=delta&chapter=novena-university`, {
+      waitUntil: "networkidle",
+    });
+    await page.waitForTimeout(400);
+
+    /* No keyboard trap: from inside the ledger, focus keeps moving forward. */
+    const rowCount = await page.locator(".cm-ledger__row").count();
+    await page.locator(".cm-ledger__row").nth(rowCount - 1).focus();
     const before = await page.evaluate(() => document.activeElement?.textContent ?? "");
     for (let i = 0; i < 12; i++) await page.keyboard.press("Tab");
     const after = await page.evaluate(() => document.activeElement?.textContent ?? "");
     check("keyboard: no trap (focus advances out of the ledger)", before !== after);
 
-    /* axe on the INTERACTED state (the default sweep only sees first paint). */
-    const axe = await new AxeBuilder({ page })
+    /* axe on INTERACTED states (the default sweep only sees first paint) — both
+     * with the designed empty record and with a real portrait rendered. */
+    const axeEmpty = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
       .analyze();
     check(
-      "axe: 0 violations with a state + chapter selected",
-      axe.violations.length === 0,
-      axe.violations.map((v) => v.id).join(", "),
+      "axe: 0 violations with a state + chapter selected (empty president)",
+      axeEmpty.violations.length === 0,
+      axeEmpty.violations.map((v) => v.id).join(", "),
+    );
+
+    await page.goto(`${base}/chapters?state=delta&chapter=michael-and-cecilia-ibru-university`, {
+      waitUntil: "networkidle",
+    });
+    await page.waitForTimeout(700);
+    const axePortrait = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      .analyze();
+    check(
+      "axe: 0 violations with a president portrait rendered",
+      axePortrait.violations.length === 0,
+      axePortrait.violations.map((v) => v.id).join(", "),
     );
 
     await ctx.close();

@@ -14,6 +14,7 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
 import { MaskReveal } from "@/components/motion/MaskReveal";
+import { assetPath } from "@/lib/asset";
 
 export function MaskImage({
   src,
@@ -42,7 +43,7 @@ export function MaskImage({
   return (
     <MaskReveal ratio={ratio} delayMs={delayMs} className={className} style={style}>
       <Image
-        src={src}
+        src={assetPath(src)}
         alt={alt}
         fill
         sizes={sizes}

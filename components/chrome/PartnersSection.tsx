@@ -7,6 +7,7 @@ import Image from "next/image";
 import { getPartners } from "@/content";
 import { SurfaceSection } from "./SurfaceSection";
 import { DisplayHeading } from "./DisplayHeading";
+import { assetPath } from "@/lib/asset";
 
 export function PartnersSection() {
   const partners = getPartners();
@@ -19,7 +20,7 @@ export function PartnersSection() {
         <div className="pg-partners">
           {partners.map((p) => {
             const logo = (
-              <Image className="pg-partners__logo" src={p.logo.src} alt={p.name} width={120} height={48} style={{ height: "48px", width: "auto" }} />
+              <Image className="pg-partners__logo" src={assetPath(p.logo.src)} alt={p.name} width={120} height={48} style={{ height: "48px", width: "auto" }} />
             );
             return p.url ? (
               <a key={p.name} href={p.url} target="_blank" rel="noreferrer noopener" aria-label={p.name}>{logo}</a>

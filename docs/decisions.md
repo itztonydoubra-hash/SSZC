@@ -192,3 +192,50 @@ president data, no component importing `content/data/*`) and the experience
 (keyboard-only selection of all six states, derived counts, chapter selection,
 empty states, deep links, 0px horizontal overflow at 375/768/1440, axe clean in
 an interacted state, and no motion under `prefers-reduced-motion`).
+
+
+
+## D7 — Asset paths must be base-path aware for the Pages export (Chapters presidents)
+
+**Bug found while adding the chapter-president portraits, and it was NOT limited
+to them.** The review deployment is GitHub Pages, which serves the site from a
+project sub-path (`basePath: "/SSZC"`) and has no image-optimisation server, so
+that build also sets `images.unoptimized`. Next.js applies `basePath` to the
+`/_next/image` optimiser URL — but when an image is **unoptimised the `src` is
+emitted verbatim, with no `basePath`**. So `/chapters/name.jpg` was requested at
+the domain root and 404'd.
+
+Effect on the export: **every** `next/image` on the site would have been a broken
+image once deployed — the five president portraits, the Zonal Director's portrait
+on `/leadership`, the Media gallery and the partner logos. It never showed up
+locally because `next start` serves from the domain root, and it had never been
+seen in production because the Pages deployment has never succeeded (Pages is not
+enabled on the repo — see the deploy workflow's own header note).
+
+**Fix:** `lib/asset.ts` exposes `assetPath()`, which prefixes root-relative asset
+paths with `NEXT_PUBLIC_BASE_PATH` (published from `next.config.mjs`; empty for
+local/dev/server builds, so it is a no-op there and the optimiser keeps working).
+It is applied at every `next/image` call site: `MaskImage`, `ExecutiveRegister`,
+`MediaGallery`, `PartnersSection` and `/leadership/[slug]`. External URLs, data
+URLs and already-prefixed paths pass through untouched.
+
+**Content files stay deployment-agnostic** — they still store plain paths like
+`"/chapters/name.jpg"`, exactly as `ImageRef` documents. No content change was
+needed and no schema changed.
+
+**New gate:** `npm run check:export` serves `./out` from a `/SSZC` prefix exactly
+as Pages does and asserts that every image on every image-bearing route actually
+decodes (`naturalWidth > 0`), that no `src` misses the base path, and that no
+request 404s. Nothing else in the pipeline could catch this class of bug —
+`next build`, `npm run check` and axe all pass with the images broken.
+
+    DEPLOY_TARGET=gh-pages npm run build && npm run check:export
+
+**Chapter presidents (5 of 22 supplied).** Client-supplied official portraits for
+Arthur Jarvis University, Hensard University, Michael and Cecilia Ibru University,
+Edo State University and Glorious Vision University. Only the **name** and the
+**portrait** were supplied for each; `role`, `tenure`, `socials` and `contact`
+remain unset because nothing was supplied, and the remaining 17 chapters have no
+`president` at all and keep the designed `[NEEDS CONTENT]` / `[OFFICIAL IMAGE]`
+state. Preparation (4:5 editorial crop, ≤1000×1250, EXIF stripped) and the exact
+crop boxes are recorded in `public/chapters/README.md`.

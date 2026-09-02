@@ -11,6 +11,7 @@ import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import type { MediaItem } from "@/content/types";
 import { useFocusTrap } from "@/lib/a11y/useFocusTrap";
+import { assetPath } from "@/lib/asset";
 
 export function MediaGallery({ items }: { items: MediaItem[] }) {
   const [open, setOpen] = useState<number | null>(null);
@@ -56,7 +57,7 @@ export function MediaGallery({ items }: { items: MediaItem[] }) {
               onClick={() => setOpen(i)}
             >
               <span style={{ display: "block", position: "relative", aspectRatio: m.ratio ?? "4 / 5" }}>
-                <Image src={m.src} alt={m.alt} fill sizes="(max-width:767px) 100vw, (max-width:1023px) 50vw, 33vw" style={{ objectFit: "cover" }} loading="lazy" placeholder={m.poster?.blur ? "blur" : "empty"} blurDataURL={m.poster?.blur} />
+                <Image src={assetPath(m.src)} alt={m.alt} fill sizes="(max-width:767px) 100vw, (max-width:1023px) 50vw, 33vw" style={{ objectFit: "cover" }} loading="lazy" placeholder={m.poster?.blur ? "blur" : "empty"} blurDataURL={m.poster?.blur} />
               </span>
             </button>
             {m.caption && <figcaption className="pg-media__caption type-label">{m.caption}</figcaption>}
@@ -74,7 +75,7 @@ export function MediaGallery({ items }: { items: MediaItem[] }) {
           onClick={(e) => { if (e.target === e.currentTarget) setOpen(null); }}
         >
           <div style={{ position: "relative", maxWidth: "min(90vw, 1200px)", maxHeight: "85vh", width: "100%", aspectRatio: active.ratio ?? "4 / 5" }}>
-            <Image src={active.src} alt={active.alt} fill sizes="90vw" style={{ objectFit: "contain" }} />
+            <Image src={assetPath(active.src)} alt={active.alt} fill sizes="90vw" style={{ objectFit: "contain" }} />
           </div>
           <button type="button" className="type-label" onClick={() => setOpen(null)} style={{ position: "absolute", top: "var(--space-4)", right: "var(--space-5)", background: "none", border: 0, color: "var(--ivory)", cursor: "pointer" }}>Close ✕</button>
           <button type="button" aria-label="Previous" className="type-label" onClick={() => move(-1)} style={{ position: "absolute", left: "var(--space-4)", background: "none", border: 0, color: "var(--ivory)", cursor: "pointer" }}>←</button>
