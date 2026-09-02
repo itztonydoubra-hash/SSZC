@@ -74,21 +74,45 @@ export type Leadership = {
 
 /* Chapters (design.md B2 / line 252) --------------------------------------- */
 
+/**
+ * A chapter's LAWSAN President.
+ *
+ * EVERY field is optional and nothing here may be inferred. Until the client
+ * supplies verified details the chapter profile renders its designed empty
+ * state ("CHAPTER PRESIDENT / [NEEDS CONTENT]" and "[OFFICIAL IMAGE]"); when
+ * the fields are populated the SAME component displays them — no redesign.
+ */
+export type ChapterPresident = {
+  /** full name, exactly as supplied */
+  name?: string;
+  /** official role wording, only if supplied (the UI's own label is generic) */
+  role?: string;
+  /** official portrait — never a stock, generic or AI-generated photograph */
+  portrait?: ImageRef;
+  /** e.g. a session/tenure string, only if supplied */
+  tenure?: string;
+  socials?: SocialLink[];
+  contact?: { email?: string; phone?: string };
+};
+
 export type Chapter = {
   institution: string;
   slug: string;
-  /** only if supplied — never inferred/invented */
+  /** city/campus location — only if supplied, never inferred/invented */
   location?: string;
-  /** chapter executives — shape kept loose until the client supplies structure */
+  /** the chapter's LAWSAN President — see ChapterPresident */
+  president?: ChapterPresident;
+  /** other chapter executives — shape kept loose until the client supplies it */
   execs?: { role: string; name: string }[];
   contact?: { email?: string; phone?: string };
   images?: ImageRef[];
 };
 
 export type ChapterState = {
+  /** full state name as it is displayed, e.g. "Bayelsa State" */
   state: string;
-  /** designed (stylised) node position — explicitly NOT geographic (B2) */
-  layout: { x: number; y: number };
+  /** url/query slug, e.g. "bayelsa" — also keys the map geography */
+  slug: string;
   chapters: Chapter[];
 };
 

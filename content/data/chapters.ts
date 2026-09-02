@@ -2,22 +2,30 @@
  * Chapters content (design.md B2). POPULATED — client-supplied.
  *
  * The six South South states and their recognised chapters were supplied by the
- * client (see content/SOURCES.md). 22 chapters across 6 states.
+ * client (see content/SOURCES.md). 22 chapters across 6 states:
+ *   Cross River 2 · Akwa Ibom 2 · Rivers 2 · Bayelsa 3 · Delta 7 · Edo 6.
+ * Nothing is added from general knowledge and nothing supplied is removed. All
+ * counts shown in the UI are DERIVED from these records — never hardcoded.
  *
- * `layout` positions are a DESIGNED, explicitly NON-GEOGRAPHIC arrangement
- * (design.md B2) — a stylised fan to the right of the Zone anchor at (22, 50)
- * in the graph's 0..100 coordinate space. They deliberately do NOT correspond to
- * real map positions. Bounds are chosen so each state's chapter dots (which fan
- * out at radius 12 with a +6 x-offset) stay inside the canvas.
+ * `slug` is the state's URL/query key (/chapters?state=bayelsa) and is also how
+ * the Chapters map matches a state record to its real geographic outline. The
+ * map geometry itself lives in components/chapters/nigeria-geography.ts because
+ * geography is presentation, not client-supplied content.
+ *
+ * "Port Harcourt" in the supplied list was a CITY heading; the grouping is
+ * recorded as Rivers State (see SOURCES.md). No "Port Harcourt State" exists.
  *
  * NOT SET, because they were not supplied — do not infer or invent:
- *   `location`  — no city/address given for any chapter.
- *   `execs`     — chapter presidents' names not yet supplied.
- *   `contact`   — no chapter emails or phone numbers given.
- *   `images`    — chapter presidents' portraits to be supplied by the client.
+ *   `location`   — no city/campus given for any chapter.
+ *   `president`  — chapter presidents' names, portraits, socials, contact and
+ *                  tenure are all outstanding. The profile renders its designed
+ *                  empty state until they are supplied.
+ *   `execs`      — no other chapter executives supplied.
+ *   `contact`    — no chapter emails or phone numbers given.
+ *   `images`     — no chapter imagery supplied.
  *
- * zoneLabel is the fixed root of the org network; it is a structural label
- * (not organisational content), naming this zone.
+ * zoneLabel is the fixed root of the hierarchy; it is a structural label (not
+ * organisational content), naming this zone.
  */
 import type { Chapters } from "../types";
 
@@ -26,7 +34,7 @@ export const chapters: Chapters = {
   states: [
     {
       state: "Cross River State",
-      layout: { x: 52, y: 12 },
+      slug: "cross-river",
       chapters: [
         { institution: "Arthur Jarvis University", slug: "arthur-jarvis-university" },
         { institution: "University of Calabar", slug: "university-of-calabar" },
@@ -34,7 +42,7 @@ export const chapters: Chapters = {
     },
     {
       state: "Akwa Ibom State",
-      layout: { x: 62, y: 26 },
+      slug: "akwa-ibom",
       chapters: [
         { institution: "University of Uyo", slug: "university-of-uyo" },
         { institution: "Topfaith University", slug: "topfaith-university" },
@@ -42,7 +50,7 @@ export const chapters: Chapters = {
     },
     {
       state: "Rivers State",
-      layout: { x: 66, y: 42 },
+      slug: "rivers",
       chapters: [
         { institution: "Rivers State University", slug: "rivers-state-university" },
         { institution: "University of Port Harcourt", slug: "university-of-port-harcourt" },
@@ -50,7 +58,7 @@ export const chapters: Chapters = {
     },
     {
       state: "Bayelsa State",
-      layout: { x: 66, y: 58 },
+      slug: "bayelsa",
       chapters: [
         { institution: "Niger Delta University", slug: "niger-delta-university" },
         { institution: "Federal University, Otuoke", slug: "federal-university-otuoke" },
@@ -59,7 +67,7 @@ export const chapters: Chapters = {
     },
     {
       state: "Delta State",
-      layout: { x: 62, y: 74 },
+      slug: "delta",
       chapters: [
         { institution: "Delta State University", slug: "delta-state-university" },
         { institution: "University of Delta", slug: "university-of-delta" },
@@ -72,7 +80,7 @@ export const chapters: Chapters = {
     },
     {
       state: "Edo State",
-      layout: { x: 52, y: 88 },
+      slug: "edo",
       chapters: [
         { institution: "University of Benin", slug: "university-of-benin" },
         { institution: "Igbinedion University", slug: "igbinedion-university" },

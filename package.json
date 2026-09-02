@@ -12,6 +12,8 @@
     "check": "npm run typecheck && npm run lint && npm run lint:styles",
     "check:a11y": "npm run build && node scripts/a11y.mjs",
     "a11y": "node scripts/a11y.mjs",
+    "check:chapters": "node scripts/chapters-check.mjs",
+    "gen:map": "node scripts/gen-nigeria-map.mjs",
     "contrast": "node scripts/contrast.mjs",
     "perf": "echo \"[placeholder] Lighthouse budget wired in Phase 16 (Task 16.2)\""
   },

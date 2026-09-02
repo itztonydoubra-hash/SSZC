@@ -1,280 +1,631 @@
 /*
  * ============================================================================
- * CHAPTERS — "The Network"  (design.md B2)  tasks.md 9.1 / 9.2
+ * CHAPTERS — "The Network", read as geography  (design.md B2)
  * ============================================================================
- * Information visualisation FIRST: the real Zone → State → Chapter containment.
- * Two layers over ONE data source:
- *   - OrgList: the semantic nested list — the source of truth, the mobile
- *     experience, and the accessibility/reduced-motion fallback.
- *   - OrgNetwork: a desktop stylised node graph LAYERED over the list. Node
- *     positions are a DESIGNED (non-geographic) layout. Primary interaction:
- *     select a State to read its subtree (light one branch, mute the rest).
- *     Budget (3): network animation + panel reveal + ambient breath.
- * Token-only. No new pattern. No FLIP. No cursor label on nodes.
+ * Editorial cartography + institutional directory, on the ink surface:
+ *
+ *   .cm-map      one stage holding the Nigeria drawing and the state register.
+ *                Both are laid out in the SAME coordinate space (published by
+ *                the component as --cm-* custom properties), so every call-out
+ *                route lands exactly on the register row it points at, at every
+ *                viewport, with no measuring JavaScript.
+ *   .cm-lower    the selected state's chapters as a ledger, and the selected
+ *                chapter's record in the outer column.
+ *   .cm-fallback the semantic State › Chapter register (prerender / no JS).
+ *
+ * Token-only. No cards, no shadows, no gradients, no radii beyond the shared
+ * focus ring. Crimson appears only as a NON-TEXT mark (the active state marker,
+ * the active ledger tick) — never as small text on ink (decisions.md D4/D5).
+ *
+ * Motion budget (3): the active route draws itself, the ledger line-rises in a
+ * stagger, the chapter record fades. Only stroke-dashoffset / opacity /
+ * transform / fill-opacity animate — never layout.
  * ============================================================================
  */
 
 /* ==========================================================================
- * ORG LIST (9.1) — semantic nested list. On desktop it can be visually hidden
- * behind the graph but stays in the DOM for SR/keyboard; on mobile/reduced/no-JS
- * it IS the experience.
+ * EDITORIAL OPENING
  * ========================================================================== */
 
-.cn-list {
+.cm-standfirst {
+  color: var(--stone);
+  margin-top: var(--space-5);
+}
+
+/* The hierarchy ladder: Nigeria › zone › states › chapters › president. Steps
+ * are divided by hairlines rather than punctuation or arrows. */
+.cm-ladder {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-4);
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  color: var(--stone);
+}
+
+.cm-ladder__step + .cm-ladder__step {
+  border-left: 1px solid var(--hairline-on-ink);
+  padding-left: var(--space-4);
+}
+
+/* ==========================================================================
+ * THE STAGE — drawing + register
+ * ========================================================================== */
+
+.cm-map {
+  position: relative;
+  margin-top: var(--space-7);
+}
+
+/* The canvas takes its height from the drawing's own aspect ratio, so the SVG
+ * fills it exactly and percentage positioning IS the SVG coordinate space. */
+.cm-canvas {
+  position: relative;
+  aspect-ratio: var(--cm-view-w) / var(--cm-view-h);
+}
+
+.cm-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ---- Rank 3: the other states — geographical context only ---------------- */
+.cm-context path {
+  fill: none;
+  stroke: var(--hairline-on-ink);
+  stroke-width: 0.9;
+  vector-effect: non-scaling-stroke;
+}
+
+/* ---- Rank 2: the national outline ---------------------------------------- */
+.cm-outline {
+  fill: none;
+  stroke: var(--stone);
+  stroke-opacity: 0.55;
+  stroke-width: 1.4;
+  vector-effect: non-scaling-stroke;
+}
+
+/* ---- The call-out routes ------------------------------------------------- */
+.cm-route {
+  fill: none;
+  stroke: var(--hairline-on-ink);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  transition: stroke var(--dur-state) var(--ease-out);
+}
+
+/* The active route is DRAWN rather than switched on: pathLength="1" normalises
+ * every route, so one keyframe works for all six. */
+.cm-route[data-active="true"] {
+  stroke: var(--ivory);
+  stroke-dasharray: 1;
+  animation: cm-draw var(--dur-settle) var(--ease-in-out) both;
+}
+
+@keyframes cm-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ---- Rank 1: the six South South states --------------------------------- */
+.cm-state {
+  fill: var(--ivory);
+  fill-opacity: 0.22;
+  stroke: var(--ivory);
+  stroke-opacity: 0.45;
+  stroke-width: 0.9;
+  vector-effect: non-scaling-stroke;
+  cursor: pointer;
+  transition:
+    fill-opacity var(--dur-state) var(--ease-out),
+    stroke-opacity var(--dur-state) var(--ease-out);
+}
+
+/* Selected/hovered: the state becomes the dominant shape on the canvas. */
+.cm-state[data-active="true"] {
+  fill-opacity: 0.92;
+  stroke-opacity: 1;
+  stroke-width: 1.2;
+}
+
+/* The other five recede — quieter, still legible as the South South. */
+.cm-state[data-muted="true"] {
+  fill-opacity: 0.14;
+  stroke-opacity: 0.3;
+}
+
+/* Marker. Crimson is permitted here because it is a NON-TEXT mark and it is not
+ * the only cue (the shape's fill and the register row both change); the ivory
+ * ring keeps the mark's own edge at full contrast (decisions.md D4/D5). */
+.cm-marker {
+  fill: var(--stone);
+  pointer-events: none;
+  transition: fill var(--dur-state) var(--ease-out), r var(--dur-state) var(--ease-out);
+}
+
+.cm-marker[data-active="true"] {
+  fill: var(--crimson);
+  stroke: var(--ivory);
+  stroke-width: 1.1;
+  vector-effect: non-scaling-stroke;
+}
+
+/* ---- The state register (real buttons, laid over the drawing) ------------ */
+.cm-rail {
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* only the buttons take events */
+}
+
+.cm-rail__head {
+  position: absolute;
+  left: calc(100% * var(--cm-label-x) / var(--cm-view-w));
+  top: calc(100% * var(--cm-head-y) / var(--cm-view-h));
+  color: var(--ivory);
+}
+
+.cm-rail__cue {
+  color: var(--stone);
+  margin-top: var(--space-3);
+}
+
+.cm-rail__list {
   list-style: none;
   margin: 0;
   padding: 0;
-  border-top: 1px solid var(--surface-hairline);
 }
 
-.cn-list__state {
-  border-bottom: 1px solid var(--surface-hairline);
+/* One row per state, placed in the drawing's coordinate space so its leader line
+ * arrives at its vertical centre. */
+.cm-rail__row {
+  position: absolute;
+  left: calc(100% * var(--cm-label-x) / var(--cm-view-w));
+  top: calc(
+    100% * (var(--cm-row-top) + var(--cm-row-i) * var(--cm-row-h)) / var(--cm-view-h)
+  );
+  width: calc(100% * (var(--cm-view-w) - var(--cm-label-x)) / var(--cm-view-w));
+  height: calc(100% * var(--cm-row-h) / var(--cm-view-h));
+  border-top: 1px solid var(--hairline-on-ink);
 }
 
-.cn-list__toggle {
+.cm-rail__row:last-child {
+  border-bottom: 1px solid var(--hairline-on-ink);
+}
+
+.cm-rail__btn {
   appearance: none;
   background: none;
   border: 0;
   width: 100%;
+  height: 100%;
+  padding: 0 0 0 var(--space-4);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--space-1);
   text-align: left;
   cursor: pointer;
-  color: var(--surface-text);
+  pointer-events: auto;
+  color: var(--stone);
+  transition: color var(--dur-state) var(--ease-out), transform var(--dur-state) var(--ease-out);
+}
+
+.cm-rail__btn[data-active="true"] {
+  transform: translateX(var(--shift-link));
+}
+
+.cm-rail__name {
+  color: inherit;
+  white-space: nowrap;
+}
+
+.cm-rail__count {
+  color: var(--stone);
+  opacity: 0.75;
+}
+
+/* Selected: the row's name goes to full ivory (19:1) — the accessible cue. */
+.cm-rail__btn[aria-pressed="true"] {
+  color: var(--ivory);
+}
+
+.cm-rail__btn[aria-pressed="true"] .cm-rail__count {
+  color: var(--stone);
+  opacity: 1;
+}
+
+/* ==========================================================================
+ * THE LOWER BAND — chapter ledger + chapter record
+ * ========================================================================== */
+
+.cm-lower {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+  column-gap: var(--grid-gutter);
+  padding-block: var(--space-9);
+}
+
+.cm-ledger-col {
+  grid-column: 1 / span 6;
+}
+
+/* Asymmetric: the record sits in the outer columns, under the register it
+ * belongs to, with a clear column of air between it and the ledger. */
+.cm-profile-col {
+  grid-column: 8 / span 5;
+}
+
+.cm-state__name {
+  color: var(--ivory);
+}
+
+.cm-state__count {
+  color: var(--stone);
+  margin-top: var(--space-3);
+}
+
+.cm-ledger {
+  list-style: none;
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  border-top: 1px solid var(--hairline-on-ink);
+}
+
+.cm-ledger__row {
+  appearance: none;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--hairline-on-ink);
+  width: 100%;
+  display: grid;
+  grid-template-columns: var(--space-8) 1fr;
+  align-items: baseline;
+  column-gap: var(--space-4);
+  padding: var(--space-5) 0;
+  text-align: left;
+  cursor: pointer;
+  color: var(--stone);
+  transition: color var(--dur-state) var(--ease-out), transform var(--dur-state) var(--ease-out);
+}
+
+.cm-ledger__row:hover {
+  transform: translateX(var(--shift-row));
+  color: var(--ivory);
+}
+
+.cm-ledger__idx {
+  color: var(--stone);
+  opacity: 0.75;
+}
+
+.cm-ledger__name {
+  color: inherit;
+}
+
+/* The read chapter: ivory name (the accessible cue) plus a crimson tick in the
+ * index column (a non-text mark, reinforcing rather than carrying the state). */
+.cm-ledger__row[aria-current="true"] {
+  color: var(--ivory);
+}
+
+.cm-ledger__row[aria-current="true"] .cm-ledger__idx {
+  color: var(--ivory);
+  opacity: 1;
+  position: relative;
+}
+
+.cm-ledger__row[aria-current="true"] .cm-ledger__idx::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0.4em;
+  width: var(--space-3);
+  height: 2px;
+  background: var(--crimson);
+}
+
+/* ---- The chapter record -------------------------------------------------- */
+.cm-profile {
+  border-top: 1px solid var(--hairline-on-ink);
+  padding-top: var(--space-5);
+}
+
+.cm-profile__body {
+  animation: cm-fade var(--dur-reveal) var(--ease-out) both;
+}
+
+@keyframes cm-fade {
+  from {
+    opacity: 0;
+    transform: translateY(var(--space-2));
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.cm-profile__label {
+  color: var(--stone);
+  margin-top: var(--space-6);
+}
+
+.cm-profile__label:first-child {
+  margin-top: 0;
+}
+
+.cm-profile__name {
+  color: var(--ivory);
+  margin-top: var(--space-3);
+}
+
+.cm-profile__person {
+  color: var(--ivory);
+  margin-top: var(--space-3);
+}
+
+.cm-profile__meta {
+  color: var(--stone);
+  margin-top: var(--space-2);
+}
+
+/* The portrait frame is always present, so the record is compositionally whole
+ * whether or not the official photograph has been supplied. */
+.cm-profile__frame {
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-5);
+  max-width: 300px;
+}
+
+.cm-profile__frame-empty {
+  aspect-ratio: 4 / 5;
+  background: var(--ink-800);
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-4);
+}
+
+.cm-profile__links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  margin: var(--space-5) 0 0;
+  padding: 0;
+}
+
+.cm-profile__links a {
+  color: var(--ivory);
+  text-decoration: none;
+  border-bottom: 1px solid var(--hairline-on-ink);
+  transition: border-color var(--dur-state) var(--ease-out);
+}
+
+.cm-profile__links a:hover {
+  border-color: var(--ivory);
+}
+
+/* ==========================================================================
+ * CONTENT-AWAITED MARK — "[NEEDS CONTENT]" / "[OFFICIAL IMAGE]".
+ * A deliberate, typeset content state: legible stone on ink (9.24:1), never
+ * styled as an error and never replaced by invented content.
+ * ========================================================================== */
+.cm-mark {
+  color: var(--stone);
+  margin-top: var(--space-3);
+}
+
+/* ==========================================================================
+ * SEMANTIC BASELINE (prerender / no JavaScript)
+ * ========================================================================== */
+
+.cm-fallback {
+  padding-block: var(--space-8);
+  color: var(--ivory);
+}
+
+.cm-fallback__list {
+  list-style: none;
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  border-top: 1px solid var(--hairline-on-ink);
+}
+
+.cm-fallback__state {
+  border-bottom: 1px solid var(--hairline-on-ink);
+}
+
+.cm-fallback__toggle {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: var(--space-4);
   padding: var(--space-5) 0;
-  transition: transform var(--dur-state) var(--ease-out);
+  cursor: pointer;
 }
 
-.cn-list__toggle:hover {
-  transform: translateX(var(--shift-row));
+.cm-fallback__count {
+  color: var(--stone);
 }
 
-.cn-list__count {
-  color: var(--surface-text-muted);
-}
-
-.cn-list__chapters {
+.cm-fallback__chapters {
   list-style: none;
   margin: 0;
   padding: 0 0 var(--space-5);
 }
 
-.cn-list__chapter {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: baseline;
-  gap: var(--space-4);
-  padding: var(--space-3) 0;
-  border-top: 1px solid var(--surface-hairline);
-}
-
-.cn-tbd {
-  color: var(--surface-text-muted);
-  padding-block: var(--space-4);
+.cm-fallback__chapter {
+  border-top: 1px solid var(--hairline-on-ink);
+  padding-block: var(--space-3);
 }
 
 /* ==========================================================================
- * NETWORK (9.2) — desktop stylised node graph. Layered over the list; the list
- * is visually hidden (still in DOM) while the graph is shown.
+ * RECOMPOSITION — tablet and mobile (design.md A10: recompose, never shrink).
+ * The register leaves the drawing and becomes a horizontal rail beneath it; the
+ * canvas crops to the map region alone, so the map stays large and readable at
+ * 375px with no pinch-zoom and no drag-to-pan. Pure CSS: the crop is expressed
+ * as an over-wide SVG inside an overflow-hidden canvas, so nothing has to be
+ * measured and nothing changes on hydration.
  * ========================================================================== */
+@media (width <= 1023px) {
+  .cm-canvas {
+    aspect-ratio: var(--cm-crop-w) / var(--cm-crop-h);
+    overflow: hidden;
+  }
 
-.cn-network {
-  position: relative;
-  min-height: 100svh;
-  display: grid;
-  grid-template-columns: 2fr 1fr; /* graph | masthead+panel */
-  gap: var(--grid-gutter);
+  .cm-svg {
+    inset: auto;
+    left: 0;
+    top: calc(-100% * var(--cm-crop-y) / var(--cm-crop-h));
+    width: calc(100% * var(--cm-view-w) / var(--cm-crop-w));
+    height: calc(100% * var(--cm-view-h) / var(--cm-crop-h));
+  }
+
+  /* The routes point at rows that are no longer there. */
+  .cm-routes {
+    display: none;
+  }
+
+  .cm-rail {
+    position: static;
+    pointer-events: auto;
+  }
+
+  .cm-rail__head {
+    position: static;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+  }
+
+  .cm-rail__cue {
+    margin-top: 0;
+  }
+
+  /* A drag rail, consistent with the Leadership directory's mobile selector. */
+  .cm-rail__list {
+    display: flex;
+    gap: var(--space-6);
+    overflow-x: auto;
+    margin-top: var(--space-4);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--hairline-on-ink);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .cm-rail__row {
+    position: relative;
+    width: auto;
+    height: auto;
+    border: 0;
+    flex: 0 0 auto;
+  }
+
+  /* In the strip the leader line is gone, so the selection needs a second cue
+   * beside the ivory name: a crimson tick on the rail's hairline. A non-text
+   * mark, reinforcing the colour change rather than replacing it. */
+  .cm-rail__btn[aria-pressed="true"]::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: calc(-1 * var(--space-3));
+    left: 0;
+    height: 2px;
+    background: var(--crimson);
+  }
+
+  .cm-rail__row:last-child {
+    border-bottom: 0;
+  }
+
+  .cm-rail__btn {
+    padding: var(--space-2) 0;
+  }
+
+  .cm-lower {
+    display: block;
+    padding-block: var(--space-8);
+  }
+
+  .cm-profile-col {
+    margin-top: var(--space-8);
+  }
 }
 
-/* On desktop the semantic list is present but visually hidden (screen-reader +
- * keyboard still reach it); the graph is the visual layer. Under 1024px this is
- * reversed (see the responsive block). */
-.cn-list-sr {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
+@media (width <= 767px) {
+  /* The ladder becomes what it describes: a vertical descent, divided by
+   * hairlines. (Wrapped inline steps would strand a divider at a line start.) */
+  .cm-ladder {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    border-top: 1px solid var(--hairline-on-ink);
+  }
+
+  .cm-ladder .cm-ladder__step {
+    padding: var(--space-3) 0;
+    border-left: 0;
+    border-bottom: 1px solid var(--hairline-on-ink);
+  }
+
+  .cm-rail__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
+  .cm-ledger__row {
+    grid-template-columns: var(--space-7) 1fr;
+  }
+
+  /* A portrait-shaped frame at full mobile width would be a 400px void while the
+   * photograph is outstanding; keep it a portrait, not a panel. */
+  .cm-profile__frame {
+    max-width: 220px;
+  }
 }
 
-.cn-canvas {
-  position: relative;
-  overflow: hidden;
-}
-
-.cn-svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-  /* ambient breath: translate toward pointer, tiny; JS sets --cn-bx/--cn-by */
-  transform: translate3d(var(--cn-bx, 0), var(--cn-by, 0), 0);
-  transition: transform 600ms var(--ease-in-out);
-}
-
+/* ==========================================================================
+ * REDUCED MOTION (design.md A6.2 / A8)
+ * No route drawing, no fade-in, no shifts — state and chapter changes happen
+ * immediately and every piece of information stays visible and understandable.
+ * ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
-  .cn-svg {
+  .cm-route[data-active="true"] {
+    animation: none;
+    stroke-dasharray: none;
+  }
+
+  .cm-profile__body {
+    animation: none;
+  }
+
+  .cm-rail__btn,
+  .cm-rail__btn[data-active="true"],
+  .cm-ledger__row,
+  .cm-ledger__row:hover {
     transform: none;
     transition: none;
   }
-}
 
-/* Edges: thin hairlines at rest; a highlighted subtree brightens to ivory. */
-.cn-edge {
-  stroke: var(--hairline-on-ink);
-  stroke-width: 1;
-  transition: stroke var(--dur-state) var(--ease-out), opacity var(--dur-state) var(--ease-out);
-}
-
-.cn-edge[data-active="true"] {
-  stroke: var(--ivory);
-}
-
-.cn-edge[data-muted="true"] {
-  opacity: 0.25;
-}
-
-/* State dot (SVG, presentational). Selected = crimson (NON-TEXT mark, allowed
- * on ink); muted branches dim. */
-.cn-state-dot {
-  fill: var(--stone);
-  transition: fill var(--dur-state) var(--ease-out), r var(--dur-state) var(--ease-out);
-}
-
-/* Crimson is allowed on ink for NON-TEXT marks (D4/D5), but crimson-on-ink is
- * 2.60:1 — under the 3:1 floor WCAG 1.4.11 sets for a graphical object that
- * carries meaning. The selected dot is the canvas's primary selection cue, so it
- * gets an ivory ring: the mark's own edge is then ivory-on-ink (19:1) and the
- * crimson reads as fill, not as the thing you must perceive. */
-.cn-state-dot[data-selected="true"] {
-  fill: var(--crimson);
-  stroke: var(--ivory);
-  stroke-width: 0.5;
-}
-
-.cn-state-dot[data-muted="true"] {
-  opacity: 0.3;
-}
-
-/* Chapter dot (SVG): appears on subtree highlight, ivory. */
-.cn-chapter-dot {
-  fill: var(--ivory);
-}
-
-/* ---- Accessible interaction overlay (HTML over the SVG) ------------------- */
-.cn-overlay {
-  position: absolute;
-  inset: 0;
-  pointer-events: none; /* only the labels/buttons capture events */
-}
-
-/* Zone label — largest, serif. Sits ENTIRELY to the LEFT of the hub dot: every
- * state edge leaves the hub rightward, so the region left of the hub is the only
- * place a wide serif label is guaranteed never to be crossed by an edge. */
-.cn-overlay__zone {
-  position: absolute;
-  transform: translate(calc(-100% - var(--cn-sq, 0px) * var(--cn-hub-gap, 5) / 100), -50%);
-  color: var(--ivory);
-  white-space: nowrap;
-  pointer-events: none;
-}
-
-/* Empty state: the lone Zone anchor's label sits clearly BELOW the dot (not
- * overlapping it) so the single node reads as intentional. */
-.cn-overlay__zone[data-below="true"] {
-  transform: translate(-50%, var(--space-6));
-}
-
-/* State labels — real buttons; ordinary pointer (NO custom cursor label).
- *
- * Set to the RIGHT of the node, BEYOND the chapter fan (--cn-lbl-gap designed
- * units, which the component keeps greater than the fan's reach). Three regions
- * were tried and measured: beside the node fails (text began 20px from centre
- * while the selected dot's radius IS 20px); the near-right wedge fails (the fan's
- * EDGES, not just its dots, sweep it); and the whole LEFT side fails (it is
- * crossed by the other five states' hub edges). Only past the fan is clear. */
-.cn-overlay__state {
-  position: absolute;
-  transform: translate(calc(var(--cn-sq, 0px) * var(--cn-lbl-gap, 14) / 100), -50%);
-  appearance: none;
-  background: none;
-  border: 0;
-  padding: var(--space-2);
-  color: var(--ivory);
-  white-space: nowrap;
-  cursor: pointer;
-  pointer-events: auto;
-  transition: color var(--dur-state) var(--ease-out), opacity var(--dur-state) var(--ease-out);
-}
-
-.cn-overlay__state[data-muted="true"] {
-  color: var(--stone);
-  opacity: 0.5;
-}
-
-.cn-overlay__state[aria-pressed="true"] {
-  color: var(--ivory);
-}
-
-/* Masthead + slide-in chapter panel (right column). */
-.cn-side {
-  display: flex;
-  flex-direction: column;
-  padding: calc(var(--space-9) + var(--space-6)) var(--grid-margin) var(--space-9) 0;
-}
-
-.cn-statement {
-  color: var(--ivory);
-  margin-top: var(--space-4);
-}
-
-.cn-side__count {
-  color: var(--stone);
-  margin-top: var(--space-4);
-}
-
-.cn-panel {
-  margin-top: var(--space-7);
-  border-top: 1px solid var(--hairline-on-ink);
-}
-
-/* panel reveal (the one non-graph motion in the budget besides highlight) */
-.cn-panel__row {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: baseline;
-  gap: var(--space-4);
-  padding: var(--space-4) 0;
-  border-bottom: 1px solid var(--hairline-on-ink);
-  color: var(--ivory);
-}
-
-.cn-panel__row-meta {
-  color: var(--stone);
-}
-
-/* ==========================================================================
- * RESPONSIVE — below the desktop breakpoint the graph is REPLACED by the list.
- * ========================================================================== */
-@media (width <= 1023px) {
-  .cn-network {
-    display: block;
-    min-height: 0;
-  }
-
-  .cn-canvas,
-  .cn-side {
-    display: none; /* graph + its side masthead are a desktop enhancement only */
-  }
-
-  .cn-list-sr {
-    position: static;
-    width: auto;
-    height: auto;
-    overflow: visible;
-    clip: auto;
-    white-space: normal;
+  .cm-state,
+  .cm-marker,
+  .cm-route {
+    transition: none;
   }
 }

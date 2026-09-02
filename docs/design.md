@@ -227,6 +227,18 @@ Nothing is centred; the composition is intentionally weighted to the lower-left 
 
 ## B2. Chapters — an org chart drawn as a network
 
+> **SUPERSEDED IN PART — see decisions.md D6.** The section's *argument* below still
+> stands (information visualisation first; every mark a real containment
+> relationship; nothing drawn that is not supplied; ink surface; ledger rows;
+> approved statement *many institutions, one network*; `03 — CHAPTERS`; the
+> visualisation is an enhancement over a real list). What changed: the
+> visualisation is now a **geographic vector map of Nigeria** with the six South
+> South states as the interactive focus and a call-out route from each state to
+> its register row — not a stylised node graph. Consequently the designed,
+> non-geographic `layout:{x,y}` node positions and the "ease the selected
+> cluster to centre" behaviour described below no longer exist, and the chapter
+> record now includes the chapter's LAWSAN President.
+
 **Argument of the section:** this is **information visualisation first**. It must show the *actual organisational relationship*: one **Zone** contains several **States**; each State recognises specific **Chapters** (university law faculties). It is not a decorative constellation — every node and edge means a real containment relationship, and if the data isn't supplied the node isn't drawn.
 
 **Primary interaction:** **select a State to read its subtree** (light one branch, mute the rest, list its chapters). **Budget (3):** network animation (primary: highlight + ease-to-centre) + the panel reveal + the one permitted ambient breath (decorative). No shared-element/FLIP on chapter selection (removed below); no custom-cursor label on nodes (they are ordinary buttons). The visualisation is a way to *read the org chart*, not a graphics demo.

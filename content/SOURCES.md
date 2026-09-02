@@ -31,9 +31,18 @@ None adds or removes an institution; all 22 supplied chapters are present.
    "University of Calabar", "Michael And Cecilia Ibru University" → "Michael and
    Cecilia Ibru University", etc. This is the institutions' own standard form.
 
-`location`, `execs`, `contact` and `images` are deliberately unset for every
-chapter — none was supplied. Chapter presidents' names and portraits are
-outstanding (client said they will supply the portraits).
+`location`, `president`, `execs`, `contact` and `images` are deliberately unset
+for every chapter — none was supplied. Chapter presidents' names and portraits
+are outstanding (client said they will supply the portraits); until then the
+chapter record on `/chapters` shows `CHAPTER PRESIDENT / [NEEDS CONTENT]` and an
+`[OFFICIAL IMAGE]` portrait frame. See decisions.md **D6**.
+
+4. **Chapter total: 22, not 25.** A later brief for the Chapters rebuild stated
+   "25 chapters", but its own per-state lists and per-state totals enumerate the
+   same **22** institutions recorded here (2 + 2 + 2 + 3 + 7 + 6 = 22). The
+   enumerated institutions were kept; three institutions were **not** invented to
+   reach 25. Every count in the UI is derived from these records. **Confirm the
+   intended total with the client.**
 
 Note: the interview names his *institution* (Arthur Jarvis University, Calabar)
 and prior *state-level* roles. These are personal/state facts, not the zone's
