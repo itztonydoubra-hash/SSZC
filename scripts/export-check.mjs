@@ -22,12 +22,16 @@ import { chromium } from "playwright";
 
 const ROOT = "/projects/sandbox/SSZC";
 const OUT = `${ROOT}/out`;
-const BASE_PATH = "/SSZC";
+/* The sub-path the export is served from. "/SSZC" for the GitHub Pages target;
+ * set EXPORT_BASE_PATH="" to verify a root-served build (the "static" target). */
+const BASE_PATH = process.env.EXPORT_BASE_PATH ?? "/SSZC";
 const PORT = 3216;
 
 if (!fs.existsSync(`${OUT}/index.html`)) {
   console.error(
-    "No static export found at ./out — run: DEPLOY_TARGET=gh-pages npm run build",
+    "No static export found at ./out — run one of:\n" +
+      "  DEPLOY_TARGET=gh-pages npm run build && npm run check:export\n" +
+      '  DEPLOY_TARGET=static npm run build && EXPORT_BASE_PATH="" npm run check:export',
   );
   process.exit(1);
 }
@@ -53,7 +57,7 @@ const TYPES = {
 /* Serve ./out under the deployment sub-path, like GitHub Pages does. */
 const server = http.createServer((req, res) => {
   const url = decodeURIComponent(req.url.split("?")[0]);
-  if (!url.startsWith(`${BASE_PATH}/`) && url !== BASE_PATH) {
+  if (BASE_PATH && !url.startsWith(`${BASE_PATH}/`) && url !== BASE_PATH) {
     res.writeHead(404).end("outside basePath");
     return;
   }
@@ -73,6 +77,7 @@ const server = http.createServer((req, res) => {
 });
 await new Promise((resolve) => server.listen(PORT, resolve));
 const base = `http://127.0.0.1:${PORT}${BASE_PATH}`;
+console.log(`serving ./out at ${BASE_PATH || "/"} (as the host would)\n`);
 
 let failures = 0;
 const check = (name, ok, detail) => {
@@ -159,9 +164,15 @@ for (const [label, url] of [
 ]) {
   const { page, problems, images } = await inspect(url);
   const broken = images.filter((i) => i.w === 0);
-  const unprefixed = images.filter((i) => (i.src ?? "").startsWith("/") && !(i.src ?? "").startsWith(`${BASE_PATH}/`));
+  const unprefixed = BASE_PATH
+    ? images.filter((i) => (i.src ?? "").startsWith("/") && !(i.src ?? "").startsWith(`${BASE_PATH}/`))
+    : [];
   check(`${label}: all ${images.length} image(s) decode`, broken.length === 0, broken.map((b) => b.src).join(", "));
-  check(`${label}: no image src misses ${BASE_PATH}`, unprefixed.length === 0, unprefixed.map((b) => b.src).join(", "));
+  check(
+    `${label}: no image src misses the base path${BASE_PATH ? ` (${BASE_PATH})` : " (root)"}`,
+    unprefixed.length === 0,
+    unprefixed.map((b) => b.src).join(", "),
+  );
   check(`${label}: no failed requests / console errors`, problems.length === 0, problems.slice(0, 2).join(" | "));
   await page.close();
 }

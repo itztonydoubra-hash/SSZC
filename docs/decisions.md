@@ -239,3 +239,46 @@ remain unset because nothing was supplied, and the remaining 17 chapters have no
 `president` at all and keep the designed `[NEEDS CONTENT]` / `[OFFICIAL IMAGE]`
 state. Preparation (4:5 editorial crop, ≤1000×1250, EXIF stripped) and the exact
 crop boxes are recorded in `public/chapters/README.md`.
+
+## D8 — A root-served export target, because Pages cannot serve a private repo
+
+**Finding:** GitHub Pages is unavailable for this repository. The repo is
+**private** on a **free personal plan**, and Pages requires the repo to be public
+(or a paid upgrade). The settings page states it plainly: *"Upgrade or make this
+repository public to enable Pages."* No workflow or configuration change can get
+around it — which is why all nine deploy runs failed at `actions/deploy-pages`.
+
+**Consequence:** publishing has to come either from making the repo public or from
+a host that serves a private repo for free (Netlify, Vercel, Cloudflare Pages).
+Those all serve from a domain ROOT, whereas the existing export was hard-wired to
+the `/SSZC` project sub-path GitHub Pages needs.
+
+**Change:** `DEPLOY_TARGET` now selects one of three deployment shapes — no
+feature or design differs between them:
+
+| `DEPLOY_TARGET` | Output | Served at | For |
+|---|---|---|---|
+| *(unset)* | Next.js app | – | `next dev` / `next start`; image optimisation on |
+| `static` | static export | domain root | Netlify · Vercel · Cloudflare Pages · any file host |
+| `gh-pages` | static export | `/SSZC` sub-path | GitHub Pages project site |
+
+**Latent bug this surfaced:** `lib/staticParams.ts` gated its empty-content
+sentinel on `DEPLOY_TARGET === "gh-pages"`. The sentinel exists because
+`output: export` rejects a dynamic route whose `generateStaticParams()` returns an
+empty array — a constraint of `output: export` itself, not of one host. So the
+`static` build failed immediately with *"Page /news/[slug] is missing
+generateStaticParams()"*. The gate is now the set of export targets, exposed as
+`isStaticExport()`, and both targets build.
+
+**Verification:** `npm run check:export` takes `EXPORT_BASE_PATH` so either shape
+can be proven:
+
+    DEPLOY_TARGET=gh-pages npm run build && npm run check:export
+    DEPLOY_TARGET=static   npm run build && EXPORT_BASE_PATH="" npm run check:export
+
+Both pass: every image decodes and nothing 404s at either base path.
+
+**If the repo is made public instead,** note that `content/SOURCES.md` and
+`docs/` become public with it. SOURCES.md is an internal verification log that
+names individuals whose roles are recorded as *unconfirmed*; move or redact it
+before making the repository public.
