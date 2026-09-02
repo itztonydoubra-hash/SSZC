@@ -6,7 +6,6 @@
  * content is unavailable, re-linking so the argument still reads.
  */
 import type { Metadata } from "next";
-import Image from "next/image";
 import {
   getAbout, getChapters, getImpact, getLeadership, getNews, getProjects, getPublications,
 } from "@/content";
@@ -46,6 +45,8 @@ export default function Home() {
   const realExec =
     firstExec && !isPlaceholder(firstExec.name) ? firstExec : undefined;
   const zoneStatementReady = !isPlaceholder(about.statement);
+  // Only a photograph with a real src counts — [OFFICIAL IMAGE] stubs have src: "".
+  const zoneImage = about.images.find((img) => img.src);
 
   return (
     <>
@@ -65,13 +66,36 @@ export default function Home() {
         <HeroCue />
       </section>
 
-      {/* 2. definition of the Zone (→ from face to meaning) */}
+      {/* 2. definition of the Zone (→ from face to meaning). When a real
+           photograph exists it carries the beat as a contained plate — sized to
+           the image's native width so it is never upscaled (see about.images). */}
       <SurfaceSection surface="ivory" index="01" title="THE ZONE">
         <div className="hp-move">
-          <DisplayHeading as="h2" size="l" className="measure">
-            {zoneStatementReady ? about.statement : "The Law Students' Association of Nigeria, South South Zone."}
-          </DisplayHeading>
-          <TransitionLink href="/about" label={{ num: "01", title: "THE ZONE" }} className="hp-move__link type-label">Read more <span aria-hidden>→</span></TransitionLink>
+          {zoneImage ? (
+            <Grid rowGap="var(--space-6)">
+              <GridItem span={7} spanMd={8} spanSm={4}>
+                <MaskImage
+                  src={zoneImage.src}
+                  alt={zoneImage.alt}
+                  ratio={zoneImage.ratio}
+                  sizes="(max-width: 1023px) 100vw, 50vw"
+                />
+              </GridItem>
+              <GridItem span={5} start={8} spanMd={8} startMd={1} spanSm={4} style={{ alignSelf: "end" }}>
+                <DisplayHeading as="h2" size="l">
+                  {zoneStatementReady ? about.statement : "The Law Students' Association of Nigeria, South South Zone."}
+                </DisplayHeading>
+                <TransitionLink href="/about" label={{ num: "01", title: "THE ZONE" }} className="hp-move__link type-label">Read more <span aria-hidden>→</span></TransitionLink>
+              </GridItem>
+            </Grid>
+          ) : (
+            <>
+              <DisplayHeading as="h2" size="l" className="measure">
+                {zoneStatementReady ? about.statement : "The Law Students' Association of Nigeria, South South Zone."}
+              </DisplayHeading>
+              <TransitionLink href="/about" label={{ num: "01", title: "THE ZONE" }} className="hp-move__link type-label">Read more <span aria-hidden>→</span></TransitionLink>
+            </>
+          )}
         </div>
       </SurfaceSection>
 
