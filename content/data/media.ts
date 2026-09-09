@@ -32,4 +32,15 @@ export const media: MediaAlbum[] = [
       { src: "/media/general/moot-competition-11.jpeg.jpeg", alt: "Scene from the Battle of the South South Moot Competition", ratio: "4 / 3" },
     ],
   },
+  {
+    title: "Zonal Tour to University of Port Harcourt",
+    description: "A Zonal Tour To University Of Port Harcourt under the leadership of H.E Jewel Inno-Anamaeje.",
+    items: [
+      { src: "/media/general/uniport-tour-01.jpeg.jpeg", alt: "Zonal tour to University of Port Harcourt under the leadership of H.E Jewel Inno-Anamaeje", ratio: "4 / 3" },
+      { src: "/media/general/uniport-tour-02.jpeg.jpeg", alt: "Zonal tour to University of Port Harcourt under the leadership of H.E Jewel Inno-Anamaeje", ratio: "4 / 3" },
+      { src: "/media/general/uniport-tour-03.jpeg.jpeg", alt: "Zonal tour to University of Port Harcourt under the leadership of H.E Jewel Inno-Anamaeje", ratio: "4 / 3" },
+      { src: "/media/general/uniport-tour-04.jpeg.jpeg", alt: "Zonal tour to University of Port Harcourt under the leadership of H.E Jewel Inno-Anamaeje", ratio: "4 / 3" },
+      { src: "/media/general/uniport-tour-05.jpeg.jpeg", alt: "Zonal tour to University of Port Harcourt under the leadership of H.E Jewel Inno-Anamaeje", ratio: "4 / 3" },
+    ],
+  },
 ];
