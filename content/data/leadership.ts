@@ -49,6 +49,16 @@ export const leadership: Leadership = {
         ratio: "4 / 5",
       },
     },
+    {
+      index: "04",
+      role: "South South Public Relations Officer",
+      name: "Goodluck Osazemwinde",
+      portrait: {
+        src: "/leadership/goodluck-osazemwinde.jpeg",
+        alt: "Goodluck Osazemwinde, South South Public Relations Officer",
+        ratio: "4 / 5",
+      },
+    },
   ],
   // Official states + per-state/campus leadership not yet supplied — empty.
   states: [],
