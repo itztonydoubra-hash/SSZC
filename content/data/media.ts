@@ -64,4 +64,14 @@ export const media: MediaAlbum[] = [
       { src: "/media/general/courtesy-visit-dean-of-student-affairs-unical.jpeg.jpeg", alt: "Courtesy visit to Professor Offiong Eyo, Dean of Student Affairs, University of Calabar", ratio: "4 / 3" },
     ],
   },
+  {
+    title: "Courtesy Visit to the Head of Civil Service Commission, Cross River State",
+    description: "A Courtesy Visit To Orok Bassey Okon, Esq. Head Of Civil Service Commission, Cross River State.",
+    items: [
+      { src: "/media/general/courtesy-visit-civil-service-commission-01.jpeg.jpeg", alt: "Courtesy visit to Orok Bassey Okon, Esq., Head of Civil Service Commission, Cross River State", ratio: "4 / 3" },
+      { src: "/media/general/courtesy-visit-civil-service-commission-02.jpeg.jpeg", alt: "Courtesy visit to Orok Bassey Okon, Esq., Head of Civil Service Commission, Cross River State", ratio: "4 / 3" },
+      { src: "/media/general/courtesy-visit-civil-service-commission-03.jpeg.jpeg", alt: "Courtesy visit to Orok Bassey Okon, Esq., Head of Civil Service Commission, Cross River State", ratio: "4 / 3" },
+      { src: "/media/general/courtesy-visit-civil-service-commission-04.jpeg.jpeg", alt: "Courtesy visit to Orok Bassey Okon, Esq., Head of Civil Service Commission, Cross River State", ratio: "4 / 3" },
+    ],
+  },
 ];
