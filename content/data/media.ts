@@ -1,113 +1,35 @@
 /*
- * Media Gallery content (design.md C8) — CLIENT-SUPPLIED production content
- * (decisions.md D2), NOT placeholder imagery.
+ * Media Gallery content (design.md C8) — CLIENT-SUPPLIED production content.
  *
- * HOW TO ADD A PHOTOGRAPH (see content/README.md → "Adding photographs"):
- *   1. Put the image file in the right public/media/<folder>/ with a
- *      descriptive filename (folders: leadership, events, outreach, convention,
- *      general). e.g. public/media/convention/2026-convention-opening.jpg
- *   2. Add ONE MediaItem to the array below.
- *   3. npm run check && next build → commit → push (Vercel auto-deploys).
+ * HOW TO ADD A NEW EVENT ALBUM:
+ *   1. Upload photos to public/media/general/ (or events/, outreach/, etc.)
+ *   2. Add a new MediaAlbum block to the array below — give it a title and list
+ *      the photos inside `items`. That is all; no component changes needed.
+ *   3. npm run check && next build → commit → push → Vercel auto-deploys.
  *
- * Minimum required per item: `src` and `alt`. Everything else is optional.
- * `type` defaults to "image"; `ratio` defaults to the masonry ratio (set it to
- * the photo's true native ratio, e.g. "3 / 2", for the most faithful crop).
+ * Each album renders as a titled section with a compact horizontal photo strip,
+ * so the page never feels like an endless wall no matter how many events are added.
  *
- * NEVER fabricate metadata. Use only what was actually supplied/verified:
- * caption, event, year, category, and a factual `alt`. If a fact is unknown,
- * use "[NEEDS CONTENT]" for `alt` (never shown as visitor copy — it is only an
- * accessibility fallback) or simply omit the optional field.
- *
- * TEMPLATE (copy, uncomment, fill in real values — do NOT ship a fake image):
- *
- *   {
- *     src: "/media/convention/2026-convention-opening.jpg",
- *     alt: "Opening session of the 2026 South South Zonal Convention",
- *     category: "Convention",
- *     caption: "[NEEDS CONTENT]",   // omit or fill from the official source
- *     event: "South South Zonal Convention 2026",
- *     year: "2026",
- *     ratio: "3 / 2",
- *   },
+ * NEVER fabricate alt text, captions, or titles. Use only what was supplied.
  */
-import type { MediaItem } from "../types";
+import type { MediaAlbum } from "../types";
 
-export const media: MediaItem[] = [
+export const media: MediaAlbum[] = [
   {
-    src: "/media/general/moot-competition-01.jpeg.jpeg",
-    alt: "Pictorial excerpt from the Battle of the South South Moot Competition",
-    caption: "Pictorial Excerpts of the Battle of the South South Moot Competition",
-    category: "Competition",
-    ratio: "4 / 3",
-  },
-  {
-    src: "/media/general/moot-competition-02.jpeg.jpeg",
-    alt: "Pictorial excerpt from the Battle of the South South Moot Competition",
-    caption: "Pictorial Excerpts of the Battle of the South South Moot Competition",
-    category: "Competition",
-    ratio: "4 / 5",
-  },
-  {
-    src: "/media/general/moot-competition-03.jpeg.jpeg",
-    alt: "Pictorial excerpt from the Battle of the South South Moot Competition",
-    caption: "Pictorial Excerpts of the Battle of the South South Moot Competition",
-    category: "Competition",
-    ratio: "3 / 2",
-  },
-  {
-    src: "/media/general/moot-competition-04.jpeg.jpeg",
-    alt: "Pictorial excerpt from the Battle of the South South Moot Competition",
-    caption: "Pictorial Excerpts of the Battle of the South South Moot Competition",
-    category: "Competition",
-    ratio: "4 / 5",
-  },
-  {
-    src: "/media/general/moot-competition-05.jpeg.jpeg",
-    alt: "Pictorial excerpt from the Battle of the South South Moot Competition",
-    caption: "Pictorial Excerpts of the Battle of the South South Moot Competition",
-    category: "Competition",
-    ratio: "4 / 3",
-  },
-  {
-    src: "/media/general/moot-competition-06.jpeg.jpeg",
-    alt: "Pictorial excerpt from the Battle of the South South Moot Competition",
-    caption: "Pictorial Excerpts of the Battle of the South South Moot Competition",
-    category: "Competition",
-    ratio: "3 / 2",
-  },
-  {
-    src: "/media/general/moot-competition-07.jpeg.jpeg",
-    alt: "Pictorial excerpt from the Battle of the South South Moot Competition",
-    caption: "Pictorial Excerpts of the Battle of the South South Moot Competition",
-    category: "Competition",
-    ratio: "4 / 5",
-  },
-  {
-    src: "/media/general/moot-competition-08.jpeg.jpeg",
-    alt: "Pictorial excerpt from the Battle of the South South Moot Competition",
-    caption: "Pictorial Excerpts of the Battle of the South South Moot Competition",
-    category: "Competition",
-    ratio: "4 / 3",
-  },
-  {
-    src: "/media/general/moot-competition-09.jpeg.jpeg",
-    alt: "Pictorial excerpt from the Battle of the South South Moot Competition",
-    caption: "Pictorial Excerpts of the Battle of the South South Moot Competition",
-    category: "Competition",
-    ratio: "3 / 2",
-  },
-  {
-    src: "/media/general/moot-competition-10.jpeg.jpeg",
-    alt: "Pictorial excerpt from the Battle of the South South Moot Competition",
-    caption: "Pictorial Excerpts of the Battle of the South South Moot Competition",
-    category: "Competition",
-    ratio: "4 / 5",
-  },
-  {
-    src: "/media/general/moot-competition-11.jpeg.jpeg",
-    alt: "Pictorial excerpt from the Battle of the South South Moot Competition",
-    caption: "Pictorial Excerpts of the Battle of the South South Moot Competition",
-    category: "Competition",
-    ratio: "4 / 3",
+    title: "Battle of the South South Moot Competition",
+    description: "Pictorial Excerpts of the Battle of the South South Moot Competition",
+    items: [
+      { src: "/media/general/moot-competition-01.jpeg.jpeg", alt: "Scene from the Battle of the South South Moot Competition", ratio: "4 / 3" },
+      { src: "/media/general/moot-competition-02.jpeg.jpeg", alt: "Scene from the Battle of the South South Moot Competition", ratio: "4 / 3" },
+      { src: "/media/general/moot-competition-03.jpeg.jpeg", alt: "Scene from the Battle of the South South Moot Competition", ratio: "4 / 3" },
+      { src: "/media/general/moot-competition-04.jpeg.jpeg", alt: "Scene from the Battle of the South South Moot Competition", ratio: "4 / 3" },
+      { src: "/media/general/moot-competition-05.jpeg.jpeg", alt: "Scene from the Battle of the South South Moot Competition", ratio: "4 / 3" },
+      { src: "/media/general/moot-competition-06.jpeg.jpeg", alt: "Scene from the Battle of the South South Moot Competition", ratio: "4 / 3" },
+      { src: "/media/general/moot-competition-07.jpeg.jpeg", alt: "Scene from the Battle of the South South Moot Competition", ratio: "4 / 3" },
+      { src: "/media/general/moot-competition-08.jpeg.jpeg", alt: "Scene from the Battle of the South South Moot Competition", ratio: "4 / 3" },
+      { src: "/media/general/moot-competition-09.jpeg.jpeg", alt: "Scene from the Battle of the South South Moot Competition", ratio: "4 / 3" },
+      { src: "/media/general/moot-competition-10.jpeg.jpeg", alt: "Scene from the Battle of the South South Moot Competition", ratio: "4 / 3" },
+      { src: "/media/general/moot-competition-11.jpeg.jpeg", alt: "Scene from the Battle of the South South Moot Competition", ratio: "4 / 3" },
+    ],
   },
 ];

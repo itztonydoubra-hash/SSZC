@@ -322,6 +322,22 @@ export type NewsItem = {
 
 /* Media (design.md C8 / line 427) — CLIENT-SUPPLIED production content ------ */
 
+/**
+ * A named album groups photos from one event or occasion. The gallery renders
+ * each album as a titled section with a horizontal scroll strip — so adding a
+ * new event never makes the page feel like a growing wall of images.
+ */
+export type MediaAlbum = {
+  /** display title, e.g. "Battle of the South South Moot Competition" */
+  title: string;
+  /** optional short description or attribution line */
+  description?: string;
+  /** optional year */
+  year?: string;
+  /** the photos in this album */
+  items: MediaItem[];
+};
+
 export type MediaItem = {
   /** path under /public/media, e.g. "/media/convention/2026-convention-opening.jpg" */
   src: string;

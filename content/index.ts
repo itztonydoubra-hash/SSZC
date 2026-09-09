@@ -22,6 +22,7 @@ import type {
   Impact,
   LawsanEvent,
   Leadership,
+  MediaAlbum,
   MediaItem,
   NewsItem,
   Opportunity,
@@ -104,6 +105,11 @@ export function getNewsItem(slug: string): NewsItem | undefined {
 
 /** CLIENT-SUPPLIED MEDIA (decisions.md D2). Empty until file intake. */
 export function getMedia(): MediaItem[] {
+  return media.flatMap((album) => album.items);
+}
+
+/** Returns media grouped by album for the gallery's event-section layout. */
+export function getMediaAlbums(): MediaAlbum[] {
   return media;
 }
 

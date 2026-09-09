@@ -78,10 +78,88 @@
   margin-top: var(--space-3);
 }
 
-/* ---- Media: importance-sized masonry -------------------------------------- */
+/* ---- Media: album-grouped horizontal strip layout ------------------------- */
 .pg-media {
-  columns: 3;
-  column-gap: var(--grid-gutter);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-9);
+}
+
+.pg-album__header {
+  margin-bottom: var(--space-5);
+  border-bottom: 1px solid var(--surface-hairline);
+  padding-bottom: var(--space-4);
+}
+
+.pg-album__title {
+  color: var(--surface-text);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 var(--space-2);
+}
+
+.pg-album__desc {
+  margin: 0;
+}
+
+/* Horizontal scroll strip — thumbnails never wrap */
+.pg-album__strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 220px;
+  gap: var(--space-3);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: var(--space-3);
+}
+
+.pg-album__strip::-webkit-scrollbar {
+  height: 3px;
+}
+
+.pg-album__strip::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.pg-album__strip::-webkit-scrollbar-thumb {
+  background: var(--surface-hairline);
+}
+
+.pg-album__thumb {
+  scroll-snap-align: start;
+  margin: 0;
+}
+
+.pg-album__btn {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  width: 100%;
+  display: block;
+}
+
+.pg-album__frame {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-hairline);
+}
+
+.pg-album__frame img {
+  transition: transform 0.3s ease;
+}
+
+.pg-album__btn:hover .pg-album__frame img,
+.pg-album__btn:focus-visible .pg-album__frame img {
+  transform: scale(1.04);
+}
+
+.pg-album__btn:focus-visible {
+  outline: 2px solid var(--crimson);
+  outline-offset: 2px;
 }
 
 .pg-media__item {
@@ -92,14 +170,6 @@
 .pg-media__caption {
   color: var(--surface-text-muted);
   margin-top: var(--space-2);
-}
-
-@media (width <= 1023px) {
-  .pg-media { columns: 2; }
-}
-
-@media (width <= 767px) {
-  .pg-media { columns: 1; }
 }
 
 /* ---- Archive: crimson-spine timeline -------------------------------------- */

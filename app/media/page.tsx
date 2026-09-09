@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getMedia } from "@/content";
+import { getMediaAlbums } from "@/content";
 import { SurfaceSection } from "@/components/chrome/SurfaceSection";
 import { DisplayHeading } from "@/components/chrome/DisplayHeading";
 import { MediaGallery } from "@/components/media/MediaGallery";
@@ -10,12 +10,12 @@ export const metadata: Metadata = {
 };
 
 export default function MediaPage() {
-  const items = getMedia();
+  const albums = getMediaAlbums();
   return (
     <SurfaceSection surface="ink" index="02" title="MEDIA" labelledById="media-title">
       <div style={{ paddingBottom: "var(--space-9)" }}>
         <DisplayHeading as="h1" id="media-title" size="xl">The archive.</DisplayHeading>
-        <MediaGallery items={items} />
+        <MediaGallery albums={albums} />
       </div>
     </SurfaceSection>
   );

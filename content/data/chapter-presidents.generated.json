@@ -38,5 +38,45 @@
       "alt": "Jude Ayobami Abe, LAWSAN chapter president, Glorious Vision University",
       "ratio": "4 / 5"
     }
+  },
+  "admiralty-university": {
+    "name": "Esther-Olive Osemeke",
+    "portrait": {
+      "src": "/chapters/auto-admiralty-university--esther-olive-osemeke.jpg",
+      "alt": "Esther-Olive Osemeke, LAWSAN chapter president, Admiralty University",
+      "ratio": "4 / 5"
+    }
+  },
+  "ambrose-alli-university": {
+    "name": "Gaius Ojevwe",
+    "portrait": {
+      "src": "/chapters/auto-ambrose-alli-university--gaius-ojevwe.jpg",
+      "alt": "Gaius Ojevwe, LAWSAN chapter president, Ambrose Alli University",
+      "ratio": "4 / 5"
+    }
+  },
+  "benson-idahosa-university": {
+    "name": "Eton Nsikak.jpeg",
+    "portrait": {
+      "src": "/chapters/auto-benson-idahosa-university--eton-nsikak-jpeg.jpg",
+      "alt": "Eton Nsikak.jpeg, LAWSAN chapter president, Benson Idahosa University",
+      "ratio": "4 / 5"
+    }
+  },
+  "rivers-state-university": {
+    "name": "Harry David",
+    "portrait": {
+      "src": "/chapters/auto-rivers-state-university--harry-david.jpg",
+      "alt": "Harry David, LAWSAN chapter president, Rivers State University",
+      "ratio": "4 / 5"
+    }
+  },
+  "western-delta-university": {
+    "name": "H.E Comr. Oghenechauko Japhet Godswill.jpeg",
+    "portrait": {
+      "src": "/chapters/auto-western-delta-university--h-e-comr-oghenechauko-japhet-godswill-jpeg.jpg",
+      "alt": "H.E Comr. Oghenechauko Japhet Godswill.jpeg, LAWSAN chapter president, Western Delta University",
+      "ratio": "4 / 5"
+    }
   }
 }
