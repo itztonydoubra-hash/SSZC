@@ -88,4 +88,13 @@ export const media: MediaAlbum[] = [
       { src: "/media/general/courtesy-visit-mba-ukweni-san.jpeg.jpeg", alt: "Courtesy visit to MBA Ukweni, SAN", ratio: "4 / 3" },
     ],
   },
+  {
+    title: "Dinner and Awards Night — Novena University, Delta State",
+    description: "The Zonal Director, Effiong Valour Daniel, COL and Sen. Kanu Jane Tochi, Senator Representing University of Calabar were in attendance at the Dinner and Awards Night of Novena University in Delta State.",
+    items: [
+      { src: "/media/general/novena-university-dinner-awards-01.jpeg.jpeg", alt: "Zonal Director Effiong Valour Daniel and Sen. Kanu Jane Tochi at the Dinner and Awards Night of Novena University, Delta State", ratio: "4 / 3" },
+      { src: "/media/general/novena-university-dinner-awards-02.jpeg.jpeg", alt: "Zonal Director Effiong Valour Daniel and Sen. Kanu Jane Tochi at the Dinner and Awards Night of Novena University, Delta State", ratio: "4 / 3" },
+      { src: "/media/general/novena-university-dinner-awards-03.jpeg.jpeg", alt: "Zonal Director Effiong Valour Daniel and Sen. Kanu Jane Tochi at the Dinner and Awards Night of Novena University, Delta State", ratio: "4 / 3" },
+    ],
+  },
 ];
