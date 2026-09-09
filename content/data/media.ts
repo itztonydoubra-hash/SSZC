@@ -97,4 +97,22 @@ export const media: MediaAlbum[] = [
       { src: "/media/general/novena-university-dinner-awards-03.jpeg.jpeg", alt: "Zonal Director Effiong Valour Daniel and Sen. Kanu Jane Tochi at the Dinner and Awards Night of Novena University, Delta State", ratio: "4 / 3" },
     ],
   },
+  {
+    title: "Operation SDG-4 Outreach",
+    description: "Pictorial Excerpts of the Operation SDG-4 Outreach.",
+    items: [
+      { src: "/media/general/sdg4-outreach-01.jpeg.jpeg", alt: "Scene from the Operation SDG-4 Outreach", ratio: "4 / 3" },
+      { src: "/media/general/sdg4-outreach-02.jpeg.jpeg", alt: "Scene from the Operation SDG-4 Outreach", ratio: "4 / 3" },
+      { src: "/media/general/sdg4-outreach-03.jpeg.jpeg", alt: "Scene from the Operation SDG-4 Outreach", ratio: "4 / 3" },
+      { src: "/media/general/sdg4-outreach-04.jpeg.jpeg", alt: "Scene from the Operation SDG-4 Outreach", ratio: "4 / 3" },
+      { src: "/media/general/sdg4-outreach-05.jpeg.jpeg", alt: "Scene from the Operation SDG-4 Outreach", ratio: "4 / 3" },
+      { src: "/media/general/sdg4-outreach-06.jpeg.jpeg", alt: "Scene from the Operation SDG-4 Outreach", ratio: "4 / 3" },
+      { src: "/media/general/sdg4-outreach-07.jpeg.jpeg", alt: "Scene from the Operation SDG-4 Outreach", ratio: "4 / 3" },
+      { src: "/media/general/sdg4-outreach-08.jpeg.jpeg", alt: "Scene from the Operation SDG-4 Outreach", ratio: "4 / 3" },
+      { src: "/media/general/sdg4-outreach-09.jpeg.jpeg", alt: "Scene from the Operation SDG-4 Outreach", ratio: "4 / 3" },
+      { src: "/media/general/sdg4-outreach-10.jpeg.jpeg", alt: "Scene from the Operation SDG-4 Outreach", ratio: "4 / 3" },
+      { src: "/media/general/sdg4-outreach-11.jpeg.jpeg", alt: "Scene from the Operation SDG-4 Outreach", ratio: "4 / 3" },
+      { src: "/media/general/sdg4-outreach-12.jpeg.jpeg", alt: "Scene from the Operation SDG-4 Outreach", ratio: "4 / 3" },
+    ],
+  },
 ];
