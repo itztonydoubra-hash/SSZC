@@ -29,6 +29,26 @@ export const leadership: Leadership = {
         ratio: "4 / 5",
       },
     },
+    {
+      index: "02",
+      role: "Zonal Chief Press Secretary",
+      name: "Ndifon Jubilant Franklin",
+      portrait: {
+        src: "/leadership/ndifon-jubilant-franklin.jpeg",
+        alt: "Ndifon Jubilant Franklin, Zonal Chief Press Secretary",
+        ratio: "4 / 5",
+      },
+    },
+    {
+      index: "03",
+      role: "Head of Human Resources and External Affairs",
+      name: "Igbanoi Prince Christopher",
+      portrait: {
+        src: "/leadership/igbanoi-prince-christopher.jpeg",
+        alt: "Igbanoi Prince Christopher, Head of Human Resources and External Affairs",
+        ratio: "4 / 5",
+      },
+    },
   ],
   // Official states + per-state/campus leadership not yet supplied — empty.
   states: [],
