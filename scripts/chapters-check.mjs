@@ -19,6 +19,7 @@
  */
 import { spawn } from "node:child_process";
 import { readFile, readdir } from "node:fs/promises";
+import path from "node:path";
 import { chromium } from "playwright";
 import AxeBuilder from "@axe-core/playwright";
 
@@ -110,7 +111,9 @@ check(
 );
 
 /* Presidents: only the supplied ones may exist, each with a name AND a portrait
- * file that is actually present. Nothing beyond what was supplied may appear. */
+ * file that is actually present. The records are intentionally read from the
+ * generated manifest because chapters.ts merges that build-time data into the
+ * canonical institutional directory. */
 const SUPPLIED_PRESIDENTS = {
   "arthur-jarvis-university": ["Edem Divine Agbor, SAL", "edem-divine-agbor.jpg"],
   "hensard-university": ["Elijah Christian Fonikimi", "elijah-christian-fonikimi.jpg"],
@@ -118,46 +121,87 @@ const SUPPLIED_PRESIDENTS = {
   "edo-state-university": ["Omorhienrhien Princess Abieyuwa", "omorhienrhien-princess-abieyuwa.jpg"],
   "glorious-vision-university": ["Jude Ayobami Abe", "jude-ayobami-abe.jpg"],
 };
-const presidentBlocks = [...dataSrc.matchAll(/president:\s*\{/g)];
+const presidentManifest = JSON.parse(
+  await readFile(`${ROOT}/content/data/chapter-presidents.generated.json`, "utf8"),
+);
+const manifestSlugs = Object.keys(presidentManifest);
+const canonicalChapterSlugs = [
+  ...dataSrc.matchAll(/institution:\s*"[^"]+"[\s\S]{0,180}?slug:\s*"([a-z0-9-]+)"/g),
+].map((m) => m[1]);
 check(
-  `data: exactly ${Object.keys(SUPPLIED_PRESIDENTS).length} presidents populated`,
-  presidentBlocks.length === Object.keys(SUPPLIED_PRESIDENTS).length,
-  `found ${presidentBlocks.length}`,
+  "data: generated president records target recognised chapters",
+  manifestSlugs.every((slug) => canonicalChapterSlugs.includes(slug)),
+  manifestSlugs.join(", "),
+);
+check(
+  "data: every generated president has a name and portrait",
+  manifestSlugs.every(
+    (slug) =>
+      typeof presidentManifest[slug]?.name === "string" &&
+      presidentManifest[slug].name.length > 0 &&
+      typeof presidentManifest[slug]?.portrait?.src === "string",
+  ),
+  manifestSlugs.join(", "),
+);
+check(
+  `data: at least ${Object.keys(SUPPLIED_PRESIDENTS).length} presidents populated`,
+  manifestSlugs.length >= Object.keys(SUPPLIED_PRESIDENTS).length,
+  `found ${manifestSlugs.length}`,
 );
 
 const portraitDir = await readdir(`${ROOT}/public/chapters`);
 for (const [slug, [name, file]] of Object.entries(SUPPLIED_PRESIDENTS)) {
-  const block = dataSrc.split(`slug: "${slug}"`)[1]?.slice(0, 600) ?? "";
+  const record = presidentManifest[slug];
   check(
     `data: ${slug} president is "${name}" with ${file}`,
-    block.includes(`name: "${name}"`) && block.includes(`src: "/chapters/${file}"`),
+    record?.name === name && record?.portrait?.src === `/chapters/${file}`,
   );
   check(`asset: public/chapters/${file} exists`, portraitDir.includes(file));
 }
 
 /* Names must not be invented for anyone else, and no unsupplied detail may be
  * filled in for the presidents that DO exist. */
-const declaredNames = [...dataSrc.matchAll(/name:\s*"([^"]+)"/g)].map((m) => m[1]);
+const declaredNames = Object.values(presidentManifest).map((record) => record?.name);
 const expectedNames = Object.values(SUPPLIED_PRESIDENTS).map(([n]) => n);
+const seedNamesPresent = expectedNames.every((name) => declaredNames.includes(name));
 check(
-  "data: no president name invented",
-  declaredNames.length === expectedNames.length &&
-    declaredNames.every((n) => expectedNames.includes(n)),
+  "data: all supplied seed president names remain present",
+  seedNamesPresent,
   declaredNames.join(" | "),
 );
 check(
   "data: no tenure / socials / execs / contact invented",
-  !/tenure:/.test(dataSrc) &&
-    !/socials:/.test(dataSrc) &&
+  !/tenure:/.test(JSON.stringify(presidentManifest)) &&
+    !/socials:/.test(JSON.stringify(presidentManifest)) &&
     !/execs:/.test(dataSrc) &&
-    !/contact:/.test(dataSrc),
+    !/contact:/.test(JSON.stringify(presidentManifest)),
 );
 /* Every portrait file in public/chapters must be referenced — no stray or
  * unrelated photograph may sit in the published folder. */
+const manifestSource = JSON.stringify(presidentManifest);
 const strayAssets = portraitDir.filter(
-  (f) => /\.(jpe?g|png|webp|avif)$/i.test(f) && !dataSrc.includes(`/chapters/${f}`),
+  (f) => /\.(jpe?g|png|webp|avif)$/i.test(f) && !manifestSource.includes(`/chapters/${f}`),
 );
 check("asset: no unreferenced portrait in public/chapters", strayAssets.length === 0, strayAssets.join(", "));
+
+const stateSlugByName = {
+  "Cross River State": "cross-river",
+  "Akwa Ibom State": "akwa-ibom",
+  "Rivers State": "rivers",
+  "Bayelsa State": "bayelsa",
+  "Delta State": "delta",
+  "Edo State": "edo",
+};
+const slugify = (value) =>
+  value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+const stateByChapterSlug = Object.fromEntries(
+  Object.entries(SUPPLIED).flatMap(([stateName, chapterNames]) =>
+    chapterNames.map((name) => [slugify(name), stateSlugByName[stateName]]),
+  ),
+);
 
 /* CMS-ready seam: components read the data-access layer, never the data files. */
 const offenders = [];
@@ -327,16 +371,12 @@ try {
         (await page.locator(".cm-profile img").count()) === 0,
     );
 
-    /* Every supplied president renders: the name, and a portrait that actually
+    /* Every generated president renders: the name, and a portrait that actually
      * decoded (naturalWidth > 0 — a broken image would report 0). */
-    for (const [slug, [name, file]] of Object.entries(SUPPLIED_PRESIDENTS)) {
-      const stateSlug = Object.entries({
-        "arthur-jarvis-university": "cross-river",
-        "hensard-university": "bayelsa",
-        "michael-and-cecilia-ibru-university": "delta",
-        "edo-state-university": "edo",
-        "glorious-vision-university": "edo",
-      }).find(([s]) => s === slug)?.[1];
+    for (const [slug, record] of Object.entries(presidentManifest)) {
+      const name = record.name;
+      const file = path.basename(record.portrait.src);
+      const stateSlug = stateByChapterSlug[slug];
       await page.goto(`${base}/chapters?state=${stateSlug}&chapter=${slug}`, {
         waitUntil: "networkidle",
       });
@@ -364,8 +404,8 @@ try {
       );
     }
 
-    /* The 17 chapters with no supplied president must ALL still show the empty
-     * state — no portrait may leak from another chapter. */
+    /* Every chapter is checked once: generated records show a real portrait and
+     * all remaining chapters show the designed empty state. */
     let emptyProfiles = 0;
     let realProfiles = 0;
     for (const [stateName] of Object.entries(SUPPLIED)) {
@@ -383,8 +423,8 @@ try {
       }
     }
     check(
-      "profiles: 5 portraits + 17 designed empty frames, never both",
-      realProfiles === 5 && emptyProfiles === 17,
+      "profiles: generated portraits + designed empty frames, never both",
+      realProfiles === manifestSlugs.length && emptyProfiles === expectedAll.length - manifestSlugs.length,
       `real=${realProfiles} empty=${emptyProfiles}`,
     );
 

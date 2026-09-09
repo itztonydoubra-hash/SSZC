@@ -1,9 +1,12 @@
-# public/chapters — official chapter-president portraits
+# public/chapters — generated chapter-president portraits
 
-Client-supplied official portraits, referenced from `content/data/chapters.ts`.
-**Do not substitute stock, AI-generated or unrelated photographs.** A chapter with
-no portrait here shows the designed `[OFFICIAL IMAGE]` frame instead — that is the
-intended state, not a bug.
+These are the optimised JPEG derivatives used by chapter profiles. The five
+initial files were client-supplied official portraits. New files are generated
+at build time by `scripts/process-chapter-presidents.mjs` from uploads in
+`content/uploads/chapter-presidents/`.
+**Do not substitute stock, AI-generated or unrelated photographs.** A chapter
+with no portrait shows the designed `[OFFICIAL IMAGE]` frame instead — that is
+the intended state, not a bug.
 
 | File | President | Chapter |
 |---|---|---|
@@ -15,42 +18,19 @@ intended state, not a bug.
 
 ## Preparation applied
 
-Every file is an **editorial 4:5 portrait crop** (matching the Leadership
-register's 4:5 and the empty frame's aspect ratio), downscaled to at most
-1000×1250, saved as an optimised progressive JPEG at quality 82, with **all EXIF
-metadata stripped** (the originals carried camera timestamps).
+Every generated file is an **editorial 4:5 portrait crop**, downscaled to at
+most 1000×1250, saved as an optimised progressive JPEG at quality 82, and
+written without EXIF metadata. The processor rotates according to the source
+camera orientation before cropping.
 
-Crop boxes below are `x, y, w, h` in the ORIGINAL pixels, chosen per photograph
-so the head keeps headroom and the frame reaches the torso/hands. Re-crop from
-the originals in the client's Drive folder if any framing needs revising.
-
-| File | Original | Crop box | Output |
-|---|---|---|---|
-| `edem-divine-agbor.jpg` | 1024×1280 | none (already 4:5) | 1000×1250 |
-| `elijah-christian-fonikimi.jpg` | 552×536 | 106, 0, 428, 535 | 428×535 |
-| `jude-ayobami-abe.jpg` | 810×1080 | 80, 30, 700, 875 | 700×875 |
-| `omorhienrhien-princess-abieyuwa.jpg` | 1986×2560 | 260, 120, 1500, 1875 | 1000×1250 |
-| `plaku-jessica-pere-ere.jpg` | 3024×4032 | 470, 1100, 1840, 2300 | 1000×1250 |
-
-`elijah-christian-fonikimi.jpg` is **low resolution** (the supplied original is
-552×536 and slightly soft). It is used at its native size rather than upscaled —
-a higher-resolution original would improve it.
+The original five files were manually framed from the supplied portraits. The
+processor uses a centre-of-attention crop for future uploads and does not
+upscale small originals.
 
 ## Adding the remaining presidents
 
-Add the portrait here, then set `president` on that chapter in
-`content/data/chapters.ts`:
-
-```ts
-president: {
-  name: "…",                       // exactly as supplied
-  portrait: {
-    src: "/chapters/<file>.jpg",
-    alt: "…, LAWSAN chapter president, <Institution>",
-    ratio: "4 / 5",
-  },
-},
-```
-
-`role`, `tenure`, `socials` and `contact` are optional and render automatically
-once supplied — no design change is needed. Never fill them in from guesswork.
+Follow the plain-language instructions in
+`content/uploads/chapter-presidents/README.md`, or use GitHub's **Add file** →
+**Upload files** flow in that folder. Do not edit `content/data/chapters.ts`,
+the generated manifest, or this directory by hand for a new upload. The build
+will create the derivative and the matching chapter record automatically.
