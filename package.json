@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/process-chapter-presidents.mjs",
     "build": "next build",
+    "process:chapter-presidents": "node scripts/process-chapter-presidents.mjs",
     "start": "next start",
     "lint": "next lint",
     "lint:styles": "stylelint \"**/*.css\"",
@@ -13,6 +15,7 @@
     "check:a11y": "npm run build && node scripts/a11y.mjs",
     "a11y": "node scripts/a11y.mjs",
     "check:chapters": "node scripts/chapters-check.mjs",
+    "check:chapter-presidents": "node scripts/chapter-president-upload-check.mjs",
     "check:export": "node scripts/export-check.mjs",
     "gen:map": "node scripts/gen-nigeria-map.mjs",
     "contrast": "node scripts/contrast.mjs",
@@ -33,6 +36,7 @@
     "eslint": "8.57.0",
     "eslint-config-next": "^14.2.35",
     "playwright": "^1.47.2",
+    "sharp": "^0.35.4",
     "stylelint": "16.9.0",
     "stylelint-config-standard": "36.0.1",
     "typescript": "5.5.4"

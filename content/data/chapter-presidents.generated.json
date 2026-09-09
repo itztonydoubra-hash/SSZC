@@ -1,0 +1,42 @@
+{
+  "arthur-jarvis-university": {
+    "name": "Edem Divine Agbor, SAL",
+    "portrait": {
+      "src": "/chapters/edem-divine-agbor.jpg",
+      "alt": "Edem Divine Agbor, LAWSAN chapter president, Arthur Jarvis University",
+      "ratio": "4 / 5"
+    }
+  },
+  "hensard-university": {
+    "name": "Elijah Christian Fonikimi",
+    "portrait": {
+      "src": "/chapters/elijah-christian-fonikimi.jpg",
+      "alt": "Elijah Christian Fonikimi, LAWSAN chapter president, Hensard University",
+      "ratio": "4 / 5"
+    }
+  },
+  "michael-and-cecilia-ibru-university": {
+    "name": "Plaku Jessica Pere-ere, SAL",
+    "portrait": {
+      "src": "/chapters/plaku-jessica-pere-ere.jpg",
+      "alt": "Plaku Jessica Pere-ere, LAWSAN chapter president, Michael and Cecilia Ibru University",
+      "ratio": "4 / 5"
+    }
+  },
+  "edo-state-university": {
+    "name": "Omorhienrhien Princess Abieyuwa",
+    "portrait": {
+      "src": "/chapters/omorhienrhien-princess-abieyuwa.jpg",
+      "alt": "Omorhienrhien Princess Abieyuwa, LAWSAN chapter president, Edo State University",
+      "ratio": "4 / 5"
+    }
+  },
+  "glorious-vision-university": {
+    "name": "Jude Ayobami Abe",
+    "portrait": {
+      "src": "/chapters/jude-ayobami-abe.jpg",
+      "alt": "Jude Ayobami Abe, LAWSAN chapter president, Glorious Vision University",
+      "ratio": "4 / 5"
+    }
+  }
+}
