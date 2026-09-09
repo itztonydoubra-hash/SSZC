@@ -74,4 +74,18 @@ export const media: MediaAlbum[] = [
       { src: "/media/general/courtesy-visit-civil-service-commission-04.jpeg.jpeg", alt: "Courtesy visit to Orok Bassey Okon, Esq., Head of Civil Service Commission, Cross River State", ratio: "4 / 3" },
     ],
   },
+  {
+    title: "Courtesy Visit to Justice Frank Onyiri",
+    description: "A Courtesy Visit To Justice Frank Onyiri, a Judge of the Rivers State High Court.",
+    items: [
+      { src: "/media/general/courtesy-visit-justice-frank-onyiri.jpeg.jpeg", alt: "Courtesy visit to Justice Frank Onyiri, a Judge of the Rivers State High Court", ratio: "4 / 3" },
+    ],
+  },
+  {
+    title: "Courtesy Visit to MBA Ukweni, SAN",
+    description: "A Courtesy Visit To MBA Ukweni, SAN.",
+    items: [
+      { src: "/media/general/courtesy-visit-mba-ukweni-san.jpeg.jpeg", alt: "Courtesy visit to MBA Ukweni, SAN", ratio: "4 / 3" },
+    ],
+  },
 ];
