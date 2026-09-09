@@ -115,4 +115,14 @@ export const media: MediaAlbum[] = [
       { src: "/media/general/sdg4-outreach-12.jpeg.jpeg", alt: "Scene from the Operation SDG-4 Outreach", ratio: "4 / 3" },
     ],
   },
+  {
+    title: "Inauguration of Glorious Vision University and Hensard University",
+    description: "On the 1st of June, 2026, Glorious Vision University of Edo State and Hensard University of Bayelsa State were inaugurated into the South South Zone and the National body at large, thereby taking the total number of Chapters in the South South to 20.",
+    items: [
+      { src: "/media/general/inauguration-glorious-vision-hensard-01.jpeg.jpeg", alt: "Inauguration of Glorious Vision University and Hensard University into the South South Zone, 1st June 2026", ratio: "4 / 3" },
+      { src: "/media/general/inauguration-glorious-vision-hensard-02.jpeg.jpeg", alt: "Inauguration of Glorious Vision University and Hensard University into the South South Zone, 1st June 2026", ratio: "4 / 3" },
+      { src: "/media/general/inauguration-glorious-vision-hensard-03.jpeg.jpeg", alt: "Inauguration of Glorious Vision University and Hensard University into the South South Zone, 1st June 2026", ratio: "4 / 3" },
+      { src: "/media/general/inauguration-glorious-vision-hensard-04.jpeg.jpeg", alt: "Inauguration of Glorious Vision University and Hensard University into the South South Zone, 1st June 2026", ratio: "4 / 3" },
+    ],
+  },
 ];
