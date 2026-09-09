@@ -32,7 +32,82 @@
  */
 import type { MediaItem } from "../types";
 
-// No official photographs have been intaken yet. Add real MediaItems above the
-// closing bracket as files arrive; until then the gallery shows its designed
-// empty state (no fabricated photos or metadata).
-export const media: MediaItem[] = [];
+export const media: MediaItem[] = [
+  {
+    src: "/media/general/moot-competition-01.jpeg.jpeg",
+    alt: "Pictorial excerpt from the Battle of the South South Moot Competition",
+    caption: "Pictorial Excerpts of the Battle of the South South Moot Competition",
+    category: "Competition",
+    ratio: "4 / 3",
+  },
+  {
+    src: "/media/general/moot-competition-02.jpeg.jpeg",
+    alt: "Pictorial excerpt from the Battle of the South South Moot Competition",
+    caption: "Pictorial Excerpts of the Battle of the South South Moot Competition",
+    category: "Competition",
+    ratio: "4 / 5",
+  },
+  {
+    src: "/media/general/moot-competition-03.jpeg.jpeg",
+    alt: "Pictorial excerpt from the Battle of the South South Moot Competition",
+    caption: "Pictorial Excerpts of the Battle of the South South Moot Competition",
+    category: "Competition",
+    ratio: "3 / 2",
+  },
+  {
+    src: "/media/general/moot-competition-04.jpeg.jpeg",
+    alt: "Pictorial excerpt from the Battle of the South South Moot Competition",
+    caption: "Pictorial Excerpts of the Battle of the South South Moot Competition",
+    category: "Competition",
+    ratio: "4 / 5",
+  },
+  {
+    src: "/media/general/moot-competition-05.jpeg.jpeg",
+    alt: "Pictorial excerpt from the Battle of the South South Moot Competition",
+    caption: "Pictorial Excerpts of the Battle of the South South Moot Competition",
+    category: "Competition",
+    ratio: "4 / 3",
+  },
+  {
+    src: "/media/general/moot-competition-06.jpeg.jpeg",
+    alt: "Pictorial excerpt from the Battle of the South South Moot Competition",
+    caption: "Pictorial Excerpts of the Battle of the South South Moot Competition",
+    category: "Competition",
+    ratio: "3 / 2",
+  },
+  {
+    src: "/media/general/moot-competition-07.jpeg.jpeg",
+    alt: "Pictorial excerpt from the Battle of the South South Moot Competition",
+    caption: "Pictorial Excerpts of the Battle of the South South Moot Competition",
+    category: "Competition",
+    ratio: "4 / 5",
+  },
+  {
+    src: "/media/general/moot-competition-08.jpeg.jpeg",
+    alt: "Pictorial excerpt from the Battle of the South South Moot Competition",
+    caption: "Pictorial Excerpts of the Battle of the South South Moot Competition",
+    category: "Competition",
+    ratio: "4 / 3",
+  },
+  {
+    src: "/media/general/moot-competition-09.jpeg.jpeg",
+    alt: "Pictorial excerpt from the Battle of the South South Moot Competition",
+    caption: "Pictorial Excerpts of the Battle of the South South Moot Competition",
+    category: "Competition",
+    ratio: "3 / 2",
+  },
+  {
+    src: "/media/general/moot-competition-10.jpeg.jpeg",
+    alt: "Pictorial excerpt from the Battle of the South South Moot Competition",
+    caption: "Pictorial Excerpts of the Battle of the South South Moot Competition",
+    category: "Competition",
+    ratio: "4 / 5",
+  },
+  {
+    src: "/media/general/moot-competition-11.jpeg.jpeg",
+    alt: "Pictorial excerpt from the Battle of the South South Moot Competition",
+    caption: "Pictorial Excerpts of the Battle of the South South Moot Competition",
+    category: "Competition",
+    ratio: "4 / 3",
+  },
+];
