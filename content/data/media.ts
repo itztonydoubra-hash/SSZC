@@ -43,4 +43,25 @@ export const media: MediaAlbum[] = [
       { src: "/media/general/uniport-tour-05.jpeg.jpeg", alt: "Zonal tour to University of Port Harcourt under the leadership of H.E Jewel Inno-Anamaeje", ratio: "4 / 3" },
     ],
   },
+  {
+    title: "Courtesy Visit to the National Welfare Officer, AWLA",
+    description: "On the 29th of March, the South South Zonal Director paid a courtesy visit to Amb. Monica Abiton Akinuli, Esq., the National Welfare Officer of the African Women Lawyers Association.",
+    items: [
+      { src: "/media/general/courtesy-visit-awla-welfare-officer.jpeg.jpeg", alt: "South South Zonal Director on a courtesy visit to Amb. Monica Abiton Akinuli, Esq., National Welfare Officer of the African Women Lawyers Association", ratio: "4 / 3" },
+    ],
+  },
+  {
+    title: "Courtesy Visit to the Dean of the Faculty of Law, UNICAL",
+    description: "A Courtesy Visit To The Dean Of The Faculty Of Law, University Of Calabar, Professor Michael Ibanga.",
+    items: [
+      { src: "/media/general/courtesy-visit-dean-of-law-unical.jpeg.jpeg", alt: "Courtesy visit to Professor Michael Ibanga, Dean of the Faculty of Law, University of Calabar", ratio: "4 / 3" },
+    ],
+  },
+  {
+    title: "Courtesy Visit to the Dean of Student Affairs, UNICAL",
+    description: "A Courtesy Visit To The Dean Of Student Affairs, University Of Calabar, Professor Offiong Eyo.",
+    items: [
+      { src: "/media/general/courtesy-visit-dean-of-student-affairs-unical.jpeg.jpeg", alt: "Courtesy visit to Professor Offiong Eyo, Dean of Student Affairs, University of Calabar", ratio: "4 / 3" },
+    ],
+  },
 ];
