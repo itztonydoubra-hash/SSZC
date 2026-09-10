@@ -97,5 +97,21 @@ export const leadership: Leadership = {
         },
       ],
     },
+    {
+      state: "Bayelsa State",
+      director: "Tony Tamaradoubra",
+      directorPortrait: {
+        src: "/leadership/tony-tamaradoubra.jpeg",
+        alt: "Tony Tamaradoubra, State Director, LAWSAN Bayelsa State",
+        ratio: "4 / 5",
+      },
+      deputyDirector: "Ayentua Favour Amaebi",
+      deputyDirectorPortrait: {
+        src: "/leadership/ayentua-favour-amaebi.jpeg",
+        alt: "Ayentua Favour Amaebi, Deputy State Director, LAWSAN Bayelsa State",
+        ratio: "4 / 5",
+      },
+      campuses: [],
+    },
   ],
 };
