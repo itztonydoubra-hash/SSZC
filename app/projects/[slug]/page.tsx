@@ -40,6 +40,19 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
             <div><p className="type-label" style={{ color: "var(--stone-600)" }}>Description</p><p className="type-body-m">{p.description}</p></div>
             {p.results && <div><p className="type-label" style={{ color: "var(--stone-600)" }}>Results</p><p className="type-body-m">{p.results}</p></div>}
           </Stack>
+
+          {p.images.length > 1 && (
+            <div style={{ marginTop: "var(--space-8)" }}>
+              <p className="type-label" style={{ color: "var(--stone-600)", marginBottom: "var(--space-5)" }}>Photos</p>
+              <div className="pg-project__gallery">
+                {p.images.slice(1).map((img) => (
+                  <div key={img.src} style={{ position: "relative", aspectRatio: img.ratio ?? "4 / 3", overflow: "hidden" }}>
+                    <MaskImage src={img.src} alt={img.alt} ratio={img.ratio ?? "4 / 3"} sizes="(max-width:767px) 100vw, 50vw" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </Container>
     </SurfaceSection>

@@ -24,4 +24,29 @@ export const projects: Project[] = [
       },
     ],
   },
+  {
+    slug: "miss-lawsan-uniport-outreach-2026",
+    name: "Miss LAWSAN UNIPORT Outreach",
+    purpose: "Supporting children in need by providing essential items while promoting care, compassion, and community support.",
+    description: "Held on 31 July, from the Office of the Rivers State Director, in collaboration with Miss LAWSAN, UNIPORT, this initiative was designed to support children in need by providing them with essential items, including clothes and detergents, while promoting care, compassion, and community support.",
+    location: "Rivers State",
+    date: "2026-07-31",
+    images: [
+      {
+        src: "/media/outreach/miss-lawsan-uniport-outreach-01.jpeg.jpeg",
+        alt: "Miss LAWSAN UNIPORT Outreach — providing clothes and detergents to children in need",
+        ratio: "4 / 3",
+      },
+      {
+        src: "/media/outreach/miss-lawsan-uniport-outreach-02.jpeg.jpeg",
+        alt: "Miss LAWSAN UNIPORT Outreach — community support initiative",
+        ratio: "4 / 3",
+      },
+      {
+        src: "/media/outreach/miss-lawsan-uniport-outreach-03.jpeg.jpeg",
+        alt: "Miss LAWSAN UNIPORT Outreach — community support initiative",
+        ratio: "4 / 3",
+      },
+    ],
+  },
 ];
