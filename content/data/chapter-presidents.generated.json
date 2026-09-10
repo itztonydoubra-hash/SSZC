@@ -86,5 +86,13 @@
       "alt": "Noel Chukwuyem Ebeigbe, COL.jpeg, LAWSAN chapter president, University of Benin",
       "ratio": "4 / 5"
     }
+  },
+  "university-of-calabar": {
+    "name": "Moses Unimna.jpeg",
+    "portrait": {
+      "src": "/chapters/auto-university-of-calabar--moses-unimna-jpeg.jpg",
+      "alt": "Moses Unimna.jpeg, LAWSAN chapter president, University of Calabar",
+      "ratio": "4 / 5"
+    }
   }
 }
