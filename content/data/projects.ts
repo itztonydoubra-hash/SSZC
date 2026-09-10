@@ -49,4 +49,18 @@ export const projects: Project[] = [
       },
     ],
   },
+  {
+    slug: "female-leadership-programme-2026",
+    name: "Female Leadership Programme",
+    purpose: "Promoting and strengthening female leadership and participation in political, economic, social, and academic spheres.",
+    description: "The Female Leadership Programme was held on 19 August from the Office of the Rivers State Director. The programme was designed to promote and strengthen female leadership and participation in political, economic, social, and academic spheres. It provided a platform to challenge existing narratives, inspire young women to take up leadership roles, and encourage greater female representation in decision-making positions across society.",
+    location: "Rivers State",
+    date: "2026-08-19",
+    images: [
+      { src: "/media/outreach/female-leadership-programme-01.jpeg.jpeg", alt: "Female Leadership Programme — Rivers State, 19 August 2026", ratio: "4 / 3" },
+      { src: "/media/outreach/female-leadership-programme-02.jpeg.jpeg", alt: "Female Leadership Programme — Rivers State, 19 August 2026", ratio: "4 / 3" },
+      { src: "/media/outreach/female-leadership-programme-03.jpeg.jpeg", alt: "Female Leadership Programme — Rivers State, 19 August 2026", ratio: "4 / 3" },
+      { src: "/media/outreach/female-leadership-programme-04.jpeg.jpeg", alt: "Female Leadership Programme — Rivers State, 19 August 2026", ratio: "4 / 3" },
+    ],
+  },
 ];
