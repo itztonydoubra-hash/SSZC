@@ -323,11 +323,11 @@
   color: var(--stone-600);
 }
 
-/* Portrait thumbnail in directory ledger rows */
+/* Portrait thumbnail in directory ledger rows — clear but smaller than zonal */
 .ld-dir-row__portrait {
   display: block;
-  width: 40px;
-  height: 50px;
+  width: 64px;
+  height: 80px;
   overflow: hidden;
   flex-shrink: 0;
 }

@@ -32,7 +32,6 @@ function tiersFor(state: StateLeadership): Tier[] {
     { label: "State Director", rows: state.director ? [{ name: state.director, portrait: state.directorPortrait }] : [] },
     { label: "Deputy State Director", rows: state.deputyDirector ? [{ name: state.deputyDirector, portrait: state.deputyDirectorPortrait }] : [] },
     { label: "Campus Directors", rows: campusDirectors },
-    { label: "Deputy Campus Directors", rows: deputyCampus },
   ];
 }
 
@@ -108,8 +107,8 @@ export function LeadershipDirectory({ states }: { states: StateLeadership[] }) {
                         <Image
                           src={assetPath(row.portrait.src)}
                           alt=""
-                          width={40}
-                          height={50}
+                          width={64}
+                          height={80}
                           style={{ objectFit: "cover", display: "block" }}
                         />
                       </span>
