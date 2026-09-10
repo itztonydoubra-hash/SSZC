@@ -60,6 +60,42 @@ export const leadership: Leadership = {
       },
     },
   ],
-  // Official states + per-state/campus leadership not yet supplied — empty.
-  states: [],
+  // Official states + per-state/campus leadership supplied below.
+  states: [
+    {
+      state: "Cross River State",
+      director: "Chioma Modesta Okoro, SAM",
+      directorPortrait: {
+        src: "/leadership/chioma-modesta-okoro-sam.jpeg",
+        alt: "Chioma Modesta Okoro, SAM, State Director, LAWSAN Cross River State",
+        ratio: "4 / 5",
+      },
+      deputyDirector: "Abam Precious Etim",
+      deputyDirectorPortrait: {
+        src: "/leadership/abam-precious-etim.jpeg",
+        alt: "Abam Precious Etim, Deputy State Director, LAWSAN Cross River State",
+        ratio: "4 / 5",
+      },
+      campuses: [
+        {
+          institution: "University of Calabar",
+          director: "Ekene Emmanuel Nduka",
+          directorPortrait: {
+            src: "/leadership/ekene-emmanuel-nduka.jpeg",
+            alt: "Ekene Emmanuel Nduka, Campus Director, University of Calabar",
+            ratio: "4 / 5",
+          },
+        },
+        {
+          institution: "Arthur Jarvis University",
+          director: "Johnson Emediong Uko",
+          directorPortrait: {
+            src: "/leadership/johnson-emediong-uko..jpeg",
+            alt: "Johnson Emediong Uko, Campus Director, Arthur Jarvis University",
+            ratio: "4 / 5",
+          },
+        },
+      ],
+    },
+  ],
 };

@@ -57,13 +57,17 @@ export type ZonalExecutive = {
 export type CampusLeadership = {
   institution: string;
   director?: string;
+  directorPortrait?: ImageRef;
   deputyDirector?: string;
+  deputyDirectorPortrait?: ImageRef;
 };
 
 export type StateLeadership = {
   state: string;
   director?: string;
+  directorPortrait?: ImageRef;
   deputyDirector?: string;
+  deputyDirectorPortrait?: ImageRef;
   campuses: CampusLeadership[];
 };
 
