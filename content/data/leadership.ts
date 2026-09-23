@@ -117,6 +117,15 @@ export const leadership: Leadership = {
       state: "Delta State",
       campuses: [
         {
+          institution: "Delta State University",
+          director: "Eyitemi Favour Tebe-ebi",
+          directorPortrait: {
+            src: "/leadership/eyitemi-favour-tebe-ebi.jpeg.jpeg",
+            alt: "Eyitemi Favour Tebe-ebi, Campus Director, Delta State University",
+            ratio: "4 / 5",
+          },
+        },
+        {
           institution: "Western Delta University",
           director: "Amreyorobo Oghenekevwe Praise",
           directorPortrait: {
@@ -163,6 +172,15 @@ export const leadership: Leadership = {
           directorPortrait: {
             src: "/leadership/ezenduka-grace-chioma.jpeg.jpeg",
             alt: "Ezenduka Grace Chioma, Campus Director, Benson Idahosa University",
+            ratio: "4 / 5",
+          },
+        },
+        {
+          institution: "Igbinedion University, Okada",
+          director: "Uwoghiren Goodness Osamuyimen",
+          directorPortrait: {
+            src: "/leadership/uwoghiren-goodness-osamuyimen.jpeg.jpeg",
+            alt: "Uwoghiren Goodness Osamuyimen, Campus Director, Igbinedion University, Okada",
             ratio: "4 / 5",
           },
         },
