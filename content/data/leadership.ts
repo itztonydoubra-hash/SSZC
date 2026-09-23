@@ -156,6 +156,15 @@ export const leadership: Leadership = {
           },
         },
         {
+          institution: "University of Delta",
+          director: "Orewa Nkem Sonia",
+          directorPortrait: {
+            src: "/leadership/orewa-nkem-sonia.jpeg.jpeg",
+            alt: "Orewa Nkem Sonia, Campus Director, University of Delta",
+            ratio: "4 / 5",
+          },
+        },
+        {
           institution: "Western Delta University",
           director: "Amreyorobo Oghenekevwe Praise",
           directorPortrait: {
@@ -211,6 +220,15 @@ export const leadership: Leadership = {
           directorPortrait: {
             src: "/leadership/uwoghiren-goodness-osamuyimen.jpeg.jpeg",
             alt: "Uwoghiren Goodness Osamuyimen, Campus Director, Igbinedion University, Okada",
+            ratio: "4 / 5",
+          },
+        },
+        {
+          institution: "Glorious Vision University",
+          director: "Onikanni Veronica Oluwabunmilofe",
+          directorPortrait: {
+            src: "/leadership/onikanni-veronica-oluwabunmilofe.jpeg.jpeg",
+            alt: "Onikanni Veronica Oluwabunmilofe, Campus Director, Glorious Vision University",
             ratio: "4 / 5",
           },
         },
