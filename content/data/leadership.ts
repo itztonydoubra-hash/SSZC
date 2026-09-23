@@ -114,6 +114,16 @@ export const leadership: Leadership = {
       campuses: [],
     },
     {
+      state: "Rivers State",
+      director: "John Jubilant",
+      directorPortrait: {
+        src: "/leadership/john-jubilant.jpeg.jpeg",
+        alt: "John Jubilant, State Director, LAWSAN Rivers State Directorate of Programs, Projects and Policies",
+        ratio: "4 / 5",
+      },
+      campuses: [],
+    },
+    {
       state: "Delta State",
       campuses: [
         {
