@@ -113,5 +113,60 @@ export const leadership: Leadership = {
       },
       campuses: [],
     },
+    {
+      state: "Delta State",
+      campuses: [
+        {
+          institution: "Western Delta University",
+          director: "Amreyorobo Oghenekevwe Praise",
+          directorPortrait: {
+            src: "/leadership/amreyorobo-oghenekevwe-praise.jpeg.jpeg",
+            alt: "Amreyorobo Oghenekevwe Praise, Campus Director, Western Delta University",
+            ratio: "4 / 5",
+          },
+        },
+        {
+          institution: "Admiralty University of Nigeria",
+          director: "Imianvan-Anthony Marvelous O.",
+          directorPortrait: {
+            src: "/leadership/imianvan-anthony-marvelous.jpeg.jpeg",
+            alt: "Imianvan-Anthony Marvelous O., Campus Director, Admiralty University of Nigeria",
+            ratio: "4 / 5",
+          },
+        },
+        {
+          institution: "Michael and Cecilia Ibru University",
+          director: "Ebinum Joseph Azubuike",
+          directorPortrait: {
+            src: "/leadership/ebinum-joseph-azubuike.jpeg.jpeg",
+            alt: "Ebinum Joseph Azubuike, Campus Director, Michael and Cecilia Ibru University",
+            ratio: "4 / 5",
+          },
+        },
+        {
+          institution: "Edwin Clark University",
+          director: "Preghafi Faith Woyengidoubara",
+          directorPortrait: {
+            src: "/leadership/preghafi-faith-woyengidoubara.jpeg.jpeg",
+            alt: "Preghafi Faith Woyengidoubara, Campus Director, Edwin Clark University",
+            ratio: "4 / 5",
+          },
+        },
+      ],
+    },
+    {
+      state: "Edo State",
+      campuses: [
+        {
+          institution: "Benson Idahosa University",
+          director: "Ezenduka Grace Chioma",
+          directorPortrait: {
+            src: "/leadership/ezenduka-grace-chioma.jpeg.jpeg",
+            alt: "Ezenduka Grace Chioma, Campus Director, Benson Idahosa University",
+            ratio: "4 / 5",
+          },
+        },
+      ],
+    },
   ],
 };
