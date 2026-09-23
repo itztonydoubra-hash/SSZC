@@ -31,6 +31,26 @@ export const leadership: Leadership = {
     },
     {
       index: "02",
+      role: "Deputy Zonal Director",
+      name: "Hon. Perpetual-Purity Amen Osayamen, COL",
+      portrait: {
+        src: "/leadership/perpetual-purity-osayamen.jpeg.jpeg",
+        alt: "Hon. Perpetual-Purity Amen Osayamen, Deputy Zonal Director",
+        ratio: "4 / 5",
+      },
+    },
+    {
+      index: "03",
+      role: "Zonal Head of Media and Publicity",
+      name: "Antigha Daniel Bassey",
+      portrait: {
+        src: "/leadership/antigha-daniel-bassey.jpeg.jpeg",
+        alt: "Antigha Daniel Bassey, Zonal Head of Media and Publicity",
+        ratio: "4 / 5",
+      },
+    },
+    {
+      index: "04",
       role: "Zonal Chief Press Secretary",
       name: "Ndifon Jubilant Franklin",
       portrait: {
@@ -40,7 +60,7 @@ export const leadership: Leadership = {
       },
     },
     {
-      index: "03",
+      index: "05",
       role: "Head of Human Resources and External Affairs",
       name: "Igbanoi Prince Christopher",
       portrait: {
@@ -50,7 +70,7 @@ export const leadership: Leadership = {
       },
     },
     {
-      index: "04",
+      index: "06",
       role: "South South Public Relations Officer",
       name: "Goodluck Osazemwinde",
       portrait: {
