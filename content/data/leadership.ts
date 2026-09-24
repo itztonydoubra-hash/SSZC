@@ -79,6 +79,36 @@ export const leadership: Leadership = {
         ratio: "4 / 5",
       },
     },
+    {
+      index: "07",
+      role: "General Secretary",
+      name: "Emmanuel Golden Daniel",
+      portrait: {
+        src: "/leadership/emmanuel-golden-daniel.jpeg.jpeg",
+        alt: "Emmanuel Golden Daniel, General Secretary",
+        ratio: "4 / 5",
+      },
+    },
+    {
+      index: "08",
+      role: "Director of Editorials and Writing",
+      name: "Ifiemi-Ikpaikpai Tari Excel",
+      portrait: {
+        src: "/leadership/ifiemi-ikpaikpai-tari-excel.jpeg.jpeg",
+        alt: "Ifiemi-Ikpaikpai Tari Excel, Director of Editorials and Writing",
+        ratio: "4 / 5",
+      },
+    },
+    {
+      index: "09",
+      role: "Director of Socials, South South",
+      name: "Lawrence Antigha Cobham",
+      portrait: {
+        src: "/leadership/lawrence-antigha-cobham.jpeg.jpeg",
+        alt: "Lawrence Antigha Cobham, Director of Socials, South South",
+        ratio: "4 / 5",
+      },
+    },
   ],
   // Official states + per-state/campus leadership supplied below.
   states: [
