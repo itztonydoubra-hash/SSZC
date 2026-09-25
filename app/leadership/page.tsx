@@ -43,7 +43,7 @@ export default function LeadershipPage() {
       <SurfaceSection surface="ivory" index="05" title="THE WIDER LEADERSHIP" labelledById="directory-title">
         <div id="directory" style={{ scrollMarginTop: "var(--space-9)" }}>
           <DisplayHeading as="h2" id="directory-title" size="l" style={{ marginTop: "var(--space-4)" }}>
-            State, campus and deputy leadership.
+            State directors, deputy directors and campus directors.
           </DisplayHeading>
           <Suspense fallback={<p className="type-body-m" style={{ color: "var(--stone-600)" }}>Loading directory…</p>}>
             <LeadershipDirectory states={states} />

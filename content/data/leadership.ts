@@ -140,7 +140,7 @@ export const leadership: Leadership = {
           institution: "Arthur Jarvis University",
           director: "Johnson Emediong Uko",
           directorPortrait: {
-            src: "/leadership/johnson-emediong-uko..jpeg",
+            src: "/leadership/johnson-emediong-uko.jpeg.jpeg",
             alt: "Johnson Emediong Uko, Campus Director, Arthur Jarvis University",
             ratio: "4 / 5",
           },
@@ -168,14 +168,42 @@ export const leadership: Leadership = {
       director: "John Jubilant",
       directorPortrait: {
         src: "/leadership/john-jubilant.jpeg.jpeg",
-        alt: "John Jubilant, State Director, LAWSAN Rivers State Directorate of Programs, Projects and Policies",
+        alt: "John Jubilant, State Director, LAWSAN Rivers State",
         ratio: "4 / 5",
       },
-      campuses: [],
+      campuses: [
+        {
+          institution: "University of Port Harcourt",
+          director: "Hanson Solomon Michael",
+          directorPortrait: {
+            src: "/leadership/hanson-solomon-michael.jpeg.jpeg",
+            alt: "Hanson Solomon Michael, Campus Director, University of Port Harcourt",
+            ratio: "4 / 5",
+          },
+        },
+        {
+          institution: "Niger Delta University",
+          director: "Diete-Spiff Laura",
+          directorPortrait: {
+            src: "/leadership/diete-spiff-laura.jpeg.jpeg",
+            alt: "Diete-Spiff Laura, Campus Director, Niger Delta University",
+            ratio: "4 / 5",
+          },
+        },
+      ],
     },
     {
       state: "Delta State",
       campuses: [
+        {
+          institution: "Novena University",
+          director: "Comr. Gbakeji O. Solomon",
+          directorPortrait: {
+            src: "/leadership/gbakeji-o-solomon.jpeg.jpeg",
+            alt: "Comr. Gbakeji O. Solomon, Campus Director, Novena University",
+            ratio: "4 / 5",
+          },
+        },
         {
           institution: "Delta State University",
           director: "Eyitemi Favour Tebe-ebi",
@@ -235,6 +263,15 @@ export const leadership: Leadership = {
     {
       state: "Edo State",
       campuses: [
+        {
+          institution: "Ambrose Alli University",
+          director: "Daniel Damilola Salami, SANL",
+          directorPortrait: {
+            src: "/leadership/daniel-damilola-salami.jpeg.jpeg",
+            alt: "Daniel Damilola Salami, SANL, Campus Director, Ambrose Alli University",
+            ratio: "4 / 5",
+          },
+        },
         {
           institution: "Benson Idahosa University",
           director: "Ezenduka Grace Chioma",

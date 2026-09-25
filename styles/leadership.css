@@ -326,8 +326,8 @@
 /* Portrait thumbnail in directory ledger rows — clear but smaller than zonal */
 .ld-dir-row__portrait {
   display: block;
-  width: 64px;
-  height: 80px;
+  width: 80px;
+  height: 100px;
   overflow: hidden;
   flex-shrink: 0;
 }
