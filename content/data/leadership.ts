@@ -195,6 +195,12 @@ export const leadership: Leadership = {
     },
     {
       state: "Delta State",
+      director: "Sen. Destiny Opiah",
+      directorPortrait: {
+        src: "/leadership/sen-destiny-opiah.jpeg.jpeg",
+        alt: "Sen. Destiny Opiah, State Director, LAWSAN Delta State",
+        ratio: "4 / 5",
+      },
       campuses: [
         {
           institution: "Novena University",
@@ -263,6 +269,18 @@ export const leadership: Leadership = {
     },
     {
       state: "Edo State",
+      director: "Lawrence Osaigbokan",
+      directorPortrait: {
+        src: "/leadership/lawrence-osaigbokan.jpeg.jpeg",
+        alt: "Lawrence Osaigbokan, State Director, LAWSAN Edo State",
+        ratio: "4 / 5",
+      },
+      deputyDirector: "Senator Echenabor Precious",
+      deputyDirectorPortrait: {
+        src: "/leadership/senator-echenabor-precious.jpeg.jpeg",
+        alt: "Senator Echenabor Precious, Deputy State Director, LAWSAN Edo State",
+        ratio: "4 / 5",
+      },
       campuses: [
         {
           institution: "Ambrose Alli University",
