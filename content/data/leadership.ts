@@ -161,7 +161,17 @@ export const leadership: Leadership = {
         alt: "Ayentua Favour Amaebi, Deputy State Director, LAWSAN Bayelsa State",
         ratio: "4 / 5",
       },
-      campuses: [],
+      campuses: [
+        {
+          institution: "Niger Delta University",
+          director: "Diete-Spiff Laura",
+          directorPortrait: {
+            src: "/leadership/diete-spiff-laura.jpeg.jpeg",
+            alt: "Diete-Spiff Laura, Campus Director, Niger Delta University",
+            ratio: "4 / 5",
+          },
+        },
+      ],
     },
     {
       state: "Rivers State",
@@ -178,15 +188,6 @@ export const leadership: Leadership = {
           directorPortrait: {
             src: "/leadership/hanson-solomon-michael.jpeg.jpeg",
             alt: "Hanson Solomon Michael, Campus Director, University of Port Harcourt",
-            ratio: "4 / 5",
-          },
-        },
-        {
-          institution: "Niger Delta University",
-          director: "Diete-Spiff Laura",
-          directorPortrait: {
-            src: "/leadership/diete-spiff-laura.jpeg.jpeg",
-            alt: "Diete-Spiff Laura, Campus Director, Niger Delta University",
             ratio: "4 / 5",
           },
         },
