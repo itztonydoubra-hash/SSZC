@@ -107,8 +107,8 @@ export function LeadershipDirectory({ states }: { states: StateLeadership[] }) {
                         <Image
                           src={assetPath(row.portrait.src)}
                           alt=""
-                          width={80}
-                          height={100}
+                          width={120}
+                          height={150}
                           style={{ objectFit: "cover", display: "block" }}
                         />
                       </span>
