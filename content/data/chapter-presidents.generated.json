@@ -56,10 +56,10 @@
     }
   },
   "benson-idahosa-university": {
-    "name": "Eton Nsikak.jpeg",
+    "name": "Eton Nsikak",
     "portrait": {
-      "src": "/chapters/auto-benson-idahosa-university--eton-nsikak-jpeg.jpg",
-      "alt": "Eton Nsikak.jpeg, LAWSAN chapter president, Benson Idahosa University",
+      "src": "/chapters/auto-benson-idahosa-university--eton-nsikak.jpg",
+      "alt": "Eton Nsikak, LAWSAN chapter president, Benson Idahosa University",
       "ratio": "4 / 5"
     }
   },
@@ -72,26 +72,26 @@
     }
   },
   "western-delta-university": {
-    "name": "H.E Comr. Oghenechauko Japhet Godswill.jpeg",
+    "name": "H.E Comr. Oghenechauko Japhet Godswill",
     "portrait": {
-      "src": "/chapters/auto-western-delta-university--h-e-comr-oghenechauko-japhet-godswill-jpeg.jpg",
-      "alt": "H.E Comr. Oghenechauko Japhet Godswill.jpeg, LAWSAN chapter president, Western Delta University",
+      "src": "/chapters/auto-western-delta-university--h-e-comr-oghenechauko-japhet-godswill.jpg",
+      "alt": "H.E Comr. Oghenechauko Japhet Godswill, LAWSAN chapter president, Western Delta University",
       "ratio": "4 / 5"
     }
   },
   "university-of-benin": {
-    "name": "Noel Chukwuyem Ebeigbe, COL.jpeg",
+    "name": "Noel Chukwuyem Ebeigbe, COL",
     "portrait": {
-      "src": "/chapters/auto-university-of-benin--noel-chukwuyem-ebeigbe-col-jpeg.jpg",
-      "alt": "Noel Chukwuyem Ebeigbe, COL.jpeg, LAWSAN chapter president, University of Benin",
+      "src": "/chapters/auto-university-of-benin--noel-chukwuyem-ebeigbe-col.jpg",
+      "alt": "Noel Chukwuyem Ebeigbe, COL, LAWSAN chapter president, University of Benin",
       "ratio": "4 / 5"
     }
   },
   "university-of-calabar": {
-    "name": "Moses Unimna.jpeg",
+    "name": "Moses Unimna",
     "portrait": {
-      "src": "/chapters/auto-university-of-calabar--moses-unimna-jpeg.jpg",
-      "alt": "Moses Unimna.jpeg, LAWSAN chapter president, University of Calabar",
+      "src": "/chapters/auto-university-of-calabar--moses-unimna.jpg",
+      "alt": "Moses Unimna, LAWSAN chapter president, University of Calabar",
       "ratio": "4 / 5"
     }
   }
