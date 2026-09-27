@@ -43,6 +43,13 @@ export const NAV_GROUPS: NavGroup[] = [
     title: "CONNECT",
     items: [{ label: "Contact", href: "/contact" }],
   },
+  {
+    index: "04",
+    title: "SPONSORS",
+    items: [
+      { label: "Sponsors", href: "/sponsors" },
+    ],
+  },
 ];
 
 /* The wordmark text fallback used until the official logo asset is supplied.

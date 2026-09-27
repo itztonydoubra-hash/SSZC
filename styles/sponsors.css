@@ -1,0 +1,48 @@
+/*
+ * Sponsors page
+ */
+
+.sponsors-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-7);
+}
+
+.sponsor-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.sponsor-card__portrait {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--stone-100);
+}
+
+.sponsor-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.sponsor-card__name {
+  color: var(--ink);
+}
+
+.sponsor-card__office {
+  color: var(--stone-600);
+}
+
+@media (width <= 1023px) {
+  .sponsors-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width <= 767px) {
+  .sponsors-grid {
+    grid-template-columns: 1fr;
+  }
+}
