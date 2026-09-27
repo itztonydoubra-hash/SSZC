@@ -35,6 +35,7 @@ export const NAV_GROUPS: NavGroup[] = [
       { label: "News & Updates", href: "/news" },
       { label: "Opportunities", href: "/opportunities" },
       { label: "Media", href: "/media" },
+      { label: "SSZC 2026", href: "/sszc-2026" },
     ],
   },
   {
