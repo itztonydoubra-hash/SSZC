@@ -6,11 +6,13 @@
  * content is unavailable, re-linking so the argument still reads.
  */
 import type { Metadata } from "next";
+import Image from "next/image";
 import {
   getAbout, getChapters, getImpact, getLeadership, getNews, getProjects, getPublications,
 } from "@/content";
 import { fmtDate } from "@/lib/date";
 import { isPlaceholder } from "@/lib/content-display";
+import { assetPath } from "@/lib/asset";
 import { Container, Grid, GridItem } from "@/components/layout/Grid";
 import { SurfaceSection } from "@/components/chrome/SurfaceSection";
 import { DisplayHeading } from "@/components/chrome/DisplayHeading";
@@ -53,7 +55,14 @@ export default function Home() {
       {/* 1. WHO WE ARE — hero */}
       <section className="surface-photo hp-hero" data-surface="ink" aria-labelledby="hp-title">
         <div className="hp-hero__media" aria-hidden>
-          {/* [OFFICIAL IMAGE] — hero photograph of LAWSAN members not yet supplied */}
+          <Image
+            src={assetPath("/media/general/hero-homepage.jpeg.jpeg")}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            style={{ objectFit: "cover", objectPosition: "center" }}
+          />
         </div>
         <div className="hp-hero__scrim" aria-hidden />
         <Container className="hp-hero__inner">
