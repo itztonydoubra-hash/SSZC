@@ -303,6 +303,15 @@ export const leadership: Leadership = {
       },
       campuses: [
         {
+          institution: "University of Benin",
+          director: "Bawi Toluwaleyi Testimony",
+          directorPortrait: {
+            src: "/leadership/bawi-toluwaleyi-testimony.jpeg.jpeg",
+            alt: "Bawi Toluwaleyi Testimony, Campus Director, University of Benin",
+            ratio: "4 / 5",
+          },
+        },
+        {
           institution: "Ambrose Alli University",
           director: "Daniel Damilola Salami, SANL",
           directorPortrait: {
