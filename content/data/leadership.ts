@@ -215,6 +215,12 @@ export const leadership: Leadership = {
         alt: "Sen. Destiny Opiah, State Director, LAWSAN Delta State",
         ratio: "4 / 5",
       },
+      deputyDirector: "Dumbi Vincent Onyekachi",
+      deputyDirectorPortrait: {
+        src: "/leadership/dumbi-vincent-onyekachi.jpeg.jpeg",
+        alt: "Dumbi Vincent Onyekachi, Deputy State Director, LAWSAN Delta State",
+        ratio: "4 / 5",
+      },
       campuses: [
         {
           institution: "Novena University",
