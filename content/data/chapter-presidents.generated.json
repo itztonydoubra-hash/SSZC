@@ -96,42 +96,42 @@
     }
   },
   "federal-university-otuoke": {
-    "name": "Kalaigo Bubainimibofa Okobotua.jpeg",
+    "name": "Kalaigo Bubainimibofa Okobotua",
     "portrait": {
-      "src": "/chapters/auto-federal-university-otuoke--kalaigo-bubainimibofa-okobotua-jpeg.jpg",
-      "alt": "Kalaigo Bubainimibofa Okobotua.jpeg, LAWSAN chapter president, Federal University, Otuoke",
+      "src": "/chapters/auto-federal-university-otuoke--kalaigo-bubainimibofa-okobotua.jpg",
+      "alt": "Kalaigo Bubainimibofa Okobotua, LAWSAN chapter president, Federal University, Otuoke",
       "ratio": "4 / 5"
     }
   },
   "igbinedion-university": {
-    "name": "Saminu Olawale.jpeg",
+    "name": "Saminu Olawale",
     "portrait": {
-      "src": "/chapters/auto-igbinedion-university--saminu-olawale-jpeg.jpg",
-      "alt": "Saminu Olawale.jpeg, LAWSAN chapter president, Igbinedion University",
+      "src": "/chapters/auto-igbinedion-university--saminu-olawale.jpg",
+      "alt": "Saminu Olawale, LAWSAN chapter president, Igbinedion University",
       "ratio": "4 / 5"
     }
   },
   "niger-delta-university": {
-    "name": "Tokoni Azorbo.jpeg",
+    "name": "Tokoni Azorbo",
     "portrait": {
-      "src": "/chapters/auto-niger-delta-university--tokoni-azorbo-jpeg.jpg",
-      "alt": "Tokoni Azorbo.jpeg, LAWSAN chapter president, Niger Delta University",
+      "src": "/chapters/auto-niger-delta-university--tokoni-azorbo.jpg",
+      "alt": "Tokoni Azorbo, LAWSAN chapter president, Niger Delta University",
       "ratio": "4 / 5"
     }
   },
   "novena-university": {
-    "name": "Ewomazino Frank.jpeg",
+    "name": "Ewomazino Frank",
     "portrait": {
-      "src": "/chapters/auto-novena-university--ewomazino-frank-jpeg.jpg",
-      "alt": "Ewomazino Frank.jpeg, LAWSAN chapter president, Novena University",
+      "src": "/chapters/auto-novena-university--ewomazino-frank.jpg",
+      "alt": "Ewomazino Frank, LAWSAN chapter president, Novena University",
       "ratio": "4 / 5"
     }
   },
   "university-of-port-harcourt": {
-    "name": "Jewel Inno-Anaemeje.jpeg",
+    "name": "Jewel Inno-Anaemeje",
     "portrait": {
-      "src": "/chapters/auto-university-of-port-harcourt--jewel-inno-anaemeje-jpeg.jpg",
-      "alt": "Jewel Inno-Anaemeje.jpeg, LAWSAN chapter president, University of Port Harcourt",
+      "src": "/chapters/auto-university-of-port-harcourt--jewel-inno-anaemeje.jpg",
+      "alt": "Jewel Inno-Anaemeje, LAWSAN chapter president, University of Port Harcourt",
       "ratio": "4 / 5"
     }
   }
