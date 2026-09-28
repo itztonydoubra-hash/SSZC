@@ -131,7 +131,7 @@ export const leadership: Leadership = {
           institution: "University of Calabar",
           director: "Ekene Emmanuel Nduka",
           directorPortrait: {
-            src: "/leadership/ekene-emmanuel-nduka.jpeg",
+            src: "/leadership/ekene-emmanuel-nduka.jpeg.jpeg",
             alt: "Ekene Emmanuel Nduka, Campus Director, University of Calabar",
             ratio: "4 / 5",
           },
@@ -142,6 +142,20 @@ export const leadership: Leadership = {
           directorPortrait: {
             src: "/leadership/johnson-emediong-uko.jpeg.jpeg",
             alt: "Johnson Emediong Uko, Campus Director, Arthur Jarvis University",
+            ratio: "4 / 5",
+          },
+        },
+      ],
+    },
+    {
+      state: "Akwa Ibom State",
+      campuses: [
+        {
+          institution: "University of Uyo",
+          director: "Uwemedimo Udofia",
+          directorPortrait: {
+            src: "/leadership/uwemedimo-udofia.jpeg.jpeg",
+            alt: "Uwemedimo Udofia, Campus Director, University of Uyo",
             ratio: "4 / 5",
           },
         },
@@ -306,6 +320,15 @@ export const leadership: Leadership = {
           directorPortrait: {
             src: "/leadership/uwoghiren-goodness-osamuyimen.jpeg.jpeg",
             alt: "Uwoghiren Goodness Osamuyimen, Campus Director, Igbinedion University, Okada",
+            ratio: "4 / 5",
+          },
+        },
+        {
+          institution: "Edo State University, Iyamho",
+          director: "Grace Jideonwor",
+          directorPortrait: {
+            src: "/leadership/grace-jideonwor.jpeg.jpeg",
+            alt: "Grace Jideonwor, Campus Director, Edo State University, Iyamho",
             ratio: "4 / 5",
           },
         },
