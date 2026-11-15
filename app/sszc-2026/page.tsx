@@ -26,17 +26,17 @@ const EVENTS = [
     link: "https://jossyphotos.pixieset.com/sszc26symposium/",
   },
   {
-    title: "Cultural Night",
+    title: "SSZC'26 Cultural Night",
     description: "A vibrant celebration of the cultures of the South South Zone.",
     image: "/media/general/sszc2026-cultural-night.jpeg.jpeg",
-    alt: "Cultural Night at the South South Zonal Convention 2026",
+    alt: "SSZC'26 Cultural Night at the South South Zonal Convention 2026",
     link: "https://jossyphotos.pixieset.com/culturalnight/",
   },
   {
-    title: "Dinner",
+    title: "SSZC'26 Dinner Night",
     description: "The official dinner of the South South Zonal Convention 2026.",
     image: "/media/general/sszc2026-dinner.jpeg.jpeg",
-    alt: "Dinner at the South South Zonal Convention 2026",
+    alt: "SSZC'26 Dinner Night at the South South Zonal Convention 2026",
     link: "https://jossyphotos.pixieset.com/sszc26dinner/",
   },
   {
