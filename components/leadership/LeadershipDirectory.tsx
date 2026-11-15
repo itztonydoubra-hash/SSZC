@@ -29,8 +29,8 @@ function tiersFor(state: StateLeadership): Tier[] {
     .map((c) => ({ name: c.deputyDirector as string, meta: c.institution, portrait: c.deputyDirectorPortrait }));
 
   return [
-    { label: "State Director", rows: state.director ? [{ name: state.director, portrait: state.directorPortrait }] : [] },
-    { label: "Deputy State Director", rows: state.deputyDirector ? [{ name: state.deputyDirector, portrait: state.deputyDirectorPortrait }] : [] },
+    { label: "State Directors", rows: state.director ? [{ name: state.director, portrait: state.directorPortrait }] : [] },
+    { label: "Deputy State Directors", rows: state.deputyDirector ? [{ name: state.deputyDirector, portrait: state.deputyDirectorPortrait }] : [] },
     { label: "Campus Directors", rows: campusDirectors },
   ];
 }
