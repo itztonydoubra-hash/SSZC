@@ -67,7 +67,7 @@ export default function SSZC2026Page() {
     <SurfaceSection surface="ink" index="02" title="SSZC 2026" labelledById="sszc2026-title">
       <div style={{ paddingBottom: "var(--space-9)" }}>
         <DisplayHeading as="h1" id="sszc2026-title" size="xl">
-          The convention.
+          2026 South South Zonal Convention
         </DisplayHeading>
         <p className="type-body-l measure" style={{ color: "var(--stone)", marginTop: "var(--space-5)" }}>
           South South Zonal Convention 2026 — in pictures.
