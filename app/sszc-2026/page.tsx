@@ -19,6 +19,13 @@ const EVENTS = [
     link: "https://jossyphotos96.pixieset.com/sszc26day1updated/",
   },
   {
+    title: "Symposium",
+    description: "Intellectual discourse and conversation at the SSZC 2026 Symposium.",
+    image: "/media/general/sszc2026-moot-and-mock.jpeg.jpeg",
+    alt: "Symposium at the South South Zonal Convention 2026",
+    link: "https://jossyphotos.pixieset.com/sszc26symposium/",
+  },
+  {
     title: "Cultural Night",
     description: "A vibrant celebration of the cultures of the South South Zone.",
     image: "/media/general/sszc2026-cultural-night.jpeg.jpeg",
