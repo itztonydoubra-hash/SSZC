@@ -33,7 +33,7 @@ export const publications: Publications = {
         `I lay on my bed as the alarm went off. Yawning, I stretched and glanced at the time.\n` +
         `"Oh, I'm late!" I shouted, jumping up immediately to get ready for work.\n\n` +
         `On my way, I saw a car hit a young boy. Thankfully, it wasn't hard enough to cause a serious injury. But before I could even react, the driver sped off, disappearing in seconds. In my head, I asked again: Why would someone do that?\n\n` +
-        `When I arrived at the counselling centre — yes, I'm a counsellor, and have been one for almost nine years — I felt the familiar tug of curiosity that had drawn me to this profession. I became a counselor because I wanted to understand people. To understand why they hurt, why they lie, why they make the choices they do. People come to me for advice every day. I listen, I guide, but what truly consumes me is the why.\n\n` +
+        `When I arrived at the counselling centre, yes, I'm a counsellor, and have been one for almost nine years, I felt the familiar tug of curiosity that had drawn me to this profession. I became a counselor because I wanted to understand people. To understand why they hurt, why they lie, why they make the choices they do. People come to me for advice every day. I listen, I guide, but what truly consumes me is the why.\n\n` +
         `That morning, my first client walked in. Her face was a mixture of fear and confusion. Her skin was not fair, and her eyes carried a tiredness I knew too well.\n\n` +
         `"Miss Besola?" she asked, her voice trembling.\n` +
         `"Yes. What's your name?" I replied gently.\n` +
@@ -43,6 +43,7 @@ export const publications: Publications = {
         `I leaned forward, held her hand, and asked softly: "Why do you feel you can't let them go? What would happen if you did?"\n\n` +
         `"I can't… I really can't," she cried out.\n\n` +
         `In my heart, I couldn't understand why she felt so trapped. Was it fear? Loneliness? Or something even deeper?\n\n` +
+        `The clock ticked loudly in the background, counting every second of her anguish, and mine.\n\n` +
         `****\n\n` +
         `"I stay friends with them because I have no choice," Zainab confessed. "If I'm not friends with them, they'll hate me and make others hate me too."\n\n` +
         `Her words pierced me. I had once been in a similar situation, yet I never understood why I endured it for so long.\n\n` +
@@ -53,19 +54,22 @@ export const publications: Publications = {
         `That night, her words replayed in my head. By morning, I checked if she had booked another session. Nothing. I tried calling, but she didn't answer. I asked my secretary to follow up and visit her address.\n\n` +
         `Later, when she returned with the tragic confirmation, I felt my chest tighten. Zainab had committed suicide.\n\n` +
         `I dropped my phone in shock. My mind replayed every word she said, every word I didn't. What had I missed? Could I have done more?\n\n` +
+        `The question lingered, heavy and sharp.\n\n` +
         `****\n\n` +
         `As days passed, Zainab's death haunted me. People said it was depression, but I didn't want to believe that was all. I kept asking myself why.\n\n` +
         `I went on vacation, hoping to find some rest. That was when I noticed new neighbours, a couple. From outside, they looked lovely, always smiling and chatting. One evening, I went to greet them.\n\n` +
         `But what I saw shook me to my core.\n\n` +
         `Behind their doors, the man was beating his wife. She noticed me, quickly pleaded with her eyes, and begged me not to intervene. My stomach twisted. I froze. The perfect couple wasn't perfect at all.\n\n` +
         `Why would she tell me not to help? Why would he hurt her?\n\n` +
-        `The next morning, an ambulance arrived. The husband cried, saying she "fell." But I knew better. And again, I asked: Why?\n\n` +
+        `The next morning, an ambulance arrived. The husband cried, saying she "fell."\n` +
+        `But I knew better.\n` +
+        `And again, I asked: Why?\n\n` +
         `****\n\n` +
         `Why would he lie? Why would she cover for him?\n\n` +
         `By the next day, they were gone. Vanished. I never saw them again.\n\n` +
         `I returned to the centre, heavy-hearted, still carrying unanswered questions. Soon, another client walked in, shivering as though her body held secrets too heavy to bear.\n\n` +
         `"What's your name?" I asked.\n` +
-        `"Ifunanya," she whispered.\n\n` +
+        `"Ifunanya," she whispered. She was fair-skinned, pretty, and slightly overweight, carrying herself with a nervous energy that made her appear lively yet vulnerable.\n\n` +
         `"What brings you here?"\n` +
         `"Nothing…" she hesitated.\n` +
         `"Then why counselling?"\n` +
@@ -73,24 +77,40 @@ export const publications: Publications = {
         `"Insecurity?" I repeated softly. She looked flawless to me, but her eyes betrayed her pain.\n\n` +
         `"Why do you feel this way?" I asked.\n\n` +
         `"I can't explain it. I just don't feel good about myself," she said, tears slipping down her cheeks. "You believe it too, right? That I'm not beautiful. Everyone says it."\n\n` +
+        `I paused, listening as she cried harder.\n\n` +
+        `"They told me… they told me I wasn't good enough."\n\n` +
         `"It sounds like you've heard those words so many times that you've started to believe them," I said gently. "Can you tell me where that belief began?"\n\n` +
         `"They were right," she muttered, and stormed out before I could stop her.\n\n` +
+        `Again, I sat in shock, asking myself: Why would she accept that lie as truth?\n\n` +
+        `The clock ticked, echoing in the empty room.\n\n` +
         `****\n\n` +
         `That weekend, I tried distracting myself. But then I saw the news.\n\n` +
-        `A young lady had taken her life, pressured by her family to marry. A young man too, pressured by his family and society to "be a man."\n\n` +
+        `A young lady had taken her life, pressured by her family to marry.\n` +
+        `A young man too, pressured by his family and society to "be a man."\n\n` +
         `I dropped my phone in disbelief. Why? Why? Why?\n\n` +
-        `That weekend, a man walked into my office. Chike. He had been sent by his company for counseling after deliberately sabotaging a colleague's work.\n\n` +
+        `Why would a family crush their children with expectations? Why would society pile unbearable weights on people's shoulders?\n\n` +
+        `As an orphan, I had never truly known what it meant to have a family. Maybe that was why I couldn't fully understand. I built myself from nothing. I endured so much but why didn't I give up? Why did others?\n\n` +
+        `That weekend, I tried to distract myself from the heavy thoughts of the week. But then a man walked into my office. Chike. He had been sent by his company for counseling after committing a serious act: he had deliberately sabotaged a colleague's work, causing the company to lose a large sum.\n\n` +
         `I looked at him, expecting shame, remorse, even fear. But he smiled, broad, unapologetic.\n\n` +
-        `"Did you know what you did?" I asked softly.\n\n` +
-        `He laughed, leaning back in his chair. "Of course I know. And honestly… I loved it."\n\n` +
-        `I felt the weight of human cruelty pressing down in the room. Not all hurt is born of ignorance or pain. Sometimes, it's deliberate. Sometimes, it's wickedness.\n\n` +
+        `"Did you know what you did?" I asked softly, trying to gauge his understanding.\n\n` +
+        `He laughed, leaning back in his chair. "Of course I know. And honestly… I loved it. I couldn't stop laughing when I saw the chaos I caused."\n\n` +
+        `My heart sank. Here was a man, sent for guidance, and yet he found pride and joy in his wrongdoing.\n\n` +
+        `I tried to explain why his actions had hurt others, why it mattered. But he shrugged, smirking. "I mean… come on. This is just life. People care too much. I did it, and I did it well. Isn't that what matters?"\n\n` +
+        `I felt the weight of human cruelty pressing down in the room. Not all hurt is born of ignorance or pain. Sometimes, it's deliberate. Sometimes, it's wickedness. And sometimes, people choose to celebrate it.\n\n` +
         `And I thought of Zainab, Ifunanya, and countless others. The human heart is fragile, yet it survives.\n\n` +
+        `I finally understood: sometimes, the answer to all our whys isn't simple. Sometimes, it's pressure. Sometimes, it's brokenness. Sometimes, it's the way we choose to act.\n\n` +
         `****\n\n` +
-        `I sit with all their stories, and the "why" echoes endlessly.\n\n` +
+        `I sit with all their stories, and the "why" echoes endlessly.\n` +
+        `Why do people hurt others? Why does a husband lie after bruising his wife's skin? Why does a girl believe she is unworthy when she shines brighter than those who mock her? Why would friends push someone until her life slips away? Why would a driver crush a child and still speed away?\n\n` +
         `The truth? Sometimes, the answer isn't simple.\n\n` +
-        `Sometimes, it is wickedness — pure, deliberate cruelty. Other times, it is carelessness — people who never pause to think about the scars they leave behind. And often, it is brokenness — hurt people hurting others, because pain is all they know.\n\n` +
-        `But I also see resilience. I see young people who keep going despite crushing expectations. Wives who rise after years of abuse. Children who still dream even after rejection. And ordinary people who choose kindness when they could choose harm.\n\n` +
-        `So maybe the answer isn't to understand every "why." Maybe the answer is to remember that as humans, we are both — the oppressed and the oppressor, the broken and the healer.\n\n` +
+        `Sometimes, it is wickedness, pure, deliberate cruelty.\n` +
+        `Other times, it is carelessness, people who never pause to think about the scars they leave behind.\n` +
+        `And often, it is brokenness, hurt people hurting others, because pain is all they know.\n\n` +
+        `Every day, I see struggles, domestic violence hidden behind fine curtains, stalking that keeps someone awake at night, child abuse disguised as discipline, harassment silenced in workplaces, poverty, discrimination, and despair mocked instead of understood.\n\n` +
+        `The "why" has no single answer. Humanity is complex, capable of love, but equally capable of cruelty. Truly, the heart of man is desperately wicked. I see it in my clients. I see it in the world.\n\n` +
+        `But I also see resilience. I see young people who keep going despite crushing expectations. Wives who rise after years of abuse. Women like me, who have endured personal struggle and divorce, yet choose to grow. Children who still dream even after rejection. And ordinary people who choose kindness when they could choose harm.\n\n` +
+        `So maybe the answer isn't to understand every "why."\n` +
+        `Maybe the answer is to remember that as humans, we are both, the oppressed and the oppressor, the broken and the healer.\n\n` +
         `What matters is which side we choose to stand on.\n\n` +
         `And I choose empathy. Always.\n\n` +
         `Dear reader, which side of humanity do you stand on?`,
