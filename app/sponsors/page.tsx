@@ -41,6 +41,30 @@ const SPONSORS = [
     image: "/media/general/sponsor-eunice-dada.jpeg.jpeg",
     alt: "Hon. Justice Eunice Dada, Judge of the Customary Court of Appeal, Cross River State",
   },
+  {
+    name: "Cordelia Eke, Esq.",
+    office: "Erstwhile NBA Chairman, Port Harcourt Branch",
+    image: "",
+    alt: "Cordelia Eke, Esq., Erstwhile NBA Chairman, Port Harcourt Branch",
+  },
+  {
+    name: "Hon. Justice Ama Edet Ekpo",
+    office: "Judge of the High Court, Cross River State, Calabar",
+    image: "",
+    alt: "Hon. Justice Ama Edet Ekpo, Judge of the High Court, Cross River State, Calabar",
+  },
+  {
+    name: "Justice Harriba Dagogo-Jack",
+    office: "Judge of the High Court, Rivers State, Port Harcourt",
+    image: "",
+    alt: "Justice Harriba Dagogo-Jack, Judge of the High Court, Rivers State, Port Harcourt",
+  },
+  {
+    name: "Justice Fiberesima",
+    office: "Judge of the High Court, Rivers State, Port Harcourt",
+    image: "",
+    alt: "Justice Fiberesima, Judge of the High Court, Rivers State, Port Harcourt",
+  },
 ];
 
 export default function SponsorsPage() {
@@ -59,13 +83,17 @@ export default function SponsorsPage() {
           {SPONSORS.map((sponsor) => (
             <article className="sponsor-card" key={sponsor.name}>
               <div className="sponsor-card__portrait">
-                <Image
-                  src={assetPath(sponsor.image)}
-                  alt={sponsor.alt}
-                  fill
-                  sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 25vw"
-                  style={{ objectFit: "cover", objectPosition: "top" }}
-                />
+                {sponsor.image ? (
+                  <Image
+                    src={assetPath(sponsor.image)}
+                    alt={sponsor.alt}
+                    fill
+                    sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 25vw"
+                    style={{ objectFit: "cover", objectPosition: "top" }}
+                  />
+                ) : (
+                  <div className="sponsor-card__portrait-placeholder" aria-hidden />
+                )}
               </div>
               <div className="sponsor-card__body">
                 <p className="sponsor-card__name type-display-m">{sponsor.name}</p>
