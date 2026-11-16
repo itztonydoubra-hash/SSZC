@@ -125,4 +125,23 @@ export const media: MediaAlbum[] = [
       { src: "/media/general/inauguration-glorious-vision-hensard-04.jpeg.jpeg", alt: "Inauguration of Glorious Vision University and Hensard University into the South South Zone, 1st June 2026", ratio: "4 / 3" },
     ],
   },
+  {
+    title: "Courtesy Visit to the Office of the Deputy Governor, Cross River State",
+    description: "On the 17th of August, Effiong Valour Daniel, COL led a delegation to Rt. Hon. Peter Odey, the Office of the Deputy Governor Of Cross River State.",
+    items: [
+      { src: "/media/general/courtesy-visit-deputy-governor-peter-odey-01.jpeg.jpeg", alt: "Effiong Valour Daniel, COL leading a delegation to the Office of the Deputy Governor of Cross River State, Rt. Hon. Peter Odey", ratio: "4 / 3" },
+      { src: "/media/general/courtesy-visit-deputy-governor-peter-odey-02.jpeg.jpeg", alt: "Effiong Valour Daniel, COL leading a delegation to the Office of the Deputy Governor of Cross River State, Rt. Hon. Peter Odey", ratio: "4 / 3" },
+      { src: "/media/general/courtesy-visit-deputy-governor-peter-odey-03.jpeg.jpeg", alt: "Effiong Valour Daniel, COL leading a delegation to the Office of the Deputy Governor of Cross River State, Rt. Hon. Peter Odey", ratio: "4 / 3" },
+      { src: "/media/general/courtesy-visit-deputy-governor-peter-odey-04.jpeg.jpeg", alt: "Effiong Valour Daniel, COL leading a delegation to the Office of the Deputy Governor of Cross River State, Rt. Hon. Peter Odey", ratio: "4 / 3" },
+      { src: "/media/general/courtesy-visit-deputy-governor-peter-odey-05.jpeg.jpeg", alt: "Effiong Valour Daniel, COL leading a delegation to the Office of the Deputy Governor of Cross River State, Rt. Hon. Peter Odey", ratio: "4 / 3" },
+    ],
+  },
+  {
+    title: "Magazine Presentation — Rivers State",
+    description: "On the 2nd of October, 2026, the South South Zonal Director alongside the Rivers State Director, John Jubilant and H.E. Harry David, the Chapter President of Rivers State University, presented a copy of the 2026 Magazine Edition of the South South Zonal Convention.",
+    items: [
+      { src: "/media/general/magazine-presentation-rivers-state-01.jpeg.jpeg", alt: "South South Zonal Director, John Jubilant and H.E. Harry David presenting the 2026 Magazine Edition of the South South Zonal Convention", ratio: "4 / 3" },
+      { src: "/media/general/magazine-presentation-rivers-state-02.jpeg.jpeg", alt: "South South Zonal Director, John Jubilant and H.E. Harry David presenting the 2026 Magazine Edition of the South South Zonal Convention", ratio: "4 / 3" },
+    ],
+  },
 ];
