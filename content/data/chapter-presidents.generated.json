@@ -134,21 +134,5 @@
       "alt": "Jewel Inno-Anaemeje, LAWSAN chapter president, University of Port Harcourt",
       "ratio": "4 / 5"
     }
-  },
-  "edwin-clark-university": {
-    "name": "Ugeh Mario-Andrea Chukwudinma",
-    "portrait": {
-      "src": "/chapters/auto-edwin-clark-university--ugeh-mario-andrea-chukwudinma.jpg.jpeg",
-      "alt": "Ugeh Mario-Andrea Chukwudinma, LAWSAN chapter president, Edwin Clark University",
-      "ratio": "4 / 5"
-    }
-  },
-  "university-of-uyo": {
-    "name": "Favour Dara Ita",
-    "portrait": {
-      "src": "/chapters/auto-university-of-uyo--favour-dara-ita.jpg.jpeg",
-      "alt": "Favour Dara Ita, LAWSAN chapter president, University of Uyo",
-      "ratio": "4 / 5"
-    }
   }
 }
