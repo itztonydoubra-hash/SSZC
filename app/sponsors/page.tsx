@@ -44,25 +44,25 @@ const SPONSORS = [
   {
     name: "Cordelia Eke, Esq.",
     office: "Erstwhile NBA Chairman, Port Harcourt Branch",
-    image: "",
+    image: "/media/general/sponsor-cordelia-eke.jpeg.jpeg",
     alt: "Cordelia Eke, Esq., Erstwhile NBA Chairman, Port Harcourt Branch",
   },
   {
     name: "Hon. Justice Ama Edet Ekpo",
     office: "Judge of the High Court, Cross River State, Calabar",
-    image: "",
+    image: "/media/general/sponsor-ama-edet-ekpo.jpeg.jpeg",
     alt: "Hon. Justice Ama Edet Ekpo, Judge of the High Court, Cross River State, Calabar",
   },
   {
     name: "Justice Harriba Dagogo-Jack",
     office: "Judge of the High Court, Rivers State, Port Harcourt",
-    image: "",
+    image: "/media/general/sponsor-harriba-dagogo-jack.jpeg.jpeg",
     alt: "Justice Harriba Dagogo-Jack, Judge of the High Court, Rivers State, Port Harcourt",
   },
   {
     name: "Justice Fiberesima",
     office: "Judge of the High Court, Rivers State, Port Harcourt",
-    image: "",
+    image: "/media/general/sponsor-fiberesima.jpeg.jpeg",
     alt: "Justice Fiberesima, Judge of the High Court, Rivers State, Port Harcourt",
   },
 ];
