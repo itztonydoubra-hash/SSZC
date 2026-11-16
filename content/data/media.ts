@@ -144,4 +144,18 @@ export const media: MediaAlbum[] = [
       { src: "/media/general/magazine-presentation-rivers-state-02.jpeg.jpeg", alt: "South South Zonal Director, John Jubilant and H.E. Harry David presenting the 2026 Magazine Edition of the South South Zonal Convention", ratio: "4 / 3" },
     ],
   },
+  {
+    title: "Inauguration of Dennis Osadebay University, Delta State",
+    description: "On the 14th of October, the South South Zone officially welcomed Dennis Osadebay University of Delta State into the South South Zone and National LAWSAN at large.",
+    items: [
+      { src: "/media/general/inauguration-dennis-osadebay-university.jpeg.jpeg", alt: "Inauguration of Dennis Osadebay University into the South South Zone and National LAWSAN, 14th October", ratio: "4 / 3" },
+    ],
+  },
+  {
+    title: "Inauguration of Federal University of Otuoke, Bayelsa State",
+    description: "On the 16th of June, 2026, the South South Zone welcomed Federal University of Otuoke into the South South Zone and National LAWSAN at large.",
+    items: [
+      { src: "/media/general/inauguration-federal-university-otuoke.jpeg.jpeg", alt: "Inauguration of Federal University of Otuoke into the South South Zone and National LAWSAN, 16th June 2026", ratio: "4 / 3" },
+    ],
+  },
 ];
