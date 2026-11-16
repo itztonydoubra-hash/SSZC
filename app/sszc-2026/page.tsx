@@ -19,17 +19,24 @@ const EVENTS = [
     link: "https://jossyphotos96.pixieset.com/sszc26day1updated/",
   },
   {
-    title: "Cultural Night",
+    title: "Symposium",
+    description: "Intellectual discourse and conversation at the SSZC 2026 Symposium.",
+    image: "/media/general/sszc2026-moot-and-mock.jpeg.jpeg",
+    alt: "Symposium at the South South Zonal Convention 2026",
+    link: "https://jossyphotos.pixieset.com/sszc26symposium/",
+  },
+  {
+    title: "SSZC'26 Cultural Night",
     description: "A vibrant celebration of the cultures of the South South Zone.",
     image: "/media/general/sszc2026-cultural-night.jpeg.jpeg",
-    alt: "Cultural Night at the South South Zonal Convention 2026",
+    alt: "SSZC'26 Cultural Night at the South South Zonal Convention 2026",
     link: "https://jossyphotos.pixieset.com/culturalnight/",
   },
   {
-    title: "Dinner",
+    title: "SSZC'26 Dinner Night",
     description: "The official dinner of the South South Zonal Convention 2026.",
     image: "/media/general/sszc2026-dinner.jpeg.jpeg",
-    alt: "Dinner at the South South Zonal Convention 2026",
+    alt: "SSZC'26 Dinner Night at the South South Zonal Convention 2026",
     link: "https://jossyphotos.pixieset.com/sszc26dinner/",
   },
   {
@@ -60,7 +67,7 @@ export default function SSZC2026Page() {
     <SurfaceSection surface="ink" index="02" title="SSZC 2026" labelledById="sszc2026-title">
       <div style={{ paddingBottom: "var(--space-9)" }}>
         <DisplayHeading as="h1" id="sszc2026-title" size="xl">
-          The convention.
+          2026 South South Zonal Convention
         </DisplayHeading>
         <p className="type-body-l measure" style={{ color: "var(--stone)", marginTop: "var(--space-5)" }}>
           South South Zonal Convention 2026 — in pictures.

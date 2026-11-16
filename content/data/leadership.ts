@@ -41,11 +41,11 @@ export const leadership: Leadership = {
     },
     {
       index: "03",
-      role: "Zonal Head of Media and Publicity",
-      name: "Antigha Daniel Bassey",
+      role: "General Secretary",
+      name: "Emmanuel Golden Daniel",
       portrait: {
-        src: "/leadership/antigha-daniel-bassey.jpeg.jpeg",
-        alt: "Antigha Daniel Bassey, Zonal Head of Media and Publicity",
+        src: "/leadership/emmanuel-golden-daniel.jpeg.jpeg",
+        alt: "Emmanuel Golden Daniel, General Secretary",
         ratio: "4 / 5",
       },
     },
@@ -61,6 +61,16 @@ export const leadership: Leadership = {
     },
     {
       index: "05",
+      role: "Zonal Head of Media and Publicity",
+      name: "Antigha Daniel Bassey",
+      portrait: {
+        src: "/leadership/antigha-daniel-bassey.jpeg.jpeg",
+        alt: "Antigha Daniel Bassey, Zonal Head of Media and Publicity",
+        ratio: "4 / 5",
+      },
+    },
+    {
+      index: "06",
       role: "Head of Human Resources and External Affairs",
       name: "Igbanoi Prince Christopher",
       portrait: {
@@ -70,22 +80,12 @@ export const leadership: Leadership = {
       },
     },
     {
-      index: "06",
+      index: "07",
       role: "South South Public Relations Officer",
       name: "Goodluck Osazemwinde",
       portrait: {
         src: "/leadership/goodluck-osazemwinde.jpeg",
         alt: "Goodluck Osazemwinde, South South Public Relations Officer",
-        ratio: "4 / 5",
-      },
-    },
-    {
-      index: "07",
-      role: "General Secretary",
-      name: "Emmanuel Golden Daniel",
-      portrait: {
-        src: "/leadership/emmanuel-golden-daniel.jpeg.jpeg",
-        alt: "Emmanuel Golden Daniel, General Secretary",
         ratio: "4 / 5",
       },
     },

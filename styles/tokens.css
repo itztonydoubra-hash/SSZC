@@ -21,25 +21,23 @@
    * selected node/state, a closing/urgent date. Never a fill, never a
    * default button colour, never long body text.
    * ========================================================================== */
-  --ink: #0b0d0f;        /* darkest surface; primary text on ivory            */
-  --ink-800: #15181b;    /* ghost numerals, faint dividers on ink             */
-  --ivory: #f4f0e8;      /* primary reading surface; text on ink              */
-  --ivory-200: #fbf9f4;  /* inset / hovered ivory (used sparingly)            */
-  --crimson: #a51c30;    /* ACCENT: record/locate only                        */
-  --crimson-700: #7e1425;/* pressed crimson (rare)                            */
-  --stone: #b8b2a7;      /* large muted text, metadata on ink, placeholders   */
-  --stone-600: #6b665c;  /* muted text that must stay legible on ivory (AA body
-                            5.02:1; darkened from #8a857b which was 3.23:1 and
-                            failed AA body — see docs/decisions.md D3)          */
-  --white: #fff;         /* one emphasised figure/word maximum per view       */
+  --ink: #0e1117;        /* deep blue-black surface; primary text on silver    */
+  --ink-800: #171c24;    /* ghost numerals, faint dividers on ink              */
+  --ivory: #e8eaf0;      /* cool silver-white reading surface; text on ink     */
+  --ivory-200: #f0f2f6;  /* inset / hovered ivory (used sparingly)             */
+  --crimson: #8b6914;    /* ACCENT: deep gold — authority, law, prestige       */
+  --crimson-700: #6a4f0f;/* pressed gold (rare)                                */
+  --stone: #9a9faa;      /* large muted text, metadata on ink, placeholders    */
+  --stone-600: #5a606e;  /* muted text legible on silver surface (AA body)     */
+  --white: #f7f8fa;      /* one emphasised figure/word maximum per view        */
 
   /* Functional alphas (A2.1) — scrims under text on photos, and hairlines
    * that REPLACE borders/boxes (A3.2). These are the only permitted uses of
    * translucency; there are no decorative overlays. */
-  --scrim-ink-70: rgb(11 13 15 / 70%);
-  --scrim-ink-40: rgb(11 13 15 / 40%);
-  --hairline-on-ink: rgb(244 240 232 / 14%);
-  --hairline-on-ivory: rgb(11 13 15 / 12%);
+  --scrim-ink-70: rgb(14 17 23 / 70%);
+  --scrim-ink-40: rgb(14 17 23 / 40%);
+  --hairline-on-ink: rgb(232 234 240 / 12%);
+  --hairline-on-ivory: rgb(14 17 23 / 10%);
 
   /* --------------------------------------------------------------------------
    * SURFACE CONTEXT (A2)  — semantic aliases resolved per section.
