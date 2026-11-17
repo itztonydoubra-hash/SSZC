@@ -138,10 +138,10 @@ export const media: MediaAlbum[] = [
   },
   {
     title: "Magazine Presentation — Rivers State",
-    description: "On the 2nd of October, 2026, the South South Zonal Director alongside the Rivers State Director, John Jubilant and H.E. Harry David, the Chapter President of Rivers State University, presented a copy of the 2026 Magazine Edition of the South South Zonal Convention.",
+    description: "On the 2nd Of October, 2026, the South South Zonal Director alongside the Rivers State Director, John Jubilant and H.E. Harry David, the Chapter President Of Rivers State University, presented a copy of the 2026 Magazine Edition Of The South South Zonal Convention to Hon. Justice Mabel Bello, a Judge Of The Federal High Court.",
     items: [
-      { src: "/media/general/magazine-presentation-rivers-state-01.jpeg.jpeg", alt: "South South Zonal Director, John Jubilant and H.E. Harry David presenting the 2026 Magazine Edition of the South South Zonal Convention", ratio: "4 / 3" },
-      { src: "/media/general/magazine-presentation-rivers-state-02.jpeg.jpeg", alt: "South South Zonal Director, John Jubilant and H.E. Harry David presenting the 2026 Magazine Edition of the South South Zonal Convention", ratio: "4 / 3" },
+      { src: "/media/general/magazine-presentation-rivers-state-01.jpeg.jpeg", alt: "South South Zonal Director, John Jubilant and H.E. Harry David presenting the 2026 Magazine Edition of the South South Zonal Convention to Hon. Justice Mabel Bello, Federal High Court Judge", ratio: "4 / 3" },
+      { src: "/media/general/magazine-presentation-rivers-state-02.jpeg.jpeg", alt: "South South Zonal Director, John Jubilant and H.E. Harry David presenting the 2026 Magazine Edition of the South South Zonal Convention to Hon. Justice Mabel Bello, Federal High Court Judge", ratio: "4 / 3" },
     ],
   },
   {
