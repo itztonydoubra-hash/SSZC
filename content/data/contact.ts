@@ -18,7 +18,7 @@ export const contact: Contact = {
   // closingStatement omitted — no slogan forced (design.md B5).
   email: "sszc.magazine@gmail.com",
   socials: [
-    { platform: "Instagram", url: "https://www.instagram.com/lawsan_southsouth" },
+    { platform: "Instagram", url: "https://www.instagram.com/lawsansouthsouth?vrfl=czRlZTR0bTE5c2pw" },
   ],
   // session omitted — not yet supplied.
 };
