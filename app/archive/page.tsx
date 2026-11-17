@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getAdministrations } from "@/content";
 import { SurfaceSection } from "@/components/chrome/SurfaceSection";
 import { DisplayHeading } from "@/components/chrome/DisplayHeading";
@@ -21,6 +22,21 @@ export default function ArchivePage() {
           <ol className="pg-timeline">
             {admins.map((a) => (
               <li className="pg-timeline__node" key={a.session}>
+                {a.images && a.images.length > 0 && (
+                  <div style={{ marginBottom: "var(--space-4)", display: "flex", gap: "var(--space-3)", flexWrap: "wrap" }}>
+                    {a.images.map((img, i) => (
+                      <div key={i} style={{ position: "relative", width: "180px", aspectRatio: img.ratio ?? "3 / 4", borderRadius: "4px", overflow: "hidden" }}>
+                        <Image
+                          src={img.src}
+                          alt={img.alt}
+                          fill
+                          style={{ objectFit: "cover" }}
+                          sizes="180px"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
                 <DisplayHeading as="h2" size="l" reveal={false}>{a.session}</DisplayHeading>
                 {a.director && <p className="type-body-m" style={{ marginTop: "var(--space-3)" }}><span style={{ color: "var(--stone-600)" }}>Zonal Director: </span>{a.director}</p>}
                 {a.team && a.team.length > 0 && (
