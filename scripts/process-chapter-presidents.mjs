@@ -64,9 +64,9 @@ function chapterDirectory(source) {
   ].map((match) => ({ institution: match[1], slug: match[2] }));
 
   const bySlug = new Map(entries.map((entry) => [entry.slug, entry]));
-  if (bySlug.size !== 22) {
+  if (bySlug.size !== 23) {
     throw new Error(
-      `Could not safely read all 22 chapter slugs from ${CHAPTER_DATA_PATH}; found ${bySlug.size}. Refusing to process uploads.`,
+      `Could not safely read all 23 chapter slugs from ${CHAPTER_DATA_PATH}; found ${bySlug.size}. Refusing to process uploads.`,
     );
   }
   return bySlug;
