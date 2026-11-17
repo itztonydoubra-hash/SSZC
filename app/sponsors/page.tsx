@@ -72,7 +72,7 @@ export default function SponsorsPage() {
     <SurfaceSection surface="ivory" index="04" title="SPONSORS" labelledById="sponsors-title">
       <div style={{ paddingBottom: "var(--space-9)" }}>
         <DisplayHeading as="h1" id="sponsors-title" size="xl">
-          Our patrons.
+          Our Patrons.
         </DisplayHeading>
         <p className="type-body-l measure" style={{ color: "var(--stone-600)", marginTop: "var(--space-5)" }}>
           We are grateful to the distinguished individuals who have supported and championed the
