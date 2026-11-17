@@ -6,4 +6,21 @@
  */
 import type { Administration } from "../types";
 
-export const administrations: Administration[] = [];
+export const administrations: Administration[] = [
+  {
+    session: "2022/2023 Administration",
+    director: "Anagbogu Prosper, Esq.",
+  },
+  {
+    session: "2023/2024 Administration",
+    director: "Abasiama Udom, Esq.",
+  },
+  {
+    session: "2024/2025 Administration",
+    director: "Dorathy Akpan",
+  },
+  {
+    session: "2025/2026 Administration",
+    director: "Ewomazino Frank, COL",
+  },
+];
