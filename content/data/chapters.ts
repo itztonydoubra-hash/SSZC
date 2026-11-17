@@ -2,7 +2,7 @@
  * Chapters content (design.md B2). POPULATED — client-supplied.
  *
  * The six South South states and their recognised chapters were supplied by the
- * client (see content/SOURCES.md). 23 chapters across 6 states:
+ * client (see content/SOURCES.md). 22 chapters across 6 states:
  *   Cross River 2 · Akwa Ibom 2 · Rivers 2 · Bayelsa 3 · Delta 8 · Edo 6.
  * Nothing is added from general knowledge and nothing supplied is removed. All
  * counts shown in the UI are DERIVED from these records — never hardcoded.

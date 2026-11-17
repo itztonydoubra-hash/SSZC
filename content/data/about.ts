@@ -213,7 +213,7 @@ export const about: About = {
     ],
   },
 
-  coda: "Six states. 23 chapters. One LAWSAN.",
+  coda: "Six states. 22 chapters. One LAWSAN.",
 
   images: [
     {
