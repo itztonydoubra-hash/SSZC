@@ -52,21 +52,21 @@ export const media: MediaAlbum[] = [
   },
   {
     title: "Courtesy Visit to the Dean of the Faculty of Law, UNICAL",
-    description: "A Courtesy Visit To The Dean Of The Faculty Of Law, University Of Calabar, Professor Michael Ibanga.",
+    description: "A Courtesy Visit to the Dean of the Faculty of Law, University of Calabar, Professor Michael Ibanga.",
     items: [
       { src: "/media/general/courtesy-visit-dean-of-law-unical.jpeg.jpeg", alt: "Courtesy visit to Professor Michael Ibanga, Dean of the Faculty of Law, University of Calabar", ratio: "4 / 3" },
     ],
   },
   {
     title: "Courtesy Visit to the Dean of Student Affairs, UNICAL",
-    description: "A Courtesy Visit To The Dean Of Student Affairs, University Of Calabar, Professor Offiong Eyo.",
+    description: "A Courtesy Visit to the Dean of Student Affairs, University of Calabar, Professor Offiong Eyo.",
     items: [
       { src: "/media/general/courtesy-visit-dean-of-student-affairs-unical.jpeg.jpeg", alt: "Courtesy visit to Professor Offiong Eyo, Dean of Student Affairs, University of Calabar", ratio: "4 / 3" },
     ],
   },
   {
     title: "Courtesy Visit to the Head of Civil Service Commission, Cross River State",
-    description: "A Courtesy Visit To Orok Bassey Okon, Esq. Head Of Civil Service Commission, Cross River State.",
+    description: "A Courtesy Visit to Orok Bassey Okon, Esq., Head of Civil Service Commission, Cross River State.",
     items: [
       { src: "/media/general/courtesy-visit-civil-service-commission-01.jpeg.jpeg", alt: "Courtesy visit to Orok Bassey Okon, Esq., Head of Civil Service Commission, Cross River State", ratio: "4 / 3" },
       { src: "/media/general/courtesy-visit-civil-service-commission-02.jpeg.jpeg", alt: "Courtesy visit to Orok Bassey Okon, Esq., Head of Civil Service Commission, Cross River State", ratio: "4 / 3" },
@@ -76,14 +76,14 @@ export const media: MediaAlbum[] = [
   },
   {
     title: "Courtesy Visit to Justice Frank Onyiri",
-    description: "A Courtesy Visit To Justice Frank Onyiri, a Judge of the Rivers State High Court.",
+    description: "A Courtesy Visit to Justice Frank Onyiri, a Judge of the Rivers State High Court.",
     items: [
       { src: "/media/general/courtesy-visit-justice-frank-onyiri.jpeg.jpeg", alt: "Courtesy visit to Justice Frank Onyiri, a Judge of the Rivers State High Court", ratio: "4 / 3" },
     ],
   },
   {
     title: "Courtesy Visit to MBA Ukweni, SAN",
-    description: "A Courtesy Visit To MBA Ukweni, SAN.",
+    description: "A Courtesy Visit to MBA Ukweni, SAN.",
     items: [
       { src: "/media/general/courtesy-visit-mba-ukweni-san.jpeg.jpeg", alt: "Courtesy visit to MBA Ukweni, SAN", ratio: "4 / 3" },
     ],
@@ -127,7 +127,7 @@ export const media: MediaAlbum[] = [
   },
   {
     title: "Courtesy Visit to the Office of the Deputy Governor, Cross River State",
-    description: "On the 17th of August, Effiong Valour Daniel, COL led a delegation to Rt. Hon. Peter Odey, the Office of the Deputy Governor Of Cross River State.",
+    description: "On the 17th of August, Effiong Valour Daniel, COL led a delegation to Rt. Hon. Peter Odey, the Deputy Governor of Cross River State.",
     items: [
       { src: "/media/general/courtesy-visit-deputy-governor-peter-odey-01.jpeg.jpeg", alt: "Effiong Valour Daniel, COL leading a delegation to the Office of the Deputy Governor of Cross River State, Rt. Hon. Peter Odey", ratio: "4 / 3" },
       { src: "/media/general/courtesy-visit-deputy-governor-peter-odey-02.jpeg.jpeg", alt: "Effiong Valour Daniel, COL leading a delegation to the Office of the Deputy Governor of Cross River State, Rt. Hon. Peter Odey", ratio: "4 / 3" },
@@ -138,7 +138,7 @@ export const media: MediaAlbum[] = [
   },
   {
     title: "Magazine Presentation — Rivers State",
-    description: "On the 2nd Of October, 2026, the South South Zonal Director alongside the Rivers State Director, John Jubilant and H.E. Harry David, the Chapter President Of Rivers State University, presented a copy of the 2026 Magazine Edition Of The South South Zonal Convention to Hon. Justice Mabel Bello, a Judge Of The Federal High Court.",
+    description: "On the 2nd of October, 2026, the South South Zonal Director alongside the Rivers State Director, John Jubilant and H.E. Harry David, the Chapter President of Rivers State University, presented a copy of the 2026 Magazine Edition of the South South Zonal Convention to Hon. Justice Mabel Bello, a Judge of the Federal High Court.",
     items: [
       { src: "/media/general/magazine-presentation-rivers-state-01.jpeg.jpeg", alt: "South South Zonal Director, John Jubilant and H.E. Harry David presenting the 2026 Magazine Edition of the South South Zonal Convention to Hon. Justice Mabel Bello, Federal High Court Judge", ratio: "4 / 3" },
       { src: "/media/general/magazine-presentation-rivers-state-02.jpeg.jpeg", alt: "South South Zonal Director, John Jubilant and H.E. Harry David presenting the 2026 Magazine Edition of the South South Zonal Convention to Hon. Justice Mabel Bello, Federal High Court Judge", ratio: "4 / 3" },
