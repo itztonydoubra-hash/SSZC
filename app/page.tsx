@@ -56,12 +56,12 @@ export default function Home() {
       <section className="surface-photo hp-hero" data-surface="ink" aria-labelledby="hp-title">
         <div className="hp-hero__media" aria-hidden>
           <Image
-            src={assetPath("/media/general/hero-homepage.jpeg.jpeg")}
+            src={assetPath("/media/general/lawsan-south-south-logo.png.jpeg")}
             alt=""
             fill
             priority
             sizes="100vw"
-            style={{ objectFit: "cover", objectPosition: "top" }}
+            style={{ objectFit: "contain", objectPosition: "center" }}
           />
         </div>
         <div className="hp-hero__scrim" aria-hidden />
