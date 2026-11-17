@@ -3,7 +3,7 @@
  *
  * The six South South states and their recognised chapters were supplied by the
  * client (see content/SOURCES.md). 22 chapters across 6 states:
- *   Cross River 2 · Akwa Ibom 2 · Rivers 2 · Bayelsa 3 · Delta 7 · Edo 6.
+ *   Cross River 2 · Akwa Ibom 2 · Rivers 2 · Bayelsa 3 · Delta 8 · Edo 6.
  * Nothing is added from general knowledge and nothing supplied is removed. All
  * counts shown in the UI are DERIVED from these records — never hardcoded.
  *
@@ -89,6 +89,7 @@ const chapterData: Chapters = {
         { institution: "Michael and Cecilia Ibru University", slug: "michael-and-cecilia-ibru-university" },
         { institution: "Western Delta University", slug: "western-delta-university" },
         { institution: "Admiralty University", slug: "admiralty-university" },
+        { institution: "Dennis Osadebay University", slug: "dennis-osadebay-university" },
       ],
     },
     {
