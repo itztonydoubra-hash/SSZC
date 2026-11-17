@@ -22,7 +22,6 @@ import { Counter } from "@/components/impact/Counter";
 import { Colophon } from "@/components/contact/Colophon";
 import { TransitionLink } from "@/components/motion/TransitionLink";
 import { HeroCue } from "@/components/home/HeroCue";
-import { HeroLogo3D } from "@/components/home/HeroLogo3D";
 
 export const metadata: Metadata = {
   title: "LAWSAN South South — Official Website",
@@ -56,7 +55,14 @@ export default function Home() {
       {/* 1. WHO WE ARE — hero */}
       <section className="surface-photo hp-hero" data-surface="ink" aria-labelledby="hp-title">
         <div className="hp-hero__media" aria-hidden>
-          <HeroLogo3D />
+          <Image
+            src={assetPath("/media/general/hero-homepage.jpeg.jpeg")}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            style={{ objectFit: "cover", objectPosition: "top" }}
+          />
         </div>
         <div className="hp-hero__scrim" aria-hidden />
         <Container className="hp-hero__inner">
