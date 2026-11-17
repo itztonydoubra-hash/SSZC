@@ -56,13 +56,13 @@ const SPONSORS = [
   {
     name: "Justice Harriba Dagogo-Jack",
     office: "Judge of the High Court, Rivers State, Port Harcourt",
-    image: "/media/general/sponsor-harriba-dagogo-jack.jpeg.jpeg",
+    image: "/media/general/sponsor-fiberesima.jpeg.jpeg",
     alt: "Justice Harriba Dagogo-Jack, Judge of the High Court, Rivers State, Port Harcourt",
   },
   {
     name: "Justice Fiberesima",
     office: "Judge of the High Court, Rivers State, Port Harcourt",
-    image: "/media/general/sponsor-fiberesima.jpeg.jpeg",
+    image: "/media/general/sponsor-harriba-dagogo-jack.jpeg.jpeg",
     alt: "Justice Fiberesima, Judge of the High Court, Rivers State, Port Harcourt",
   },
 ];
