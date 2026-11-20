@@ -312,7 +312,7 @@ export const leadership: Leadership = {
           institution: "University of Benin",
           director: "Bawi Toluwaleyi Testimony",
           directorPortrait: {
-            src: "/leadership/bawi-toluwaleyi-testimony.jpeg.jpeg",
+            src: "/leadership/bawi-toluwaleyi-testimony.jpeg",
             alt: "Bawi Toluwaleyi Testimony, Campus Director, University of Benin",
             ratio: "4 / 5",
           },
