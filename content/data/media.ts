@@ -158,4 +158,11 @@ export const media: MediaAlbum[] = [
       { src: "/media/general/inauguration-federal-university-otuoke.jpeg.jpeg", alt: "Inauguration of Federal University of Otuoke into the South South Zone and National LAWSAN, 16th June 2026", ratio: "4 / 3" },
     ],
   },
+  {
+    title: "Condolence Visit to Rt. Hon. Dennis Idahosa",
+    description: "The Deputy Zonal Director, Agbaso Perpetual, COL alongside other stakeholders in the South South paid a condolence visit to Rt. Hon. Dennis Idahosa.",
+    items: [
+      { src: "/media/general/courtesy-visit-dennis-idahosa.jpeg.jpeg", alt: "Deputy Zonal Director Agbaso Perpetual, COL and South South stakeholders on a condolence visit to Rt. Hon. Dennis Idahosa", ratio: "4 / 3" },
+    ],
+  },
 ];
