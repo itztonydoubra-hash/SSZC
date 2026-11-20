@@ -195,6 +195,12 @@ export const leadership: Leadership = {
         alt: "John Jubilant, State Director, LAWSAN Rivers State",
         ratio: "4 / 5",
       },
+      deputyDirector: "Orji Chinecherem Judith Adaeze",
+      deputyDirectorPortrait: {
+        src: "/leadership/orji-chinecherem-judith-adaeze.jpeg.jpeg",
+        alt: "Orji Chinecherem Judith Adaeze, Deputy State Director, LAWSAN Rivers State",
+        ratio: "4 / 5",
+      },
       campuses: [
         {
           institution: "University of Port Harcourt",
